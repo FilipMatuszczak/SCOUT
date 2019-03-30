@@ -1,15 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: oem
- * Date: 2019-03-28
- * Time: 21:35
- */
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
-class LoginController
+class LoginController extends AbstractController
 {
-
+    public function indexAction()
+    {
+        return $this->render('main/main.html.twig',[]);
+    }
 }

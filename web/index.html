@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <div style="background-image:url('images/background.png');
+min-height: 800px; background-color: white;
+                background-size: cover;
+  background-repeat: no-repeat">
+  <head>
+      <link href="styles/index.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <meta charset="utf-8">
+      <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+
+    <title>S COUT</title>
+  </head>
+  <body>
+      
+      
+      <div class="row">
+      
+        <div class="columnLeft">  
+          <div id="ilogo">
+          <a href=""><img src="images/logov22.png"></a>
+            </div>
+      
+     <div class="block">
+         <p> w pełni darmowy portal, który ma pomóc tobie w realizacji projektów oraz w zdobyciu niezbędnego doświadczenia!</p>
+         <img src="images/kot.jpg">
+            </div>
+      </div>
+       
+          <div class="columnRight">
+      
+              <div class="block">
+              
+                  <form onsubmit="return false">
+                      
+ <input type="text" size="30" placeholder="Username">
+ <input type="password" size="30" placeholder="Hasło"><br>
+ <input type="submit" id="button-log" value="Zaloguj się" onclick="alert('login')"><br>
+                      <a href="">Nie pamiętasz hasła?</a>
+                    </form>
+                  
+                  <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje, rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p> <br>
+                  
+                  <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
+                  <!-- Button to open the modal -->
+                
+                  
+              </div>
+              
+          </div>
+           
+      </div>
+
+<!-- The Modal (contains the Sign Up form) -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
+      <p>Podaj swoje cos</p>
+      <hr>
+        <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+        
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        
+        
+
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label>
+
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signup">Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div>
+                  
+                
+<script>
+     ////////////////////////////////////  //////////////////////////////////// 
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+      
+      <script src="scripts/web/main.js"></script>
+      
+  </body>
+</html>

@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <div style="background-image:url('images/background.png');
-min-height: 800px; background-color: white;
-                background-size: cover;
-  background-repeat: no-repeat">
+   
   <head>
+      
+      <style>
+                @font-face {
+                  font-family: "Apercu";
+                  src: url("https://s3.us-east-2.amazonaws.com/shoekicker-cdn/fonts/apercu_regular.woff")
+                    format("woff");
+                  font-style: normal;
+                  font-weight: normal;
+                }
+
+                @font-face {
+                  font-family: "Apercu";
+                  src: url("https://s3.us-east-2.amazonaws.com/shoekicker-cdn/fonts/apercu_bold.woff")
+                    format("woff");
+                  font-style: normal;
+                  font-weight: bold;
+                }
+
+              </style>
+      
+      
       <link href="styles/index.css" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
@@ -20,21 +38,8 @@ min-height: 800px; background-color: white;
       
       <div class="row">
       
-        <div class="columnLeft">  
-          <div id="ilogo">
-          <a href=""><img src="images/logov22.png"></a>
-            </div>
-      
-     <div class="block">
-         <p> w pełni darmowy portal, który ma pomóc tobie w realizacji projektów oraz w zdobyciu niezbędnego doświadczenia!</p>
-         <img src="images/kot.jpg">
-            </div>
-      </div>
-       
-          <div class="columnRight">
-      
               <div class="block">
-              
+              <a href=""><img src="images/logov22.png"></a>
                   <form onsubmit="return false">
                       
  <input type="text" size="30" placeholder="Username">
@@ -43,15 +48,14 @@ min-height: 800px; background-color: white;
                       <a href="">Nie pamiętasz hasła?</a>
                     </form>
                   
-                  <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje, rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p> <br>
+                  <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje, rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p> <hr>
                   
                   <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
                   <!-- Button to open the modal -->
                 
                   
               </div>
-              
-          </div>
+           
            
       </div>
 
@@ -80,7 +84,7 @@ min-height: 800px; background-color: white;
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamiętaj mnie
       </label>
 
-      <p>Rejestrując się akceptujesz nasz <a href="#" style="color:dodgerblue">regulamin</a>.</p>
+      <p>Rejestrując się akceptujesz nasz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Anuluj</button>

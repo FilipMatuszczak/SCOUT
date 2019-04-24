@@ -149,14 +149,14 @@ class Technology
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getUser(): Collection
     {
         return $this->user;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
@@ -165,7 +165,7 @@ class Technology
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->user->contains($user)) {
             $this->user->removeElement($user);

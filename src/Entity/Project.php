@@ -61,8 +61,8 @@ class Project
      */
     public function __construct()
     {
-        $this->technology = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->technology = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getProjectId(): ?int
@@ -135,14 +135,14 @@ class Project
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getUser(): Collection
     {
         return $this->user;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
@@ -152,7 +152,7 @@ class Project
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->user->contains($user)) {
             $this->user->removeElement($user);

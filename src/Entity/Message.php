@@ -34,7 +34,7 @@ class Message
     private $timestamp;
 
     /**
-     * @var Users
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
@@ -44,7 +44,7 @@ class Message
     private $sender;
 
     /**
-     * @var Users
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
@@ -82,24 +82,24 @@ class Message
         return $this;
     }
 
-    public function getSender(): ?Users
+    public function getSender(): ?User
     {
         return $this->sender;
     }
 
-    public function setSender(?Users $sender): self
+    public function setSender(?User $sender): self
     {
         $this->sender = $sender;
 
         return $this;
     }
 
-    public function getReceiver(): ?Users
+    public function getReceiver(): ?User
     {
         return $this->receiver;
     }
 
-    public function setReceiver(?Users $receiver): self
+    public function setReceiver(?User $receiver): self
     {
         $this->receiver = $receiver;
 

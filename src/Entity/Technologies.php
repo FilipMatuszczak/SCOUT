@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Technologies
- *
  * @ORM\Table(name="technologies")
  * @ORM\Entity
  */
@@ -45,7 +43,7 @@ class Technologies
     private $options = '0';
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Projects", inversedBy="technology")
      * @ORM\JoinTable(name="projects_technologies",
@@ -60,7 +58,7 @@ class Technologies
     private $project;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Users", inversedBy="technology")
      * @ORM\JoinTable(name="users_technologies",
@@ -79,8 +77,8 @@ class Technologies
      */
     public function __construct()
     {
-        $this->project = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->project = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getTechnologyId(): ?int

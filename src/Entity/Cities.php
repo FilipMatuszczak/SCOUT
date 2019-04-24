@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cities
- *
  * @ORM\Table(name="cities", indexes={@ORM\Index(name="country_id", columns={"country_id"})})
  * @ORM\Entity
  */
@@ -31,7 +29,7 @@ class Cities
     private $name;
 
     /**
-     * @var \Countries
+     * @var Countries
      *
      * @ORM\ManyToOne(targetEntity="Countries")
      * @ORM\JoinColumns({
@@ -41,18 +39,16 @@ class Cities
     private $country;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Users", mappedBy="city")
      */
     private $user;
 
-    /**
-     * Constructor
-     */
+    /** */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getCityId(): ?int

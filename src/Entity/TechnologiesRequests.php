@@ -5,8 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TechnologiesRequests
- *
  * @ORM\Table(name="technologies_requests", indexes={@ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
@@ -50,7 +48,7 @@ class TechnologiesRequests
     private $options = '0';
 
     /**
-     * @var \Users
+     * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({

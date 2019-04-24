@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Languages
- *
  * @ORM\Table(name="languages")
  * @ORM\Entity
  */
@@ -31,7 +29,7 @@ class Languages
     private $name;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Users", inversedBy="language")
      * @ORM\JoinTable(name="users_languages",
@@ -45,12 +43,10 @@ class Languages
      */
     private $user;
 
-    /**
-     * Constructor
-     */
+    /** */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getLanguageId(): ?int

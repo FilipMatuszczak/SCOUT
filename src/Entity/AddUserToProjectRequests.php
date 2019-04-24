@@ -5,8 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AddUserToProjectRequests
- *
  * @ORM\Table(name="add_user_to_project_requests", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
@@ -43,7 +41,7 @@ class AddUserToProjectRequests
     private $options = '0';
 
     /**
-     * @var \Users
+     * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
@@ -53,7 +51,7 @@ class AddUserToProjectRequests
     private $user;
 
     /**
-     * @var \Projects
+     * @var Projects
      *
      * @ORM\ManyToOne(targetEntity="Projects")
      * @ORM\JoinColumns({

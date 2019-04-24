@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Countries
- *
  * @ORM\Table(name="countries")
  * @ORM\Entity
  */
@@ -38,18 +36,16 @@ class Countries
     private $status = '0';
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Users", mappedBy="country")
      */
     private $user;
 
-    /**
-     * Constructor
-     */
+    /** */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getCountryId(): ?int

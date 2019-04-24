@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Users
- *
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
@@ -94,7 +92,7 @@ class Users
     private $options = '0';
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Cities", inversedBy="user")
      * @ORM\JoinTable(name="users_cities",
@@ -109,7 +107,7 @@ class Users
     private $city;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Countries", inversedBy="user")
      * @ORM\JoinTable(name="users_countries",
@@ -124,14 +122,14 @@ class Users
     private $country;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Languages", mappedBy="user")
      */
     private $language;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Projects", inversedBy="user")
      * @ORM\JoinTable(name="users_projects",
@@ -146,7 +144,7 @@ class Users
     private $project;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Technologies", mappedBy="user")
      */
@@ -157,11 +155,11 @@ class Users
      */
     public function __construct()
     {
-        $this->city = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->country = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->language = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->project = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->technology = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->city = new ArrayCollection();
+        $this->country = new ArrayCollection();
+        $this->language = new ArrayCollection();
+        $this->project = new ArrayCollection();
+        $this->technology = new ArrayCollection();
     }
 
     public function getUserId(): ?int

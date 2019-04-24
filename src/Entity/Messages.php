@@ -5,8 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Messages
- *
  * @ORM\Table(name="messages", indexes={@ORM\Index(name="receiver_id", columns={"receiver_id"}), @ORM\Index(name="sender_id", columns={"sender_id"})})
  * @ORM\Entity
  */
@@ -36,7 +34,7 @@ class Messages
     private $timestamp;
 
     /**
-     * @var \Users
+     * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
@@ -46,7 +44,7 @@ class Messages
     private $sender;
 
     /**
-     * @var \Users
+     * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({

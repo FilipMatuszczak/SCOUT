@@ -5,8 +5,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Posts
- *
  * @ORM\Table(name="posts", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
@@ -36,7 +34,7 @@ class Posts
     private $text;
 
     /**
-     * @var \Users
+     * @var Users
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
@@ -46,7 +44,7 @@ class Posts
     private $user;
 
     /**
-     * @var \Projects
+     * @var Projects
      *
      * @ORM\ManyToOne(targetEntity="Projects")
      * @ORM\JoinColumns({

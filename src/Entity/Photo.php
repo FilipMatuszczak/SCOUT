@@ -5,19 +5,26 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="posts", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
+ * @ORM\Table(name="photos", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
-class Posts
+class Photo
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="post_id", type="integer", nullable=false)
+     * @ORM\Column(name="photo_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $postId;
+    private $photoId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="blob", length=65535, nullable=false)
+     */
+    private $photo;
 
     /**
      * @var \DateTime
@@ -29,9 +36,9 @@ class Posts
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      */
-    private $text;
+    private $description;
 
     /**
      * @var Users
@@ -44,18 +51,30 @@ class Posts
     private $user;
 
     /**
-     * @var Projects
+     * @var Project
      *
-     * @ORM\ManyToOne(targetEntity="Projects")
+     * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
      * })
      */
     private $project;
 
-    public function getPostId(): ?int
+    public function getPhotoId(): ?int
     {
-        return $this->postId;
+        return $this->photoId;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
     }
 
     public function getTimestamp(): ?\DateTimeInterface
@@ -70,14 +89,14 @@ class Posts
         return $this;
     }
 
-    public function getText(): ?string
+    public function getDescription(): ?string
     {
-        return $this->text;
+        return $this->description;
     }
 
-    public function setText(string $text): self
+    public function setDescription(string $description): self
     {
-        $this->text = $text;
+        $this->description = $description;
 
         return $this;
     }
@@ -94,12 +113,12 @@ class Posts
         return $this;
     }
 
-    public function getProject(): ?Projects
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(?Projects $project): self
+    public function setProject(?Project $project): self
     {
         $this->project = $project;
 

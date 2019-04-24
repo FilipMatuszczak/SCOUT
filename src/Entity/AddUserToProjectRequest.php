@@ -5,26 +5,26 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="reports", indexes={@ORM\Index(name="post_id", columns={"post_id"}), @ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="photo_id", columns={"photo_id"})})
+ * @ORM\Table(name="add_user_to_project_requests", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
-class Reports
+class AddUserToProjectRequest
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="report_id", type="integer", nullable=false)
+     * @ORM\Column(name="request_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $reportId;
+    private $requestId;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="reason", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="text", type="text", length=65535, nullable=true)
      */
-    private $reason;
+    private $text;
 
     /**
      * @var \DateTime
@@ -51,38 +51,28 @@ class Reports
     private $user;
 
     /**
-     * @var Posts
+     * @var Project
      *
-     * @ORM\ManyToOne(targetEntity="Posts")
+     * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="post_id", referencedColumnName="post_id")
+     *   @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
      * })
      */
-    private $post;
+    private $project;
 
-    /**
-     * @var Photos
-     *
-     * @ORM\ManyToOne(targetEntity="Photos")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="photo_id", referencedColumnName="photo_id")
-     * })
-     */
-    private $photo;
-
-    public function getReportId(): ?int
+    public function getRequestId(): ?int
     {
-        return $this->reportId;
+        return $this->requestId;
     }
 
-    public function getReason(): ?string
+    public function getText(): ?string
     {
-        return $this->reason;
+        return $this->text;
     }
 
-    public function setReason(string $reason): self
+    public function setText(?string $text): self
     {
-        $this->reason = $reason;
+        $this->text = $text;
 
         return $this;
     }
@@ -123,26 +113,14 @@ class Reports
         return $this;
     }
 
-    public function getPost(): ?Posts
+    public function getProject(): ?Project
     {
-        return $this->post;
+        return $this->project;
     }
 
-    public function setPost(?Posts $post): self
+    public function setProject(?Project $project): self
     {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    public function getPhoto(): ?Photos
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?Photos $photo): self
-    {
-        $this->photo = $photo;
+        $this->project = $project;
 
         return $this;
     }

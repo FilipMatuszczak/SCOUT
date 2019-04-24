@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="languages")
  * @ORM\Entity
  */
-class Languages
+class Language
 {
     /**
      * @var int

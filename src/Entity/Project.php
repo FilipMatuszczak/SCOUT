@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="projects")
  * @ORM\Entity
  */
-class Projects
+class Project
 {
     /**
      * @var int
@@ -45,7 +45,7 @@ class Projects
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Technologies", mappedBy="project")
+     * @ORM\ManyToMany(targetEntity="Technology", mappedBy="project")
      */
     private $technology;
 
@@ -107,14 +107,14 @@ class Projects
     }
 
     /**
-     * @return Collection|Technologies[]
+     * @return Collection|Technology[]
      */
     public function getTechnology(): Collection
     {
         return $this->technology;
     }
 
-    public function addTechnology(Technologies $technology): self
+    public function addTechnology(Technology $technology): self
     {
         if (!$this->technology->contains($technology)) {
             $this->technology[] = $technology;
@@ -124,7 +124,7 @@ class Projects
         return $this;
     }
 
-    public function removeTechnology(Technologies $technology): self
+    public function removeTechnology(Technology $technology): self
     {
         if ($this->technology->contains($technology)) {
             $this->technology->removeElement($technology);

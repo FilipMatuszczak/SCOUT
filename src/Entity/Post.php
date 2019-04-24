@@ -5,26 +5,19 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="add_user_to_project_requests", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
+ * @ORM\Table(name="posts", indexes={@ORM\Index(name="project_id", columns={"project_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity
  */
-class AddUserToProjectRequests
+class Post
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="request_id", type="integer", nullable=false)
+     * @ORM\Column(name="post_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $requestId;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="text", type="text", length=65535, nullable=true)
-     */
-    private $text;
+    private $postId;
 
     /**
      * @var \DateTime
@@ -34,11 +27,11 @@ class AddUserToProjectRequests
     private $timestamp;
 
     /**
-     * @var bool|null
+     * @var string
      *
-     * @ORM\Column(name="options", type="boolean", nullable=true)
+     * @ORM\Column(name="text", type="text", length=65535, nullable=false)
      */
-    private $options = '0';
+    private $text;
 
     /**
      * @var Users
@@ -51,30 +44,18 @@ class AddUserToProjectRequests
     private $user;
 
     /**
-     * @var Projects
+     * @var Project
      *
-     * @ORM\ManyToOne(targetEntity="Projects")
+     * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
      * })
      */
     private $project;
 
-    public function getRequestId(): ?int
+    public function getPostId(): ?int
     {
-        return $this->requestId;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(?string $text): self
-    {
-        $this->text = $text;
-
-        return $this;
+        return $this->postId;
     }
 
     public function getTimestamp(): ?\DateTimeInterface
@@ -89,14 +70,14 @@ class AddUserToProjectRequests
         return $this;
     }
 
-    public function getOptions(): ?bool
+    public function getText(): ?string
     {
-        return $this->options;
+        return $this->text;
     }
 
-    public function setOptions(?bool $options): self
+    public function setText(string $text): self
     {
-        $this->options = $options;
+        $this->text = $text;
 
         return $this;
     }
@@ -113,12 +94,12 @@ class AddUserToProjectRequests
         return $this;
     }
 
-    public function getProject(): ?Projects
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(?Projects $project): self
+    public function setProject(?Project $project): self
     {
         $this->project = $project;
 

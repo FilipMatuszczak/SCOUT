@@ -5,33 +5,26 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="technologies_requests", indexes={@ORM\Index(name="user_id", columns={"user_id"})})
+ * @ORM\Table(name="reports", indexes={@ORM\Index(name="post_id", columns={"post_id"}), @ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="photo_id", columns={"photo_id"})})
  * @ORM\Entity
  */
-class TechnologiesRequests
+class Report
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="request_id", type="integer", nullable=false)
+     * @ORM\Column(name="report_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $requestId;
+    private $reportId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="reason", type="text", length=65535, nullable=false)
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_proposition", type="text", length=65535, nullable=false)
-     */
-    private $descriptionProposition;
+    private $reason;
 
     /**
      * @var \DateTime
@@ -57,31 +50,39 @@ class TechnologiesRequests
      */
     private $user;
 
-    public function getRequestId(): ?int
+    /**
+     * @var Post
+     *
+     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post_id", referencedColumnName="post_id")
+     * })
+     */
+    private $post;
+
+    /**
+     * @var Photo
+     *
+     * @ORM\ManyToOne(targetEntity="Photo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="photo_id", referencedColumnName="photo_id")
+     * })
+     */
+    private $photo;
+
+    public function getReportId(): ?int
     {
-        return $this->requestId;
+        return $this->reportId;
     }
 
-    public function getName(): ?string
+    public function getReason(): ?string
     {
-        return $this->name;
+        return $this->reason;
     }
 
-    public function setName(string $name): self
+    public function setReason(string $reason): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDescriptionProposition(): ?string
-    {
-        return $this->descriptionProposition;
-    }
-
-    public function setDescriptionProposition(string $descriptionProposition): self
-    {
-        $this->descriptionProposition = $descriptionProposition;
+        $this->reason = $reason;
 
         return $this;
     }
@@ -118,6 +119,30 @@ class TechnologiesRequests
     public function setUser(?Users $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?Photo
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?Photo $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

@@ -7,19 +7,19 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="cities", indexes={@ORM\Index(name="country_id", columns={"country_id"})})
+ * @ORM\Table(name="countries")
  * @ORM\Entity
  */
-class Cities
+class Country
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="city_id", type="integer", nullable=false)
+     * @ORM\Column(name="country_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $cityId;
+    private $countryId;
 
     /**
      * @var string
@@ -29,19 +29,16 @@ class Cities
     private $name;
 
     /**
-     * @var Countries
+     * @var bool|null
      *
-     * @ORM\ManyToOne(targetEntity="Countries")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="country_id", referencedColumnName="country_id")
-     * })
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
-    private $country;
+    private $status = '0';
 
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="city")
+     * @ORM\ManyToMany(targetEntity="Users", mappedBy="country")
      */
     private $user;
 
@@ -51,9 +48,9 @@ class Cities
         $this->user = new ArrayCollection();
     }
 
-    public function getCityId(): ?int
+    public function getCountryId(): ?int
     {
-        return $this->cityId;
+        return $this->countryId;
     }
 
     public function getName(): ?string
@@ -68,14 +65,14 @@ class Cities
         return $this;
     }
 
-    public function getCountry(): ?Countries
+    public function getStatus(): ?bool
     {
-        return $this->country;
+        return $this->status;
     }
 
-    public function setCountry(?Countries $country): self
+    public function setStatus(?bool $status): self
     {
-        $this->country = $country;
+        $this->status = $status;
 
         return $this;
     }
@@ -92,7 +89,7 @@ class Cities
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
-            $user->addCity($this);
+            $user->addCountry($this);
         }
 
         return $this;
@@ -102,7 +99,7 @@ class Cities
     {
         if ($this->user->contains($user)) {
             $this->user->removeElement($user);
-            $user->removeCity($this);
+            $user->removeCountry($this);
         }
 
         return $this;

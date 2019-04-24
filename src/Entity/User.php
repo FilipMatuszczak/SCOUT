@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class Users
+class User
 {
     /**
      * @var int
@@ -94,7 +94,7 @@ class Users
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Cities", inversedBy="user")
+     * @ORM\ManyToMany(targetEntity="City", inversedBy="user")
      * @ORM\JoinTable(name="users_cities",
      *   joinColumns={
      *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
@@ -109,7 +109,7 @@ class Users
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Countries", inversedBy="user")
+     * @ORM\ManyToMany(targetEntity="Country", inversedBy="user")
      * @ORM\JoinTable(name="users_countries",
      *   joinColumns={
      *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
@@ -124,14 +124,14 @@ class Users
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Languages", mappedBy="user")
+     * @ORM\ManyToMany(targetEntity="Language", mappedBy="user")
      */
     private $language;
 
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Projects", inversedBy="user")
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="user")
      * @ORM\JoinTable(name="users_projects",
      *   joinColumns={
      *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
@@ -146,7 +146,7 @@ class Users
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Technologies", mappedBy="user")
+     * @ORM\ManyToMany(targetEntity="Technology", mappedBy="user")
      */
     private $technology;
 
@@ -288,14 +288,14 @@ class Users
     }
 
     /**
-     * @return Collection|Cities[]
+     * @return Collection|City[]
      */
     public function getCity(): Collection
     {
         return $this->city;
     }
 
-    public function addCity(Cities $city): self
+    public function addCity(City $city): self
     {
         if (!$this->city->contains($city)) {
             $this->city[] = $city;
@@ -304,7 +304,7 @@ class Users
         return $this;
     }
 
-    public function removeCity(Cities $city): self
+    public function removeCity(City $city): self
     {
         if ($this->city->contains($city)) {
             $this->city->removeElement($city);
@@ -314,14 +314,14 @@ class Users
     }
 
     /**
-     * @return Collection|Countries[]
+     * @return Collection|Country[]
      */
     public function getCountry(): Collection
     {
         return $this->country;
     }
 
-    public function addCountry(Countries $country): self
+    public function addCountry(Country $country): self
     {
         if (!$this->country->contains($country)) {
             $this->country[] = $country;
@@ -330,7 +330,7 @@ class Users
         return $this;
     }
 
-    public function removeCountry(Countries $country): self
+    public function removeCountry(Country $country): self
     {
         if ($this->country->contains($country)) {
             $this->country->removeElement($country);
@@ -340,14 +340,14 @@ class Users
     }
 
     /**
-     * @return Collection|Languages[]
+     * @return Collection|Language[]
      */
     public function getLanguage(): Collection
     {
         return $this->language;
     }
 
-    public function addLanguage(Languages $language): self
+    public function addLanguage(Language $language): self
     {
         if (!$this->language->contains($language)) {
             $this->language[] = $language;
@@ -357,7 +357,7 @@ class Users
         return $this;
     }
 
-    public function removeLanguage(Languages $language): self
+    public function removeLanguage(Language $language): self
     {
         if ($this->language->contains($language)) {
             $this->language->removeElement($language);
@@ -368,14 +368,14 @@ class Users
     }
 
     /**
-     * @return Collection|Projects[]
+     * @return Collection|Project[]
      */
     public function getProject(): Collection
     {
         return $this->project;
     }
 
-    public function addProject(Projects $project): self
+    public function addProject(Project $project): self
     {
         if (!$this->project->contains($project)) {
             $this->project[] = $project;
@@ -384,7 +384,7 @@ class Users
         return $this;
     }
 
-    public function removeProject(Projects $project): self
+    public function removeProject(Project $project): self
     {
         if ($this->project->contains($project)) {
             $this->project->removeElement($project);
@@ -394,14 +394,14 @@ class Users
     }
 
     /**
-     * @return Collection|Technologies[]
+     * @return Collection|Technology[]
      */
     public function getTechnology(): Collection
     {
         return $this->technology;
     }
 
-    public function addTechnology(Technologies $technology): self
+    public function addTechnology(Technology $technology): self
     {
         if (!$this->technology->contains($technology)) {
             $this->technology[] = $technology;
@@ -411,7 +411,7 @@ class Users
         return $this;
     }
 
-    public function removeTechnology(Technologies $technology): self
+    public function removeTechnology(Technology $technology): self
     {
         if ($this->technology->contains($technology)) {
             $this->technology->removeElement($technology);

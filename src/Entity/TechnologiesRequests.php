@@ -59,5 +59,70 @@ class TechnologiesRequests
      */
     private $user;
 
+    public function getRequestId(): ?int
+    {
+        return $this->requestId;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescriptionProposition(): ?string
+    {
+        return $this->descriptionProposition;
+    }
+
+    public function setDescriptionProposition(string $descriptionProposition): self
+    {
+        $this->descriptionProposition = $descriptionProposition;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getOptions(): ?bool
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?bool $options): self
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 
 }

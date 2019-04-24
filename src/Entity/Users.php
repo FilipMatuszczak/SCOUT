@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -160,6 +162,265 @@ class Users
         $this->language = new \Doctrine\Common\Collections\ArrayCollection();
         $this->project = new \Doctrine\Common\Collections\ArrayCollection();
         $this->technology = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSalt(): ?string
+    {
+        return $this->salt;
+    }
+
+    public function setSalt(string $salt): self
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeInterface
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): self
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(?string $info): self
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getOptions(): ?bool
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?bool $options): self
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cities[]
+     */
+    public function getCity(): Collection
+    {
+        return $this->city;
+    }
+
+    public function addCity(Cities $city): self
+    {
+        if (!$this->city->contains($city)) {
+            $this->city[] = $city;
+        }
+
+        return $this;
+    }
+
+    public function removeCity(Cities $city): self
+    {
+        if ($this->city->contains($city)) {
+            $this->city->removeElement($city);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Countries[]
+     */
+    public function getCountry(): Collection
+    {
+        return $this->country;
+    }
+
+    public function addCountry(Countries $country): self
+    {
+        if (!$this->country->contains($country)) {
+            $this->country[] = $country;
+        }
+
+        return $this;
+    }
+
+    public function removeCountry(Countries $country): self
+    {
+        if ($this->country->contains($country)) {
+            $this->country->removeElement($country);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Languages[]
+     */
+    public function getLanguage(): Collection
+    {
+        return $this->language;
+    }
+
+    public function addLanguage(Languages $language): self
+    {
+        if (!$this->language->contains($language)) {
+            $this->language[] = $language;
+            $language->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Languages $language): self
+    {
+        if ($this->language->contains($language)) {
+            $this->language->removeElement($language);
+            $language->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Projects[]
+     */
+    public function getProject(): Collection
+    {
+        return $this->project;
+    }
+
+    public function addProject(Projects $project): self
+    {
+        if (!$this->project->contains($project)) {
+            $this->project[] = $project;
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Projects $project): self
+    {
+        if ($this->project->contains($project)) {
+            $this->project->removeElement($project);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Technologies[]
+     */
+    public function getTechnology(): Collection
+    {
+        return $this->technology;
+    }
+
+    public function addTechnology(Technologies $technology): self
+    {
+        if (!$this->technology->contains($technology)) {
+            $this->technology[] = $technology;
+            $technology->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTechnology(Technologies $technology): self
+    {
+        if ($this->technology->contains($technology)) {
+            $this->technology->removeElement($technology);
+            $technology->removeUser($this);
+        }
+
+        return $this;
     }
 
 }

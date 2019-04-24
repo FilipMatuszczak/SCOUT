@@ -55,5 +55,58 @@ class Messages
      */
     private $receiver;
 
+    public function getMessageId(): ?int
+    {
+        return $this->messageId;
+    }
+
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
+
+    public function setText(string $text): self
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getSender(): ?Users
+    {
+        return $this->sender;
+    }
+
+    public function setSender(?Users $sender): self
+    {
+        $this->sender = $sender;
+
+        return $this;
+    }
+
+    public function getReceiver(): ?Users
+    {
+        return $this->receiver;
+    }
+
+    public function setReceiver(?Users $receiver): self
+    {
+        $this->receiver = $receiver;
+
+        return $this;
+    }
+
 
 }

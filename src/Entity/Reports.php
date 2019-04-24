@@ -72,5 +72,82 @@ class Reports
      */
     private $photo;
 
+    public function getReportId(): ?int
+    {
+        return $this->reportId;
+    }
+
+    public function getReason(): ?string
+    {
+        return $this->reason;
+    }
+
+    public function setReason(string $reason): self
+    {
+        $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getOptions(): ?bool
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?bool $options): self
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPost(): ?Posts
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Posts $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?Photos
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?Photos $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
 
 }

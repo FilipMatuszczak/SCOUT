@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,6 +81,99 @@ class Technologies
     {
         $this->project = new \Doctrine\Common\Collections\ArrayCollection();
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getTechnologyId(): ?int
+    {
+        return $this->technologyId;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getOptions(): ?bool
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?bool $options): self
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Projects[]
+     */
+    public function getProject(): Collection
+    {
+        return $this->project;
+    }
+
+    public function addProject(Projects $project): self
+    {
+        if (!$this->project->contains($project)) {
+            $this->project[] = $project;
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Projects $project): self
+    {
+        if ($this->project->contains($project)) {
+            $this->project->removeElement($project);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Users[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(Users $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Users $user): self
+    {
+        if ($this->user->contains($user)) {
+            $this->user->removeElement($user);
+        }
+
+        return $this;
     }
 
 }

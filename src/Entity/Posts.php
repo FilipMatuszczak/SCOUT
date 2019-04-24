@@ -55,5 +55,58 @@ class Posts
      */
     private $project;
 
+    public function getPostId(): ?int
+    {
+        return $this->postId;
+    }
+
+    public function getTimestamp(): ?\DateTimeInterface
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(\DateTimeInterface $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
+
+    public function setText(string $text): self
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProject(): ?Projects
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Projects $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
 
 }

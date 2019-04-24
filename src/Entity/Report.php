@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="reports", indexes={@ORM\Index(name="post_id", columns={"post_id"}), @ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="photo_id", columns={"photo_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ReportRepository")
  */
 class Report
 {

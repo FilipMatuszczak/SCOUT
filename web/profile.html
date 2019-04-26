@@ -2,6 +2,7 @@
 <html>
   <head>
       <link href="styles/profile.css" rel="stylesheet" type="text/css">
+      <link href="styles/style.css" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
     <meta charset="utf-8">
@@ -55,24 +56,33 @@
       <div id="contents">
         <div id="profile">
           <div class="profile-left">
-              <a href=""><img id="profile-picture" src="images/krowa.jpg" width="230" height="280"></a>
+              <img id="profile-picture" src="images/krowa.jpg" width="230" height="280">
             </div>
           
             <div class="profile-right">
-             <p>Adam Mickiewicz</p>
-                <p>cos</p>
+             <p id="name-profile">Imie i nazwisko</p>
+                <p>wiek i miasto</p>
                 <hr>
-                <p>cos</p>
+                <p>jezyki obce i programowania</p>
                 <hr>
-                <p>cos</p>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim, pulvinar sit amet nisl id, vestibulum ornare velit. Vestibulum molestie elit sit amet vehicula posuere. Morbi tristique sem sed ipsum malesuada, id lacinia quam rhoncus. Donec varius ligula vitae mi sagittis tristique nullam.</p>
             </div>
           </div>
-           <button class="navico"><i class="fa fa-suitcase"></i></button>
-          <div class="comment">
-              <a href=""><img id="comment-avatar" src="images/krowa.jpg"  width="70" height="70"></a>
+           <button class="navico" id="message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button> 
           
-            <a class="project-title" href=" ">Imie i Nazwisko</a><br>
-            <p>cos</p>
+          <div class="form-post">
+          
+          <img id="post-avatar" src="images/krowa.jpg"  width="70" height="70">
+    		<textarea rows="3" class="form-control" name="description" maxlength=400></textarea>
+              <button class="button-post">Opublikuj</button>
+          </div>
+          
+          
+          <div class="comment">
+              <a href=""><img id="comment-avatar" src="images/kot.jpg"  width="70" height="70"></a>
+          
+            <p class="project-title" href=" ">Imie i Nazwisko</p> - data
+            <p class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim, pulvinar sit amet nisl id, vestibulum ornare velit.</p>
                 </div>
          
           

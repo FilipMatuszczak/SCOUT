@@ -1,138 +1,13 @@
 
-html {
-  background-color: #ECF0F1;
-     min-width: 1200px; margin: 0 auto; overflow: auto;
-}
-
-header{
-    background-color: #7DA2AA;
-    color: floralwhite;
-    text-decoration: none;
-    font-size: 30px;
-    height: 40px;
-    width: 100%;
-    top: 0px;
-}
-
-.header-tab{
-    float:left;
-    width: 25%;
-    padding-bottom: 5px;
-    border-bottom: 2px solid white;
-    text-align: center;
-}
-
-#search-tab:hover{
-    border-bottom: 2px solid white;
-}
-
-.alogo{
-    color: white;
-    text-decoration: none;
-    font-size: 30px;
-    text-align: center;
-    
-}
-
-.header-tab:hover{
-    border-bottom: 5px solid white;
-    text-shadow: 1px 1px 2px white;
-}
-/*#EBB3B4*/
-#searchbar{
-    color:black;
-    background-color: white;
-    margin-top: -26px;
-    width: 70%;
-    border-radius: 7px;
-}
-
-header button{
-  background: none;
-  color: white;
-    margin-top: -27px;
-    margin-right: 69px;
-    float: right;
-  font-size: 18px;
-  border: none; 
-  cursor: pointer;
-    
-}
-
-header button:hover{
-    color: lightgrey;
-}
-
-.anavig{
-    color: black;
-    text-decoration: none;
-    font-size: 15px;
-    text-align: center;
-}
-
-.columnLeft{
-    margin-top: -40px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 80px;
-    margin-left: 7%;
-    float: left;
-}
-
-#navigation{
-  float: left;
-  width: 300px;
-  background-color: rgba(255,255,255,0.8);
-  border: 1px solid #7DA2AA;
-  padding: 10px;
-}
-#ilogo{
-    overflow:visible;
-    margin-left: 30px;
-}   
-
-#navigation-avatar{
-    border: 1px solid #7DA2AA;
-    border-radius: 100px;
-    object-fit: cover;
-    float:left;
-}
-
-.navico{
-  background: none;
-  color: #112d32;
-  font-size: 25px;
-  border: none; 
-  cursor: pointer;
-}
-
-.navico:hover{
-    color: #7DA2AA;
-}
-
-.columnRight{
-    min-width: 700px;
-    margin-left: 37%;
-    margin-right: 15%;
-  margin-top: 80px;
-}
-
-#contents{
-  float:none;
- background-color: rgba(255,255,255,0.8);
-  border:1px solid #7DA2AA;
-  padding: 10px;
-  min-height: 2300px;
-    
-}
-    
-
 #profile{
     margin-top: 0px;
     width: 100%;
     float: left;
     background: rgba(235,235,235,0.4);
     border:1px solid #7DA2AA;
+    height: 300px;
+    overflow: hidden;
+    text-align: justify;
 }
 
 #profile-picture{
@@ -152,6 +27,77 @@ header button:hover{
 }
 
 
+#name-profile{ 
+    color: #7DA2AA;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-post{
+    
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#post-avatar{
+    margin: 5px;
+    border: 1px solid #7DA2AA;
+    border-radius: 100px;
+    object-fit: cover;
+    float:left;
+}
+
+.form-control{
+    width: 75%;
+    margin-top: 16px;
+    resize: none;
+    border-radius: 5px;
+}
+
+.button-post{
+    float: right;
+    margin-top: 17px;
+    height: 51px;
+    padding: 10px;
+  background-color: #EBB3B4; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+    opacity: 0.85;
+    
+}
+
+.button-post:hover{
+    opacity: 1;
+}
+
+#message-ico{
+    float: right;
+    font-size: 
+}
+
+#comment-avatar{
+    margin: 5px;
+    border: 1px solid #7DA2AA;
+    border-radius: 100px;
+    object-fit: cover;
+    float:left;
+    
+}
+    
+.project-title{
+    text-decoration: none;
+    color: #4f4a41;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 1px;
+    display:contents;
+}
+
 
 .comment{
     background-color: rgba(235,235,235,0.4);
@@ -165,46 +111,15 @@ header button:hover{
     
 }
 
-#project-avatar{
-    border: 2px solid #254e58;
-    float:left;
-    margin: 5px;
-    object-fit:cover;
-    
+.comment-content{
+    margin: 1px;
 }
-    
-.project-title{
-    text-decoration: none;
-    color: #4f4a41;
-    font-size: 28px;
-    font-weight: bold;
-    margin: 10px;
-}
-.project-lang{
-    text-decoration: none;
-    color: #17252A;
-    font-size: 20px;
-    margin: 13px;
-}
-.project-autors{
-    text-decoration: none;
-    color: #17252A;
-    font-size: 20px;
-    margin-right: 5px;
-    margin-top: 20px;
-    float:right;
-    font-style: italic;
-}
-body {
-  width: auto;
-  margin: 0 auto;
-  --background: rgba(255,255,255,0.25);
+
+p{
+    padding-right: 5px;
 }
 
 
-
-
-
-img {
-  
+hr{
+    width: 90%;
 }

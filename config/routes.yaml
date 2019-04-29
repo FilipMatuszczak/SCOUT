@@ -1,3 +1,8 @@
 index:
     path: /
     controller: App\Controller\LoginController::indexAction
+
+create_user:
+    path:       /create_user
+    controller: App\Controller\LoginController::createUserAction
+    methods:    POST

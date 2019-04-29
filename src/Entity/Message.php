@@ -36,7 +36,7 @@ class Message
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sender_id", referencedColumnName="user_id")
      * })
@@ -46,7 +46,7 @@ class Message
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="receiver_id", referencedColumnName="user_id")
      * })

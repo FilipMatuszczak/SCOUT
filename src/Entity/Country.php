@@ -38,7 +38,7 @@ class Country
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="country")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="country")
      */
     private $user;
 

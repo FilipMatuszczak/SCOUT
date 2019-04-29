@@ -41,7 +41,7 @@ class City
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="city")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="city")
      */
     private $user;
 

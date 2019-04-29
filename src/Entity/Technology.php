@@ -60,7 +60,7 @@ class Technology
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", inversedBy="technology")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="technology")
      * @ORM\JoinTable(name="users_technologies",
      *   joinColumns={
      *     @ORM\JoinColumn(name="technology_id", referencedColumnName="technology_id")

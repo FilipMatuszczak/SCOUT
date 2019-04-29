@@ -52,7 +52,7 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", mappedBy="project")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="project")
      */
     private $user;
 

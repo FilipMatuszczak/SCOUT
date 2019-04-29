@@ -31,7 +31,7 @@ class Language
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Users", inversedBy="language")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="language")
      * @ORM\JoinTable(name="users_languages",
      *   joinColumns={
      *     @ORM\JoinColumn(name="language_id", referencedColumnName="language_id")

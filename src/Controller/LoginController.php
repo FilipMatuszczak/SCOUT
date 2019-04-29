@@ -41,7 +41,7 @@ class LoginController extends AbstractController
         );
 
         $email = $this->userRepository->find(1)->getEmail();
-        
+
         return new JsonResponse(
             [
                 'status' => 'ok',

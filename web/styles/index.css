@@ -86,8 +86,19 @@ body {
 
 
 
-
-
+.names{
+    float: left;
+    width: 100%;
+}
+.first-name{
+    float: left;
+    display: block;
+    width: 48%;
+    
+}
+#last-name.first-name{
+    margin-left: 4%;
+}
 
 * {box-sizing: border-box}
   input[type=text], input[type=password] {

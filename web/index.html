@@ -39,7 +39,7 @@
       <div class="row">
       
               <div class="block">
-              <a href=""><img src="images/logov22.png"></a>
+              <a href=""><img src="images/logom.png"></a>
                   <form onsubmit="return false">
                       
  <input type="text" size="30" placeholder="Username">
@@ -69,14 +69,22 @@
         <label for="username"><b>Nazwa użytkownika</b></label>
       <input type="text" placeholder="Podaj nazwę" name="username" required>
         
+        <div class="names">
+            <div class="first-name">
+         <label for="first-name"><b>Imię</b></label>
+                <input type="text" placeholder="Podaj imię" name="first-name" required> </div>
+            <div id="last-name" class="first-name">
+         <label for="last-name"><b>Nazwisko</b></label>
+                <input type="text" placeholder="Podaj nazwisko" name="last-name" required></div> </div>
+        
       <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Podaj email" name="email" required>
+      <input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" placeholder="Podaj email" name="email" required>
 
       <label for="psw"><b>Podaj hasło</b></label>
-      <input type="password" placeholder="Podaj hasło" name="psw" required>
+      <input type="password" placeholder="Podaj hasło" name="psw" id="password" required>
 
       <label for="psw-repeat"><b>Powtórz hasło</b></label>
-      <input type="password" placeholder="Powtórz hasło" name="psw-repeat" required>
+      <input type="password" placeholder="Powtórz hasło" id="confirm_password" name="psw-repeat" required>
         
         
 
@@ -106,6 +114,23 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+////////////////////////////////////////////
+//passwords
+//
+
+var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Hasła nie zgadzają się!");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+                 
 </script>
       
       <script src="scripts/web/main.js"></script>

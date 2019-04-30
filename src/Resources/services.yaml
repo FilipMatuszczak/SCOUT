@@ -1,0 +1,5 @@
+services:
+  register_handler:
+    class: App\Services\RegisterHandler
+    arguments:
+      - App\Repository\UserRepository

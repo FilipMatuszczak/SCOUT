@@ -2,30 +2,31 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+use App\Services\RegisterHandler;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /** */
 class LoginController extends AbstractController
 {
-    /** @var UserRepository */
-    private $userRepository;
+    /** @var RegisterHandler */
+    private $registerHandler;
 
     /**
-     * @param UserRepository $userRepository
+     * @param RegisterHandler $registerHandler
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(RegisterHandler $registerHandler)
     {
-        $this->userRepository = $userRepository;
+        $this->registerHandler = $registerHandler;
     }
 
     /** */
     public function indexAction()
     {
-        return $this->render('main/main.html.twig',[]);
+        return $this->render('main/main.html.twig', []);
     }
 
     /**
@@ -40,12 +41,27 @@ class LoginController extends AbstractController
             true
         );
 
-        $email = $this->userRepository->find(1)->getEmail();
+        try {
+            $this->registerHandler->registerUser($newUserData);
+        } catch (OptimisticLockException $e) {
+            return new JsonResponse(
+                [
+                    'status' => 'failed',
+                ],
+                JsonResponse::HTTP_LOCKED
+            );
+        } catch (ORMException $e) {
+            return new JsonResponse(
+                [
+                    'status' => 'failed',
+                ],
+                JsonResponse::HTTP_BAD_GATEWAY
+            );
+        }
 
         return new JsonResponse(
             [
                 'status' => 'ok',
-                'email' => $email,
             ],
             JsonResponse::HTTP_CREATED
         );

@@ -12,6 +12,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    const COLUMN_USER_ID = 'user_id';
+    const COLUMN_FIRST_NAME = 'firstname';
+    const COLUMN_LAST_NAME = 'lastname';
+    const COLUMN_USERNAME = 'username';
+    const COLUMN_EMAIL = 'email';
+    const COLUMN_PASSWORD = 'password';
+    const COLUMN_SALT = 'salt';
+    const COLUMN_DATE_OF_BIRTH = 'date_of_birth';
+    const COLUMN_INFO = 'info';
+    const COLUMN_PHOTO = 'photo';
+    const COLUMN_OPTIONS = 'options';
+
     /**
      * @var int
      *

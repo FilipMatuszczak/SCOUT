@@ -36,9 +36,6 @@ class RegisterHandler
 
     /**
      * @param array $userData
-     * @throws ORMException
-     *
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function registerUser(array $userData)
     {
@@ -62,5 +59,7 @@ class RegisterHandler
         $this->entityManager->persist($user);
 
         $this->entityManager->flush();
+
+        return $user;
     }
 }

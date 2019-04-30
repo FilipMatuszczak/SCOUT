@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
+use App\Services\MailerService;
 use App\Services\RegisterHandler;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +14,17 @@ class LoginController extends AbstractController
     /** @var RegisterHandler */
     private $registerHandler;
 
+    /** @var MailerService */
+    private $mailerService;
+
     /**
      * @param RegisterHandler $registerHandler
+     * @param MailerService $mailerService
      */
-    public function __construct(RegisterHandler $registerHandler)
+    public function __construct(RegisterHandler $registerHandler, MailerService $mailerService)
     {
         $this->registerHandler = $registerHandler;
+        $this->mailerService = $mailerService;
     }
 
     /** */
@@ -41,23 +45,8 @@ class LoginController extends AbstractController
             true
         );
 
-        try {
-            $this->registerHandler->registerUser($newUserData);
-        } catch (OptimisticLockException $e) {
-            return new JsonResponse(
-                [
-                    'status' => 'failed',
-                ],
-                JsonResponse::HTTP_LOCKED
-            );
-        } catch (ORMException $e) {
-            return new JsonResponse(
-                [
-                    'status' => 'failed',
-                ],
-                JsonResponse::HTTP_BAD_GATEWAY
-            );
-        }
+        $user = $this->registerHandler->registerUser($newUserData);
+        $this->mailerService->sendAuthenticationEmail($user->getEmail());
 
         return new JsonResponse(
             [

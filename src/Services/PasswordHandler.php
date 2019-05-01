@@ -13,7 +13,7 @@ class PasswordHandler
      */
     public function generateHashAndSalt($password)
     {
-        $salt = $this->getSalt(128);
+        $salt = $this->getRandomString(128);
         $hash = hash('sha512', $password . $salt);
 
         return [
@@ -22,7 +22,17 @@ class PasswordHandler
         ];
     }
 
-    private function getSalt($size)
+    public function generateAuthenticationLink()
+    {
+        return $this->getRandomString(128);
+    }
+
+    /**
+     * @param int $size
+     *
+     * @return string
+     */
+    private function getRandomString($size)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
@@ -34,4 +44,5 @@ class PasswordHandler
 
         return $randomString;
     }
+
 }

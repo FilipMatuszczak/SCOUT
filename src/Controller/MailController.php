@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MailController extends AbstractController
 {
@@ -16,15 +18,35 @@ class MailController extends AbstractController
         $this->mailer = $mailer;
     }
 
-    public function sendRegisterMailAction($email, $firstname)
+    /**
+     * @param string $email
+     * @param string $username
+     * @param string $authenticationLink
+     *
+     * @return JsonResponse
+     */
+    public function sendRegisterMailAction($email, $username, $authenticationLink)
     {
-        $message = (new \Swift_Message('Hello Email'))
+        $verificationUrl = $this->generateUrl
+        (
+            'authenticate_account',
+            [
+                'username' => $username,
+                'authenticationLink' => $authenticationLink,
+                ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $message = (new Swift_Message('Scout - Confirmation email'))
             ->setFrom('scoutregister1@gmail.com')
             ->setTo($email)
             ->setBody(
                 $this->renderView(
                     'main/registration.html.twig',
-                    ['name' => $firstname]
+                    [
+                        'name' => $username,
+                        'verificationUrl' => $verificationUrl,
+                    ]
                 ),
                 'text/html'
             );

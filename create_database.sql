@@ -1,4 +1,7 @@
 use scout;
+drop database scout;
+create database scout;
+use scout;
 
 CREATE TABLE IF NOT EXISTS users(
     user_id INT auto_increment,
@@ -11,6 +14,7 @@ CREATE TABLE IF NOT EXISTS users(
     date_of_birth DATETIME NULL,
     info TEXT NULL,
     photo BLOB NULL,
+    authentication_link CHAR(128),
     options TINYINT(4) DEFAULT 0,
     PRIMARY KEY (user_id)
 ) ENGINE=INNODB;
@@ -114,7 +118,6 @@ CREATE TABLE IF NOT EXISTS users_languages(
 
 insert into users_languages values (1, 2), (2, 1), (1, 3), (3,1), (4,4);
 
-
 create table if not exists messages(
     message_id int auto_increment,
     sender_id int not null,
@@ -133,7 +136,6 @@ insert into messages (sender_id, receiver_id, text, timestamp) values
 (2,4, 'Czesc', (NOW()-interval 3 DAY)),
 (2,1, 'siemano', (NOW()-interval 3 DAY));
 
-
 create table if not exists projects(
 project_id INT auto_increment,
 title VARCHAR(50) NOT NULL,
@@ -147,8 +149,6 @@ insert into projects (title, description, created_date) VALUES
 ('lepszy fejsbuk', 'nie podoba nam sie fb wiec robimy swoj', NOW()),
 ('gorszy twitter', 'chcemy udowodnic, ze da sie zrobic cos gorszego niz twitter', NOW());
 
-
-
  create table if not exists add_user_to_project_requests(
      request_id int auto_increment,
      user_id INT not null ,
@@ -161,7 +161,6 @@ insert into projects (title, description, created_date) VALUES
      FOREIGN KEY (project_id) REFERENCES projects(project_id)
  );
 
-
 create table if not exists users_projects(
     user_id INT not null ,
     project_id INT not null,
@@ -173,16 +172,12 @@ create table if not exists users_projects(
 
 insert into users_projects (user_id, project_id) values (1,2), (1,3), (2,1);
 
-
 create table if not exists countries (
     country_id int auto_increment,
     name varchar(50) not null,
     status tinyint(4) default 0,
     primary key(country_id)
 );
-
-
-
 
 create table if not exists users_countries(
     user_id INT not null ,
@@ -192,11 +187,9 @@ create table if not exists users_countries(
     primary key (user_id, country_id)
 );
 
-insert into users_countries (user_id, country_id) VALUES (1,1), (2,2), (3,3), (4,4);
-
-
 insert into countries (name) values ('England'), ('Poland'), ('USA'),('France'),('Germany');
 
+insert into users_countries (user_id, country_id) VALUES (1,1), (2,2), (3,3), (4,4);
 
 create table if not exists cities(
     city_id int auto_increment,

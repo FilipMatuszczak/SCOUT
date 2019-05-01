@@ -22,7 +22,12 @@ class User
     const COLUMN_DATE_OF_BIRTH = 'date_of_birth';
     const COLUMN_INFO = 'info';
     const COLUMN_PHOTO = 'photo';
+    const COLUMN_AUTHENTICATION_LINK = 'authentication_link';
     const COLUMN_OPTIONS = 'options';
+
+    const USER_CREATED = 1;
+    const USER_VERIFIED = 2;
+    const USER_BANNED = 4;
 
     /**
      * @var int
@@ -95,6 +100,13 @@ class User
      * @ORM\Column(name="photo", type="blob", length=65535, nullable=true)
      */
     private $photo;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="authentication_link", type="string", length=128, nullable=true)
+     */
+    private $authenticationLink;
 
     /**
      * @var bool|null
@@ -223,6 +235,18 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAuthenticationLink(): ?string
+    {
+        return $this->authenticationLink;
+    }
+
+    public function setAuthenticationLink(string $authenticationLink): self
+    {
+        $this->authenticationLink = $authenticationLink;
 
         return $this;
     }
@@ -432,5 +456,4 @@ class User
 
         return $this;
     }
-
 }

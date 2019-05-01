@@ -7,3 +7,6 @@ create_user:
     controller: App\Controller\LoginController::createUserAction
     methods:    POST
 
+authenticate_account:
+    path: autheticate_accout/{username}/{authenticationLink}
+    controller: App\Controller\LoginController::authenticateUserAction

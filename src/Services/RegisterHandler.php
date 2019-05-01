@@ -54,7 +54,9 @@ class RegisterHandler
             ->setLastname($lastname)
             ->setEmail($email)
             ->setPassword($hashAndSalt[User::COLUMN_PASSWORD])
-            ->setSalt($hashAndSalt[User::COLUMN_SALT]);
+            ->setSalt($hashAndSalt[User::COLUMN_SALT])
+            ->setOptions(User::USER_CREATED)
+            ->setAuthenticationLink($this->passwordHandler->generateAuthenticationLink());
 
         $this->entityManager->persist($user);
 

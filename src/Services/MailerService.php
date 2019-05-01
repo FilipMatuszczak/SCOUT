@@ -1,29 +1,44 @@
 <?php
 
-
 namespace App\Services;
 
-use Swift_Mailer;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
 
 class MailerService
 {
-    /** @var Swift_Mailer */
-    private $mailer;
+    /** @var UserRepository */
+    private $userRepository;
 
-    public function __construct(Swift_Mailer $mailer)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $entityManager)
     {
-        $this->mailer = $mailer;
+        $this->userRepository = $userRepository;
+        $this->entityManager = $entityManager;
     }
 
-    public function sendAuthenticationEmail($email)
+    /**
+     * @param string $username
+     * @param string $authenticationLink
+     *
+     * @return User|null
+     */
+    public function verifyAuthenticationLink($username, $authenticationLink)
     {
-        $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('scoutregister1@gmail.com')
-            ->setTo($email)
-            ->setBody(
-                'dziala'
-            );
+        $user = $this->userRepository
+            ->findCreatedUserByUsernameAndAuthenticationLink($username, $authenticationLink);
 
-        $this->mailer->send($message);
+        if ($user)
+        {
+            $user->setOptions($user->getOptions() | User::USER_VERIFIED);
+            $this->entityManager->flush();
+            return $user;
+        }
+
+        return null;
     }
 }

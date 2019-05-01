@@ -36,15 +36,23 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    /**
+     * @param $username
+     * @param $authenticationLink
+     *
+     * @return User|null
+     */
+    public function findCreatedUserByUsernameAndAuthenticationLink($username, $authenticationLink): ?User
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('u.' . User::COLUMN_USERNAME . '= :username')
+            //->andWhere('u.' . User::COLUMN_AUTHENTICATION_LINK . '= :authenticationLink')
+            ->andWhere('u.' . User::COLUMN_OPTIONS . ' = ' . User::USER_CREATED)
+            ->setParameters([
+                'username' => $username,
+               // 'authenticationLink' => $authenticationLink,
+            ])
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 }

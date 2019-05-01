@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Services\MailerService;
 use App\Services\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /** */
 class LoginController extends AbstractController
@@ -36,7 +37,7 @@ class LoginController extends AbstractController
     /**
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function createUserAction(Request $request)
     {
@@ -46,13 +47,10 @@ class LoginController extends AbstractController
         );
 
         $user = $this->registerHandler->registerUser($newUserData);
-        $this->mailerService->sendAuthenticationEmail($user->getEmail());
 
-        return new JsonResponse(
-            [
-                'status' => 'ok',
-            ],
-            JsonResponse::HTTP_CREATED
-        );
+        return $this->forward('App\Controller\MailController::sendRegisterMailAction', [
+            User::COLUMN_EMAIL  => $user->getEmail(),
+            User::COLUMN_FIRST_NAME => $user->getFirstname(),
+        ]);
     }
 }

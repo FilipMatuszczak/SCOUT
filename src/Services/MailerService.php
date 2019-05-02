@@ -35,7 +35,10 @@ class MailerService
         if ($user)
         {
             $user->setOptions($user->getOptions() | User::USER_VERIFIED);
+
+            $this->entityManager->merge($user);
             $this->entityManager->flush();
+
             return $user;
         }
 

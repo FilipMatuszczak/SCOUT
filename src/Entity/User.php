@@ -104,14 +104,14 @@ class User
     /**
      * @var string|null
      *
-     * @ORM\Column(name="authentication_link", type="string", length=128, nullable=true)
+     * @ORM\Column(name="authentication_link", type="string", length=128, nullable=true, options={"fixed"=true})
      */
     private $authenticationLink;
 
     /**
-     * @var bool|null
+     * @var int|null
      *
-     * @ORM\Column(name="options", type="boolean", nullable=true)
+     * @ORM\Column(name="options", type="integer", nullable=true)
      */
     private $options = '0';
 
@@ -311,12 +311,12 @@ class User
         return $this;
     }
 
-    public function getOptions(): ?bool
+    public function getOptions(): ?int
     {
         return $this->options;
     }
 
-    public function setOptions(?bool $options): self
+    public function setOptions(?int $options): self
     {
         $this->options = $options;
 

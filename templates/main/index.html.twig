@@ -1,123 +1,124 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
- 
- <head>
- 
- 
-	
-	
- {% block stylesheets %}
-            <link href="{{ asset('web/styles/index.css') }}" rel="stylesheet" type="text/css"/>
-        {% endblock %}
- 
+
+<head>
+
+
+    {% block stylesheets %}
+        <link href="{{ asset('web/styles/index.css') }}" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+
     <meta charset="utf-8">
-      <script src="https://unpkg.com/react/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.js"></script>
 
     <title>S COUT</title>
-  </head>
-  <body>
-      
-      
-      <div class="row">
-      
-              <div class="block">
-              <img src="{{ asset('web/images/logov22.png') }}">
-                  <form onsubmit="return false">
-                      
- <input type="text" size="30" placeholder="Username">
- <input type="password" size="30" placeholder="Hasło"><br>
- <input type="submit" id="button-log" value="Zaloguj się"><br>
-                      <a href="">Nie pamiętasz hasła?</a>
-                    </form>
-                  
-                  <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje, rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p> <hr>
-                  
-                  <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
-                  <!-- Button to open the modal -->
-                
-                  
-              </div>
-           
-           
-      </div>
+</head>
+<body>
+
+
+<div class="row">
+
+    <div class="block">
+        <img src="{{ asset('web/images/logov22.png') }}">
+        <form onsubmit="return false">
+
+            <input type="text" size="30" placeholder="Username">
+            <input type="password" size="30" placeholder="Hasło"><br>
+            <input type="submit" id="button-log" value="Zaloguj się"><br>
+            <a href="">Nie pamiętasz hasła?</a>
+        </form>
+
+        <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje,
+            rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p>
+        <hr>
+
+        <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
+        <!-- Button to open the modal -->
+
+
+    </div>
+
+
+</div>
 
 <!-- The Modal (contains the Sign Up form) -->
 <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
-  <form class="modal-content" action="/action_page.php">
-    <div class="container">
-      <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
-      <hr>
-        <label for="username"><b>Nazwa użytkownika</b></label>
-      <input type="text" placeholder="Podaj nazwę" name="username" required>
-        
-        <div class="names">
-            <div class="first-name">
-         <label for="first-name"><b>Imię</b></label>
-                <input type="text" placeholder="Podaj imię" name="first-name" required> </div>
-            <div id="last-name" class="first-name">
-         <label for="last-name"><b>Nazwisko</b></label>
-                <input type="text" placeholder="Podaj nazwisko" name="last-name" required></div> </div>
-        
-      <label for="email"><b>Email</b></label>
-      <input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$" placeholder="Podaj email" name="email" required>
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
+    <form class="modal-content" action="{{ path('create_user') }}" method="post">
+            <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
+            <hr>
+        <div class="username">
+            <label for="username"><b>Nazwa użytkownika</b></label>
+            <input type="text" placeholder="Podaj nazwę" name="username" required>
+        </div>
+                <div class="first-name">
+                    <label for="first-name"><b>Imię</b></label>
+                    <input type="text" placeholder="Podaj imię" name="firstname" required></div>
+                <div id="last-name" class="first-name">
+                    <label for="last-name"><b>Nazwisko</b></label>
+                    <input type="text" placeholder="Podaj nazwisko" name="lastname" required></div>
+        <div class="email">
+            <label for="email"><b>Email</b></label>
+            <input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$"
+                   placeholder="Podaj email" name="email" required>
+        </div>
+        <div class="password">
+            <label for="psw"><b>Podaj hasło</b></label>
+            <input type="password" placeholder="Podaj hasło" name="psw" id="password" required>
+        </div>
+            <label for="psw-repeat"><b>Powtórz hasło</b></label>
+            <input type="password" placeholder="Powtórz hasło" id="confirm_password" name="psw-repeat" required>
 
-      <label for="psw"><b>Podaj hasło</b></label>
-      <input type="password" placeholder="Podaj hasło" name="psw" id="password" required>
 
-      <label for="psw-repeat"><b>Powtórz hasło</b></label>
-      <input type="password" placeholder="Powtórz hasło" id="confirm_password" name="psw-repeat" required>
-        
-        
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamiętaj mnie
+            </label>
 
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Zapamiętaj mnie
-      </label>
+            <p>Rejestrując się akceptujesz nasz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
 
-      <p>Rejestrując się akceptujesz nasz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
-
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Anuluj</button>
-        <button type="submit" class="signup">Zarejestruj się</button>
-      </div>
-    </div>
-  </form>
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Anuluj
+                </button>
+                <button type="submit" class="signup">Zarejestruj się</button>
+            </div>
+    </form>
 </div>
-                  
-                
+
+
 <script>
-     ////////////////////////////////////  //////////////////////////////////// 
-// Get the modal
-var modal = document.getElementById('id01');
+    ////////////////////////////////////  ////////////////////////////////////
+    // Get the modal
+    var modal = document.getElementById('id01');
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
-}
-////////////////////////////////////////////
-//passwords
-//
+    ////////////////////////////////////////////
+    //passwords
+    //
 
-var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+    var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
 
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Hasła nie zgadzają się!");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
-}
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Hasła nie zgadzają się!");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-                 
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
 </script>
-      
-      <script src="scripts/web/main.js"></script>
-      
-  </body>
+
+<script src="{{ asset('web/scripts/main.js') }}"></script>
+
+</body>
 </html>

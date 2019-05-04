@@ -52,7 +52,7 @@ class LoginController extends AbstractController
             );
         }
 
-        return $this->render('main/verify_user.html.twig', ['name' => $username]);
+        return $this->render('main/activate-web.html.twig', ['name' => $username]);
     }
 
     /**
@@ -62,10 +62,13 @@ class LoginController extends AbstractController
      */
     public function createUserAction(Request $request)
     {
-        $newUserData = json_decode(
-            $request->getContent(),
-            true
-        );
+        $newUserData = [
+            User::COLUMN_USERNAME => $request->get('username'),
+            User::COLUMN_FIRST_NAME => $request->get('firstname'),
+            User::COLUMN_LAST_NAME => $request->get('lastname'),
+            User::COLUMN_EMAIL => $request->get('email'),
+            User::COLUMN_PASSWORD => $request->get('password'),
+        ];
 
         $user = $this->registerHandler->registerUser($newUserData);
 

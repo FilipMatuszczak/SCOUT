@@ -1,85 +1,84 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
- 
- <head>
- 
- 
-	
-	
- {% block stylesheets %}
-            <link href="{{ asset('web/styles/main.css') }}" rel="stylesheet" type="text/css"/>
-			<link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
-        {% endblock %}
- 
-      <link href="styles/main.css" rel="stylesheet" type="text/css">
-       <link href="styles/style.css" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      
+
+<head>
+
+
+    {% block stylesheets %}
+        <link href="{{ asset('web/styles/main.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+
+    <link href="styles/main.css" rel="stylesheet" type="text/css">
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta charset="utf-8">
-      <script src="https://unpkg.com/react/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.js"></script>
 
     <title>S COUT</title>
-  </head>
-  <body>
-      <header>
-          <div class="header-tab">
-  <a class="alogo" href="">Główna</a></div>
-          <div class="header-tab">
-  <a class="alogo" href="/projects.html">Projekty</a></div>
-          <div class="header-tab">
-  <a class="alogo" href="/users.html">Użytkownicy</a></div>
-          
-          
- <div id="search-tab" class="header-tab">
-    <form action="/action_page.php">
-      <input id="searchbar" type="text" placeholder="Search..." name="search">
-     
-    </form>      
-          </div>
-          
+</head>
+<body>
+<header>
+    <div class="header-tab">
+        <a class="alogo" href="">Główna</a></div>
+    <div class="header-tab">
+        <a class="alogo" href="/projects.html">Projekty</a></div>
+    <div class="header-tab">
+        <a class="alogo" href="/users.html">Użytkownicy</a></div>
+
+
+    <div id="search-tab" class="header-tab">
+        <form action="/action_page.php">
+            <input id="searchbar" type="text" placeholder="Search..." name="search">
+
+        </form>
+    </div>
+
 </header>
-      
-      <div class="row">
-      
-        <div class="columnLeft">  
-          <div id="ilogo">
-          <a href=""><img src="{{ asset('web/images/logov22.png') }}"></a>
+
+<div class="row">
+
+    <div class="columnLeft">
+        <div id="ilogo">
+            <a href=""><img src="{{ asset('web/images/logov22.png') }}"></a>
+        </div>
+
+        <div id="navigation">
+            <a href="/profile.html"><img id="navigation-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="100"
+                                         height="100"></a>
+
+            <button class="navico"><i class="fa fa-suitcase"></i></button>
+            <button class="navico"><i class="fa fa-users"></i></button>
+            <button class="navico"><i class="fa fa-envelope"></i></button>
+            <button class="navico"><i class="fa fa-cog"></i></button>
+            <button class="navico"><i class="fa fa-ellipsis-v"></i></button>
+
+            <p class="anavig">Witaj, <br>
+                Wyloguj się</p>
+        </div>
+    </div>
+
+    <div class="columnRight">
+        <div id="contents">
+
+            <div class="post">
+                <a href=""><img id="project-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
+
+                <a class="project-title" href=" ">Tytuł Projektu</a><br>
+                <a class="project-lang" href=" ">Technologie Projektu</a>
+                <a class="project-autors" href=" ">Autorzy Projektu</a>
             </div>
-      
-     <div id="navigation">
-      <a href="/profile.html"><img id="navigation-avatar" src="{{ asset('web/images/krowa.jpg') }}"  width="100" height="100"></a>
-         
-         <button class="navico"><i class="fa fa-suitcase"></i></button>
-         <button class="navico"><i class="fa fa-users"></i></button>
-         <button class="navico"><i class="fa fa-envelope"></i></button>
-         <button class="navico"><i class="fa fa-cog"></i></button>
-         <button class="navico"><i class="fa fa-ellipsis-v"></i></button>
-         
-         <p class="anavig">Witaj, <br>
-        Wyloguj się</p>
-      </div> 
-      </div>
-       
-          <div class="columnRight">
-      <div id="contents">
-     
-          <div class="post">
-              <a href=""><img id="project-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
-          
-            <a class="project-title" href=" ">Tytuł Projektu</a><br>
-            <a class="project-lang" href=" ">Technologie Projektu</a>
-            <a class="project-autors" href=" ">Autorzy Projektu</a>
-                </div>
-         
-          
-      </div>
-          </div>
-      </div>
-      
-      
-      <script src="scripts/web/main.js"></script>
-      
-  </body>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="scripts/web/main.js"></script>
+
+</body>
 </html>

@@ -1,0 +1,64 @@
+ <!DOCTYPE html>
+<html>
+ 
+ <head>
+ 
+ 
+	
+	
+ {% block stylesheets %}
+            <link href="{{ asset('web/styles/activate.css') }}" rel="stylesheet" type="text/css"/>
+        {% endblock %}
+ 
+   <meta charset="utf-8">
+      <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+
+    <title>S COUT</title>
+  </head>
+  <body>
+      
+      
+      <div class="row">
+      
+              <div class="block">
+              <img src="{{ asset('web/images/logom.png') }}">
+                  
+                  <p>Podaj nowe hasło poniżej.</p> 
+                <form onsubmit="return false">
+                      
+ <input type="password" size="30" placeholder="Podaj nowe hasło" id="password">
+ <input type="password" size="30" placeholder="Powtórz nowe hasło" id="confirm_password"><br>
+ <input type="submit" id="button-log" value="Zmień hasło">
+            
+                    </form>
+                             
+                  
+              </div>
+           
+           
+      </div>
+
+
+                  
+            <script>
+      
+var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Hasła nie zgadzają się!");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+                
+      </script>    
+
+      
+  </body>
+</html>

@@ -1,0 +1,206 @@
+
+html {
+  background-color: #7DA2AA;
+    
+  font-family: Verdana;
+}
+
+
+.row{
+    width: auto;
+    
+}
+
+
+.block{
+  background-color: rgba(255,255,255,0.2);
+  float: left;
+  margin-top: 10%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 10%;
+  width: 40%;
+  opacity: 0.97;
+  padding: 10px;
+  text-align: center;
+  border: 0.5px solid white;
+}
+
+
+
+.block form input{
+    width: 80%;
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.block a{
+    color: white;
+    text-decoration: none;
+}
+.block a:hover{
+    text-shadow: 1px 2px 4px black;
+    ---border-bottom: 1px solid black;
+}
+
+.block p{
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#button-log{
+    background-color: #254e58;
+    border: none;
+   width: 80%;
+    height: 30px;
+    margin-top: 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+      opacity: 0.9;
+}
+
+#button-reg {
+   background-color: #4f4a41;
+    border: none;
+    width: 80%;
+    height: 30px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+
+
+body {
+  width: auto;
+  margin: 0 auto;
+  background-color: white;
+}
+
+
+
+.names{
+    float: left;
+    width: 100%;
+}
+.first-name{
+    float: left;
+    display: block;
+    width: 48%;
+    
+}
+#last-name.first-name{
+    margin-left: 4%;
+}
+
+* {box-sizing: border-box}
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background-color: white;
+}
+
+/* Set a style for all buttons */
+#id01 button {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+#id01 h1{
+    text-align: center;
+}
+
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #B22222;
+}
+
+.signup {
+  padding: 14px 20px;
+  background-color: #254e58;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signup {
+  float: left;
+  width: 50%;
+    font-size: 16px;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #7DA2AA;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: rgba(255,255,255,0.2);
+  margin: 1% auto 5% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 0.5px solid white;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#id01 button:hover, #button-reg:hover, #button-log:hover {
+  opacity: 1;
+}
+

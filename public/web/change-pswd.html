@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+   
+  <head>
+      
+      <style>
+                @font-face {
+                  font-family: "Apercu";
+                  src: url("https://s3.us-east-2.amazonaws.com/shoekicker-cdn/fonts/apercu_regular.woff")
+                    format("woff");
+                  font-style: normal;
+                  font-weight: normal;
+                }
+
+                @font-face {
+                  font-family: "Apercu";
+                  src: url("https://s3.us-east-2.amazonaws.com/shoekicker-cdn/fonts/apercu_bold.woff")
+                    format("woff");
+                  font-style: normal;
+                  font-weight: bold;
+                }
+
+              </style>
+      
+      
+      <link href="styles/activate.css" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <meta charset="utf-8">
+      <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+
+    <title>S COUT</title>
+  </head>
+  <body>
+      
+      
+      <div class="row">
+      
+              <div class="block">
+              <a href=""><img src="images/logom.png"></a>
+                  
+                  <p>Podaj nowe hasło poniżej.</p> 
+                <form onsubmit="return false">
+                      
+ <input type="password" size="30" placeholder="Podaj nowe hasło" id="password">
+ <input type="password" size="30" placeholder="Powtórz nowe hasło" id="confirm_password"><br>
+ <input type="submit" id="button-log" value="Zmień hasło">
+            
+                    </form>
+                             
+                  
+              </div>
+           
+           
+      </div>
+
+
+                  
+            <script>
+      
+var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Hasła nie zgadzają się!");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+                
+      </script>    
+
+      
+  </body>
+</html>

@@ -1,0 +1,125 @@
+
+#profile{
+    margin-top: 0px;
+    width: 100%;
+    float: left;
+    background: rgba(235,235,235,0.4);
+    border:1px solid #7DA2AA;
+    height: 300px;
+    overflow: hidden;
+    text-align: justify;
+}
+
+#profile-picture{
+    margin: 5px;
+    border: 1.5px solid #7DA2AA;
+    object-fit: cover;
+}
+
+.profile-left{
+    float: left;
+    width: 40%;
+}
+
+.profile-right{
+    float: left;
+    width:  60%;
+}
+
+
+#name-profile{ 
+    color: #7DA2AA;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-post{
+    
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#post-avatar{
+    margin: 5px;
+    border: 1px solid #7DA2AA;
+    border-radius: 100px;
+    object-fit: cover;
+    float:left;
+}
+
+.form-control{
+    width: 75%;
+    margin-top: 16px;
+    resize: none;
+    border-radius: 5px;
+}
+
+.button-post{
+    float: right;
+    margin-top: 17px;
+    height: 50px;
+    padding: 10px;
+  background-color: #EBB3B4; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+    opacity: 0.85;
+    
+}
+
+.button-post:hover{
+    opacity: 1;
+}
+
+#message-ico{
+    float: right;
+    font-size: 
+}
+
+#comment-avatar{
+    margin: 5px;
+    border: 1px solid #7DA2AA;
+    border-radius: 100px;
+    object-fit: cover;
+    float:left;
+    
+}
+    
+.project-title{
+    text-decoration: none;
+    color: #4f4a41;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 1px;
+    display:contents;
+}
+
+
+.comment{
+    background-color: rgba(235,235,235,0.4);
+    height: 85px;
+    border: 1px solid #7DA2AA;
+    overflow: hidden;
+}
+
+.comment:hover{
+    background-color: rgba(235,235,235,0.2);
+    
+}
+
+.comment-content{
+    margin: 1px;
+}
+
+p{
+    padding-right: 5px;
+}
+
+
+hr{
+    width: 90%;
+}

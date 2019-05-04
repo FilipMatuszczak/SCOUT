@@ -1,18 +1,14 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
- 
- <head>
- 
- 
-	
-	
- {% block stylesheets %}
-            <link href="{{ asset('web/styles/main.css') }}" rel="stylesheet" type="text/css"/>
+  <head>
+      
+      
+       {% block stylesheets %}
+            <link href="{{ asset('web/styles/profile.css') }}" rel="stylesheet" type="text/css"/>
 			<link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
         {% endblock %}
  
-      <link href="styles/main.css" rel="stylesheet" type="text/css">
-       <link href="styles/style.css" rel="stylesheet" type="text/css">
+      
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
     <meta charset="utf-8">
@@ -35,7 +31,7 @@
  <div id="search-tab" class="header-tab">
     <form action="/action_page.php">
       <input id="searchbar" type="text" placeholder="Search..." name="search">
-     
+      
     </form>      
           </div>
           
@@ -64,13 +60,35 @@
        
           <div class="columnRight">
       <div id="contents">
-     
-          <div class="post">
-              <a href=""><img id="project-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
+        <div id="profile">
+          <div class="profile-left">
+              <img id="profile-picture" src="{{ asset('web/images/krowa.jpg') }}" width="230" height="280">
+            </div>
           
-            <a class="project-title" href=" ">Tytuł Projektu</a><br>
-            <a class="project-lang" href=" ">Technologie Projektu</a>
-            <a class="project-autors" href=" ">Autorzy Projektu</a>
+            <div class="profile-right">
+             <p id="name-profile">Imie i nazwisko</p>
+                <p>wiek i miasto</p>
+                <hr>
+                <p>jezyki obce i programowania</p>
+                <hr>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim, pulvinar sit amet nisl id, vestibulum ornare velit. Vestibulum molestie elit sit amet vehicula posuere. Morbi tristique sem sed ipsum malesuada, id lacinia quam rhoncus. Donec varius ligula vitae mi sagittis tristique nullam.</p>
+            </div>
+          </div>
+           <button class="navico" id="message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button> 
+          
+          <div class="form-post">
+          
+          <img id="post-avatar" src="{{ asset('web/images/krowa.jpg') }}"  width="70" height="70">
+    		<textarea rows="3" class="form-control" name="description" maxlength=400></textarea>
+              <button class="button-post">Opublikuj</button>
+          </div>
+          
+          
+          <div class="comment">
+              <a href=""><img id="comment-avatar" src="{{ asset('web/images/kot.jpg') }}"  width="70" height="70"></a>
+          
+            <p class="project-title" href=" ">Imie i Nazwisko</p> - data
+            <p class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim, pulvinar sit amet nisl id, vestibulum ornare velit.</p>
                 </div>
          
           

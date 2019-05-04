@@ -1,0 +1,44 @@
+ <!DOCTYPE html>
+<html>
+ 
+ <head>
+ 
+ 
+	
+	
+ {% block stylesheets %}
+            <link href="{{ asset('web/styles/activate.css') }}" rel="stylesheet" type="text/css"/>
+        {% endblock %}
+ 
+   <meta charset="utf-8">
+      <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+
+    <title>S COUT</title>
+  </head>
+  <body>
+      
+      
+      <div class="row">
+      
+              <div class="block">
+               <img src="{{ asset('web/images/logom.png') }}">
+                  
+                  <p>Aby aktywować swoje konto kliknij poniższy przycisk.</p> 
+                
+                                  
+ <input type="submit" id="button-log" value="Aktywuj konto">
+                  
+              </div>
+           
+           
+      </div>
+
+
+                  
+                
+
+      
+  </body>
+</html>

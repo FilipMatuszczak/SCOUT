@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link href="styles/style.css" rel="stylesheet" type="text/css">
+      <link href="styles/main.css" rel="stylesheet" type="text/css">
+       <link href="styles/style.css" rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
     <meta charset="utf-8">
@@ -13,17 +14,20 @@
   </head>
   <body>
       <header>
-  <a class="alogo" href="">Główna</a>
-  <a class="alogo" href="/projects.html">Projekty</a>
-  <a class="alogo" href="/users.html">Użytkownicy</a>
+          <div class="header-tab">
+  <a class="alogo" href="">Główna</a></div>
+          <div class="header-tab">
+  <a class="alogo" href="/projects.html">Projekty</a></div>
+          <div class="header-tab">
+  <a class="alogo" href="/users.html">Użytkownicy</a></div>
           
           
-
+ <div id="search-tab" class="header-tab">
     <form action="/action_page.php">
       <input id="searchbar" type="text" placeholder="Search..." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+      <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
     </form>      
-          
+          </div>
           
 </header>
       

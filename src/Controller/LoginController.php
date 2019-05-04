@@ -31,7 +31,9 @@ class LoginController extends AbstractController
     /** */
     public function indexAction()
     {
-        return $this->render('main/main.html.twig', []);
+        ////return $this->render('main/main.html.twig', []);
+        return $this->render('main/index.html.twig', []); //testuje
+        
     }
 
     /**

@@ -78,4 +78,9 @@ class LoginController extends AbstractController
             'authenticationLink' => $user->getAuthenticationLink(),
         ]);
     }
+
+    public function emailConfirmationSentAction()
+    {
+        return $this->render('main/registered-web.html.twig', []);
+    }
 }

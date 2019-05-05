@@ -23,7 +23,7 @@ class MailController extends AbstractController
      * @param string $username
      * @param string $authenticationLink
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendRegisterMailAction($email, $username, $authenticationLink)
     {
@@ -53,9 +53,6 @@ class MailController extends AbstractController
 
         $this->mailer->send($message);
 
-        return new JsonResponse(
-            [
-                'status' => 'ok',
-            ], JsonResponse::HTTP_CREATED);
+        return $this->redirectToRoute('email_confirmation_sent', [], 301);
     }
 }

@@ -10,3 +10,7 @@ create_user:
 authenticate_account:
     path: autheticate_accout/{username}/{authenticationLink}
     controller: App\Controller\LoginController::authenticateUserAction
+
+email_confirmation_sent:
+    path: email_confirmation_sent
+    controller: App\Controller\LoginController::emailConfirmationSentAction

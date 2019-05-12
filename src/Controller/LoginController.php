@@ -39,8 +39,8 @@ class LoginController extends AbstractController
 
     public function userExistsAction(Request $request)
     {
-
-        $username = $request->get('username');
+        $data = json_decode($request->getContent(), true);
+        $username = $data['username'];
 
         $userExists = $this->registerHandler->userExists($username);
 

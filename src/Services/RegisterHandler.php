@@ -36,6 +36,8 @@ class RegisterHandler
 
     /**
      * @param array $userData
+     *
+     * @return User
      */
     public function registerUser(array $userData)
     {
@@ -63,5 +65,20 @@ class RegisterHandler
         $this->entityManager->flush();
 
         return $user;
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return bool
+     */
+    public function userExists($username)
+    {
+        if ($this->userRepository->findOneBy([User::COLUMN_USERNAME => $username]))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

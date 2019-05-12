@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Services\MailerService;
 use App\Services\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,7 +34,22 @@ class LoginController extends AbstractController
     {
         ////return $this->render('main/main.html.twig', []);
         return $this->render('main/index.html.twig', []); //testuje
-        
+
+    }
+
+    public function userExistsAction(Request $request)
+    {
+
+        $username = $request->get('username');
+
+        $userExists = $this->registerHandler->userExists($username);
+
+        return new JsonResponse(
+            [
+                'user_exists' => $userExists,
+            ]
+        );
+
     }
 
     /**
@@ -48,7 +64,7 @@ class LoginController extends AbstractController
 
         if (!$user) {
             throw $this->createNotFoundException(
-                'Cannot verify user '. $username
+                'Cannot verify user ' . $username
             );
         }
 

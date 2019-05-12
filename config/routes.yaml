@@ -8,9 +8,13 @@ create_user:
     methods:    POST
 
 authenticate_account:
-    path: autheticate_accout/{username}/{authenticationLink}
+    path: authenticate_accout/{username}/{authenticationLink}
     controller: App\Controller\LoginController::authenticateUserAction
 
 email_confirmation_sent:
     path: email_confirmation_sent
     controller: App\Controller\LoginController::emailConfirmationSentAction
+
+user_exists:
+    path: user_exists
+    controller: App\Controller\LoginController::userExistsAction

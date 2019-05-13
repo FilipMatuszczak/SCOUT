@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Security\LoginFormAuthenticator;
+use App\Security\UserProvider;
 use App\Services\MailerService;
 use App\Services\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /** */
 class LoginController extends AbstractController
@@ -19,22 +22,44 @@ class LoginController extends AbstractController
     /** @var MailerService */
     private $mailerService;
 
+    /** @var AuthenticationUtils */
+    private $authenticationUtils;
+
+    /** @var LoginFormAuthenticator */
+    private $loginFormAuthenticator;
+
+    /** @var UserProvider */
+    private $userProvider;
+
     /**
      * @param RegisterHandler $registerHandler
      * @param MailerService $mailerService
+     * @param AuthenticationUtils $authenticationUtils
+     * @param LoginFormAuthenticator $loginFormAuthenticator
+     * @param UserProvider $userProvider
      */
-    public function __construct(RegisterHandler $registerHandler, MailerService $mailerService)
+    public function __construct(
+        RegisterHandler $registerHandler,
+        MailerService $mailerService,
+        AuthenticationUtils $authenticationUtils,
+        LoginFormAuthenticator $loginFormAuthenticator,
+        UserProvider $userProvider
+    )
     {
         $this->registerHandler = $registerHandler;
         $this->mailerService = $mailerService;
+        $this->authenticationUtils = $authenticationUtils;
+        $this->loginFormAuthenticator = $loginFormAuthenticator;
+        $this->userProvider = $userProvider;
     }
 
     /** */
     public function indexAction()
     {
-        ////return $this->render('main/main.html.twig', []);
-        return $this->render('main/index.html.twig', []); //testuje
+        $error = $this->authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $this->authenticationUtils->getLastUsername();
 
+        return $this->render('main/index.html.twig',  ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     public function userExistsAction(Request $request)
@@ -98,5 +123,16 @@ class LoginController extends AbstractController
     public function emailConfirmationSentAction()
     {
         return $this->render('main/registered-web.html.twig', []);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function loginAction(Request $request)
+    {
+
+
     }
 }

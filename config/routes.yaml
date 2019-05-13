@@ -18,3 +18,12 @@ email_confirmation_sent:
 user_exists:
     path: user_exists
     controller: App\Controller\LoginController::userExistsAction
+
+login_user:
+    path:       /login_user
+    controller: App\Controller\LoginController::loginAction
+    methods:    POST
+
+main:
+    path: /main
+    controller: App\Controller\MainController::mainAction

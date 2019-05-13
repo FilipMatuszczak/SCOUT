@@ -22,12 +22,23 @@
 
     <div class="block">
         <img src="{{ asset('web/images/logov22.png') }}">
-        <form onsubmit="return false">
+        <form action="{{ path('login_user') }}" method="post"  >
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <input type="text" size="30" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
+            <input type="password" size="30" name="password" id="inputPassword" class="form-control" value="Zaloguj się" required>
 
-            <input type="text" size="30" placeholder="Username">
-            <input type="password" size="30" placeholder="Hasło"><br>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Pamiętaj mnie
+                    </label>
+                </div>
+
+
             <input type="submit" id="button-log" value="Zaloguj się"><br>
-            <a href="">Nie pamiętasz hasła?</a>
         </form>
 
         <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje,
@@ -72,8 +83,8 @@
         
         
         <div class="password form">
-            <label for="psw"><b>Podaj hasło</b></label>
-            <input type="password" placeholder="Podaj hasło" name="psw" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków." required>
+            <label for="password"><b>Podaj hasło</b></label>
+            <input type="password" placeholder="Podaj hasło" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków." required>
         
             <label for="psw-repeat"><b>Powtórz hasło</b></label>
             <input type="password" placeholder="Powtórz hasło" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw-repeat" title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków." required>

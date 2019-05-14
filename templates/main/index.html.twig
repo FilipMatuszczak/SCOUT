@@ -24,21 +24,22 @@
         <img src="{{ asset('web/images/logov22.png') }}">
         <form action="{{ path('login_user') }}" method="post"  >
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <p>Niepoprawne dane logowania</p>
             {% endif %}
             <input type="text" size="30" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
-            <input type="password" size="30" name="password" id="inputPassword" class="form-control" value="Zaloguj się" required>
+            <input type="password" size="30" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}">
-                <div class="checkbox mb-3">
+                {#<div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" name="_remember_me"> Pamiętaj mnie
+                        <input type="checkbox" name="_remember_me" size = "1"> Pamiętaj mnie
                     </label>
-                </div>
+                </div>#}
 
 
             <input type="submit" id="button-log" value="Zaloguj się"><br>
+            <a href="">Nie pamiętasz hasła?</a>
         </form>
 
         <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje,

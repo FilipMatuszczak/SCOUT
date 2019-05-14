@@ -16,5 +16,5 @@ email_confirmation_sent:
     controller: App\Controller\LoginController::emailConfirmationSentAction
 
 user_exists:
-    path: user_exists
+    path: user_exists/{username}
     controller: App\Controller\LoginController::userExistsAction

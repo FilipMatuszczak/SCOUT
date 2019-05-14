@@ -3,7 +3,7 @@
 
 <head>
 
-
+<script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
     {% block stylesheets %}
         <link href="{{ asset('web/styles/index.css') }}" rel="stylesheet" type="text/css"/>
     {% endblock %}
@@ -63,7 +63,9 @@
             <hr>
         <div class="username form">
             <label for="username"><b>Nazwa użytkownika</b></label>
-            <input type="text" placeholder="Podaj nazwę" name="username" required>
+            
+            <div id="status" name="status"></div>
+            <input type="text" placeholder="Podaj nazwę" name="username" id="username" required>
         </div>
             
                 <div class="first-name">

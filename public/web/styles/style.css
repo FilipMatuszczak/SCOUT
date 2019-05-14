@@ -89,6 +89,16 @@ header{
   padding: 10px;
     
 }
+
+.logout{
+    color:black;
+    text-decoration: none;
+}
+
+.logout:hover{
+    border-bottom: 1px solid black;
+}
+
 #ilogo{
     overflow:visible;
     margin-left: 30px;

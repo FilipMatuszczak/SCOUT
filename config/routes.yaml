@@ -27,3 +27,12 @@ login_user:
 main:
     path: /main
     controller: App\Controller\MainController::mainAction
+
+app_logout:
+    path: /logout
+    methods: GET
+
+login_email:
+    path: /login_email
+    controller: App\Controller\LoginController::loginEmailAction
+    methods: POST

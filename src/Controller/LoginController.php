@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /** */
@@ -31,6 +32,9 @@ class LoginController extends AbstractController
     /** @var UserProvider */
     private $userProvider;
 
+    /** @var GuardAuthenticatorHandler */
+    private $guardAuthenticatorHandler;
+
     /**
      * @param RegisterHandler $registerHandler
      * @param MailerService $mailerService
@@ -43,7 +47,8 @@ class LoginController extends AbstractController
         MailerService $mailerService,
         AuthenticationUtils $authenticationUtils,
         LoginFormAuthenticator $loginFormAuthenticator,
-        UserProvider $userProvider
+        UserProvider $userProvider,
+        GuardAuthenticatorHandler $guardAuthenticatorHandler
     )
     {
         $this->registerHandler = $registerHandler;
@@ -51,6 +56,7 @@ class LoginController extends AbstractController
         $this->authenticationUtils = $authenticationUtils;
         $this->loginFormAuthenticator = $loginFormAuthenticator;
         $this->userProvider = $userProvider;
+        $this->guardAuthenticatorHandler = $guardAuthenticatorHandler;
     }
 
     /** */
@@ -126,13 +132,25 @@ class LoginController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     */
+ * @param Request $request
+ *
+ * @return Response
+ */
     public function loginAction(Request $request)
     {
 
+    }
 
+    public function loginEmailAction(Request $request)
+    {
+        $user = $this->userProvider->loadUserByUsername($request->get('username'));
+        //return $this->render('main/index.html.twig', []);
+        return $this->guardAuthenticatorHandler
+            ->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $this->loginFormAuthenticator,
+                'main'
+            );
     }
 }

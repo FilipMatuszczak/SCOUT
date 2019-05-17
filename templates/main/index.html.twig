@@ -21,31 +21,52 @@
 <div class="row">
 
     <div class="block">
-        <img src="{{ asset('web/images/logov22.png') }}">
+        <a href="" ><img src="{{ asset('web/images/logov22.png') }}"></a>
+        <div id="id00"> 
         <form action="{{ path('login_user') }}" method="post"  >
             {% if error %}
                 <p>Niepoprawne dane logowania</p>
             {% endif %}
             <input type="text" size="30" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
+            
             <input type="password" size="30" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}">
-                {#<div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me" size = "1"> Pamiętaj mnie
-                    </label>
-                </div>#}
+               
+                    {#<label class="checkRem">
+                        <input id="remcheck" type="checkbox" name="_remember_me"> Zapamiętaj mnie
+                    </label>#}
 
 
             <input type="submit" id="button-log" value="Zaloguj się"><br>
-            <a href="">Nie pamiętasz hasła?</a>
+            
+            <button id="Pswdrem" onclick="document.getElementById('id00').style.display='none'; document.getElementById('id02').style.display='block'; ">Nie pamiętasz hasła?</button>
+            </div>
         </form>
-
+        
+        <form>
+        
+        
+        <div id="id02" style="display:none;">Wygeneruj nowe hasło:
+        <input type="text" 
+        placeholder="Podaj email lub login" name="email" required>
+            
+            <input type="submit" id="button-rem" value="Przypomnij"><br>
+            <!-- przycisk anuluj
+             <input onclick="document.getElementById('id02').style.display='none'; document.getElementById('id00').style.display='block'; "id="button-an" value="Anuluj"><br> 
+                -->
+            
+            
+            </div>
+            </form>
         <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje,
             rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!</p>
         <hr>
 
+        
+        
+        
         <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
         <!-- Button to open the modal -->
 
@@ -96,7 +117,7 @@
         
         
            
-                <input type="checkbox" name="remember" style="margin-left: 10px; margin-top: -20px;" required> <p id="regulamin"> Zaznaczając to pole oświadczasz, że akceptujesz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
+                <input type="checkbox" name="remember" style="margin-left: 10px; margin-top: -20px; transform: scale(1.5);" required> <p id="regulamin"> Zaznaczając to pole oświadczasz, że akceptujesz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
         
 
 

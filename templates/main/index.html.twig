@@ -77,15 +77,16 @@
 </div>
 
 <!-- The Modal (contains the Sign Up form) -->
-<div id="id01" class="modal">
+<div id="id01" class="modal" style="min-width: 1000px;">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
     <form class="modal-content" action="{{ path('create_user') }}" method="post">
             <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
             <hr>
         <div class="username form">
-            <label for="username"><b>Nazwa użytkownika</b></label>
+                        
             
-            <div id="status" name="status"></div>
+            <label for="username" id="status"><b>Nazwa użytkownika</b></label>
+
             <input type="text" placeholder="Podaj nazwę" name="username" id="username" required>
         </div>
             
@@ -122,10 +123,10 @@
 
 
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"  class="cancelbtn">
                     Anuluj
                 </button>
-                <button type="submit" class="signup">Zarejestruj się</button>
+                <button type="submit" id="register-form" class="signup">Zarejestruj się</button>
             </div>
     </form>
 </div>

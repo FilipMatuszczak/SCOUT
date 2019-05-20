@@ -11,6 +11,8 @@ security:
         main:
             logout:
                 path:   app_logout
+                target: /
+                invalidate_session: true
             anonymous: true
             guard:
                 authenticators:

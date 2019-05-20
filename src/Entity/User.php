@@ -23,7 +23,7 @@ class User implements UserInterface
     const COLUMN_DATE_OF_BIRTH = 'date_of_birth';
     const COLUMN_INFO = 'info';
     const COLUMN_PHOTO = 'photo';
-    const COLUMN_AUTHENTICATION_LINK = 'authentication_link';
+    const COLUMN_AUTHENTICATION_LINK = 'authenticationLink';
     const COLUMN_OPTIONS = 'options';
 
     const USER_CREATED = 1;

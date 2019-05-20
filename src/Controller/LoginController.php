@@ -41,6 +41,7 @@ class LoginController extends AbstractController
      * @param AuthenticationUtils $authenticationUtils
      * @param LoginFormAuthenticator $loginFormAuthenticator
      * @param UserProvider $userProvider
+     * @param GuardAuthenticatorHandler $guardAuthenticatorHandler
      */
     public function __construct(
         RegisterHandler $registerHandler,
@@ -62,10 +63,14 @@ class LoginController extends AbstractController
     /** */
     public function indexAction()
     {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('main');
+        }
+
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        return $this->render('main/index.html.twig',  ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('main/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     public function userExistsAction(Request $request, $username)
@@ -128,20 +133,10 @@ class LoginController extends AbstractController
         return $this->render('main/registered-web.html.twig', []);
     }
 
-    /**
- * @param Request $request
- *
- * @return Response
- */
-    public function loginAction(Request $request)
-    {
-
-    }
-
     public function loginEmailAction(Request $request)
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));
-        //return $this->render('main/index.html.twig', []);
+
         return $this->guardAuthenticatorHandler
             ->authenticateUserAndHandleSuccess(
                 $user,

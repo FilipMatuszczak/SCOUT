@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users(
     info TEXT NULL,
     photo BLOB NULL,
     authentication_link CHAR(128),
+    change_password_link CHAR(128) DEFAULT NULL,
     options TINYINT(4) DEFAULT 0,
     PRIMARY KEY (user_id)
 ) ENGINE=INNODB;

@@ -38,4 +38,18 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findCreatedUserByUsernameAndChangePasswordLink($username, $changePasswordLink): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.' . User::COLUMN_USERNAME . ' = :username')
+            ->andWhere('u.' . User::COLUMN_CHANGE_PASSWORD_LINK . ' = :change_password_link')
+            ->andWhere('BIT_AND(u.' . User::COLUMN_OPTIONS . ', ' . User::USER_CHANGING_PASSWORD . ') = ' . User::USER_CHANGING_PASSWORD)
+            ->setParameters([
+                'username' => $username,
+                'change_password_link' => $changePasswordLink,
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

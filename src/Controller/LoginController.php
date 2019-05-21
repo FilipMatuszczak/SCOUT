@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Security\LoginFormAuthenticator;
 use App\Security\UserProvider;
 use App\Services\MailerService;
+use App\Services\PasswordHandler;
 use App\Services\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -35,6 +36,9 @@ class LoginController extends AbstractController
     /** @var GuardAuthenticatorHandler */
     private $guardAuthenticatorHandler;
 
+    /** @var PasswordHandler  */
+    private $passwordHandler;
+
     /**
      * @param RegisterHandler $registerHandler
      * @param MailerService $mailerService
@@ -49,7 +53,8 @@ class LoginController extends AbstractController
         AuthenticationUtils $authenticationUtils,
         LoginFormAuthenticator $loginFormAuthenticator,
         UserProvider $userProvider,
-        GuardAuthenticatorHandler $guardAuthenticatorHandler
+        GuardAuthenticatorHandler $guardAuthenticatorHandler,
+        PasswordHandler $passwordHandler
     )
     {
         $this->registerHandler = $registerHandler;
@@ -58,6 +63,7 @@ class LoginController extends AbstractController
         $this->loginFormAuthenticator = $loginFormAuthenticator;
         $this->userProvider = $userProvider;
         $this->guardAuthenticatorHandler = $guardAuthenticatorHandler;
+        $this->passwordHandler = $passwordHandler;
     }
 
     /** */
@@ -104,6 +110,19 @@ class LoginController extends AbstractController
         return $this->render('main/activate-web.html.twig', ['name' => $username]);
     }
 
+    public function changePasswordAction($username, $changePasswordLink)
+    {
+        $user = $this->mailerService->verifyChangePasswordLink($username, $changePasswordLink);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'Cannot verify user ' . $username
+            );
+        }
+
+        return $this->render('main/changepswd-web.html.twig', []);
+    }
+
     /**
      * @param Request $request
      *
@@ -124,7 +143,7 @@ class LoginController extends AbstractController
         return $this->forward('App\Controller\MailController::sendRegisterMailAction', [
             User::COLUMN_EMAIL => $user->getEmail(),
             User::COLUMN_USERNAME => $user->getUsername(),
-            'authenticationLink' => $user->getAuthenticationLink(),
+            User::COLUMN_AUTHENTICATION_LINK => $user->getAuthenticationLink(),
         ]);
     }
 
@@ -144,5 +163,25 @@ class LoginController extends AbstractController
                 $this->loginFormAuthenticator,
                 'main'
             );
+    }
+
+    public function changePasswordEmailAction(Request $request)
+    {
+        $user = $this->userProvider->loadUserByUsername($request->get('username'));
+
+        if (empty($user))
+        {
+            throw $this->createNotFoundException(
+                'Cannot verify user ' . $request->get('username')
+            );
+        }
+
+        $this->passwordHandler->generatePasswordLinkForUser($user);
+
+        return $this->forward('App\Controller\MailController::sendChangePasswordAction', [
+            User::COLUMN_EMAIL => $user->getEmail(),
+            User::COLUMN_USERNAME => $user->getUsername(),
+            User::COLUMN_CHANGE_PASSWORD_LINK => $user->getChangePassowrdLink(),
+        ]);
     }
 }

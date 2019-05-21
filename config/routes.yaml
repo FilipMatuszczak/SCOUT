@@ -36,3 +36,12 @@ login_email:
     path: /login_email
     controller: App\Controller\LoginController::loginEmailAction
     methods: POST
+
+change_password:
+    path: change_password/{username}/{changePasswordLink}
+    controller: App\Controller\LoginController::changePasswordAction
+
+email_change_password:
+    path:       /email_change_password
+    controller: App\Controller\LoginController::changePasswordEmailAction
+    methods:    POST

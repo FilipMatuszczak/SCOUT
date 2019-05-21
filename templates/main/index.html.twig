@@ -47,12 +47,12 @@
             </div>
         </form>
         
-        <form>
+        <form action="{{ path('email_change_password') }}" method="post">
         
         
         <div id="id02" style="display:none;">Wygeneruj nowe hasło:
         <input type="text" 
-        placeholder="Podaj email lub login" name="email" required>
+        placeholder="Podaj email lub login" name="username" required>
             
             <input type="submit" id="button-rem" value="Przypomnij"><br>
             <!-- przycisk anuluj

@@ -26,7 +26,7 @@ class UserProvider implements UserProviderInterface
      * If you're not using these features, you do not need to implement
      * this method.
      *
-     * @return UserInterface
+     * @return User
      *
      * @throws UsernameNotFoundException if the user is not found
      */

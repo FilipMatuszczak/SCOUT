@@ -3,9 +3,18 @@
 namespace App\Services;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PasswordHandler
 {
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @param $password
      *
@@ -25,6 +34,19 @@ class PasswordHandler
     public function generateAuthenticationLink()
     {
         return $this->getRandomString(128);
+    }
+
+    /**
+     * @param User $user
+     */
+    public function generatePasswordLinkForUser(User $user)
+    {
+        $user->setChangePassowrdLink($this->generateAuthenticationLink());
+        $user->setOptions($user->getOptions() | User::USER_CHANGING_PASSWORD);
+        $this->entityManager->persist($user);
+
+        $this->entityManager->flush();
+
     }
 
     /**

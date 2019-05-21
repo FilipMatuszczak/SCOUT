@@ -44,4 +44,28 @@ class MailerService
 
         return null;
     }
+
+    /**
+     * @param string $username
+     * @param string $changePasswordLink
+     *
+     * @return User|null
+     */
+    public function verifyChangePasswordLink($username, $changePasswordLink)
+    {
+        $user = $this->userRepository
+            ->findCreatedUserByUsernameAndChangePasswordLink($username, $changePasswordLink);
+
+        if ($user)
+        {
+            $user->setOptions($user->getOptions() ^ User::USER_CHANGING_PASSWORD);
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return $user;
+        }
+
+        return null;
+    }
 }

@@ -24,12 +24,14 @@ class User implements UserInterface
     const COLUMN_INFO = 'info';
     const COLUMN_PHOTO = 'photo';
     const COLUMN_AUTHENTICATION_LINK = 'authenticationLink';
+    const COLUMN_CHANGE_PASSWORD_LINK = 'changePasswordLink';
     const COLUMN_OPTIONS = 'options';
 
     const USER_CREATED = 1;
     const USER_VERIFIED = 2;
     const USER_BANNED = 4;
     const USER_ADMIN = 8;
+    const USER_CHANGING_PASSWORD = 16;
 
     /**
      * @var int
@@ -109,6 +111,13 @@ class User implements UserInterface
      * @ORM\Column(name="authentication_link", type="string", length=128, nullable=true, options={"fixed"=true})
      */
     private $authenticationLink;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="change_password_link", type="string", length=128, nullable=true, options={"fixed"=true})
+     */
+    private $changePasswordLink;
 
     /**
      * @var int|null
@@ -249,6 +258,18 @@ class User implements UserInterface
     public function setAuthenticationLink(string $authenticationLink): self
     {
         $this->authenticationLink = $authenticationLink;
+
+        return $this;
+    }
+
+    public function getChangePassowrdLink(): ?string
+    {
+        return $this->changePasswordLink;
+    }
+
+    public function setChangePassowrdLink(string $changePasswordLink): self
+    {
+        $this->changePasswordLink = $changePasswordLink;
 
         return $this;
     }

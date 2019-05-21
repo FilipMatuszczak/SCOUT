@@ -54,4 +54,35 @@ class MailController extends AbstractController
 
         return $this->redirectToRoute('email_confirmation_sent', [], 301);
     }
+
+    public function sendChangePasswordAction($email, $username, $changePasswordLink)
+    {
+        $changePasswordLink = $this->generateUrl
+        (
+            'change_password',
+            [
+                'username' => $username,
+                'changePasswordLink' => $changePasswordLink,
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $message = (new Swift_Message('Scout - Change password'))
+            ->setFrom('scoutregister1@gmail.com')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView(
+                    'main/change_password_email.html.twig',
+                    [
+                        'name' => $username,
+                        'changePasswordUrl' => $changePasswordLink,
+                    ]
+                ),
+                'text/html'
+            );
+
+        $this->mailer->send($message);
+
+        return $this->redirectToRoute('index', [], 301);
+    }
 }

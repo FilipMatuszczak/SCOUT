@@ -19,7 +19,7 @@
 
     <div class="block">
         <img src="{{ asset('web/images/logom.png') }}">
-        <h3>Hej {{ name }}, pomyślnie aktywowałeś swoje konto!</h3>
+        <h3>Hej {{ name }}, twoje konto zostało pomyślnie aktywowane!</h3>
         <form action="{{ path('login_email') }}" method="post"  >
             <input type="hidden" name="username"
                    value="{{ name }}">

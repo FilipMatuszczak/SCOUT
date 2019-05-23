@@ -46,6 +46,7 @@ class LoginController extends AbstractController
      * @param LoginFormAuthenticator $loginFormAuthenticator
      * @param UserProvider $userProvider
      * @param GuardAuthenticatorHandler $guardAuthenticatorHandler
+     * @param PasswordHandler $passwordHandler
      */
     public function __construct(
         RegisterHandler $registerHandler,
@@ -66,8 +67,11 @@ class LoginController extends AbstractController
         $this->passwordHandler = $passwordHandler;
     }
 
-    /** */
-    public function indexAction()
+    /**
+     * @param $message
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function indexAction($message=null)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('main');
@@ -76,7 +80,7 @@ class LoginController extends AbstractController
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        return $this->render('main/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('main/index.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'message' => $message]);
     }
 
     public function userExistsAction(Request $request, $username)
@@ -120,7 +124,7 @@ class LoginController extends AbstractController
             );
         }
 
-        return $this->render('main/changepswd-web.html.twig', []);
+        return $this->render('main/changepswd-web.html.twig', ['name' => $username]);
     }
 
     /**
@@ -163,6 +167,19 @@ class LoginController extends AbstractController
                 $this->loginFormAuthenticator,
                 'main'
             );
+    }
+
+    public function submitChangePasswordAction(Request $request)
+    {
+        $user = $this->userProvider->loadUserByUsername($request->get('username'));
+        $newPassowrd = $request->get('password');
+
+        $credentials = $this->passwordHandler->generateHashAndSalt($newPassowrd);
+        $this->passwordHandler->updateUserCredentials($credentials, $user);
+        $this->get('session')->getFlashBag()->set('notice', 'Twoje hasło zostało zmienione, możesz teraz się zalogować używając swojego nowego hasła');
+        return $this->redirectToRoute('index',
+            ['message' => 'Zmiana hasła zakończyła się sukcesem'],301);
+
     }
 
     public function changePasswordEmailAction(Request $request)

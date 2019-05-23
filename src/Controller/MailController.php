@@ -82,7 +82,8 @@ class MailController extends AbstractController
             );
 
         $this->mailer->send($message);
-
-        return $this->redirectToRoute('index', [], 301);
+        $this->get('session')->getFlashBag()->set('notice', 'Na twoją skrzynkę pocztową został wysłany email umożliwiający zmianę hasła');
+        return $this->forward('App\Controller\LoginController::indexAction',
+            ['message' => 'Na twoją skrzynkę pocztową został wysłany email umożliwiający zmianę hasła']);
     }
 }

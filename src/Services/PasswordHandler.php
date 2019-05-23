@@ -49,6 +49,18 @@ class PasswordHandler
 
     }
 
+    public function updateUserCredentials(array $credentials, User $user)
+    {
+        $passwordHash = $credentials[User::COLUMN_PASSWORD];
+        $salt = $credentials[User::COLUMN_SALT];
+
+        $user->setPassword($passwordHash)->setSalt($salt);
+
+        $this->entityManager->persist($user);
+
+        $this->entityManager->flush();
+    }
+
     /**
      * @param int $size
      *

@@ -45,3 +45,8 @@ email_change_password:
     path:       /email_change_password
     controller: App\Controller\LoginController::changePasswordEmailAction
     methods:    POST
+
+submit_password_change:
+    path: /change_password
+    controller: App\Controller\LoginController::submitChangePasswordAction
+    methods: POST

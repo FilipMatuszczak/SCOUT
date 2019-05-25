@@ -50,3 +50,12 @@ submit_password_change:
     path: /change_password
     controller: App\Controller\LoginController::submitChangePasswordAction
     methods: POST
+
+user_profile:
+    path: /profile/{username}
+    controller:  App\Controller\ProfileController:profileIndexAction
+
+create_wall_post:
+    path: /create_wall_post
+    controller:  App\Controller\ProfileController:createPostOnWall
+    methods: POST

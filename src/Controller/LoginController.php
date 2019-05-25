@@ -177,8 +177,7 @@ class LoginController extends AbstractController
         $credentials = $this->passwordHandler->generateHashAndSalt($newPassowrd);
         $this->passwordHandler->updateUserCredentials($credentials, $user);
         $this->get('session')->getFlashBag()->set('notice', 'Twoje hasło zostało zmienione, możesz teraz się zalogować używając swojego nowego hasła');
-        return $this->redirectToRoute('index',
-            ['message' => 'Zmiana hasła zakończyła się sukcesem'],301);
+        return $this->redirectToRoute('index',[]);
 
     }
 

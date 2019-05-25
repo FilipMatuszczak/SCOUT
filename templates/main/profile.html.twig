@@ -21,7 +21,7 @@
 <body>
 <header>
     <div class="header-tab">
-        <a class="alogo" href="">Główna</a></div>
+        <a class="alogo" href="{{ path('main') }}">Główna</a></div>
     <div class="header-tab">
         <a class="alogo" href="/projects.html">Projekty</a></div>
     <div class="header-tab">
@@ -41,11 +41,11 @@
 
     <div class="columnLeft">
         <div id="ilogo">
-            <a href=""><img src="{{ asset('web/images/logov22.png') }}"></a>
+            <a href="{{ path('main') }}"><img src="{{ asset('web/images/logov22.png') }}"></a>
         </div>
 
         <div id="navigation">
-            <a href="/profile.html"><img id="navigation-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="100"
+            <a href="{{ path('user_profile', {'username': app.user.username}) }}"><img id="navigation-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="100"
                                          height="100"></a>
 
             <button class="navico"><i class="fa fa-suitcase"></i></button>
@@ -54,7 +54,7 @@
             <button class="navico"><i class="fa fa-cog"></i></button>
             <button class="navico"><i class="fa fa-ellipsis-v"></i></button>
 
-            <p class="anavig">Witaj, <br>
+            <p class="anavig">Witaj, {{ app.user.username }} <br>
                 Wyloguj się</p>
         </div>
     </div>
@@ -67,34 +67,48 @@
                 </div>
 
                 <div class="profile-right">
-                    <p id="name-profile">Imie i nazwisko</p>
-                    <p>wiek i miasto</p>
+                    <p id="name-profile">{{ user.firstname }} {{ user.lastname }}</p>
+                    <p>wiek : {{ age }} </p>
+                    {% for city in user.city %}
+                        <li>{{ city.name }}</li>
+                    {% endfor %}
                     <hr>
-                    <p>jezyki obce i programowania</p>
+                    <p>jezyki obce</p>
+                    {% for language in user.language %}
+                        <li>{{ language.name }}</li>
+                    {% endfor %}
                     <hr>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim, pulvinar sit amet
-                        nisl id, vestibulum ornare velit. Vestibulum molestie elit sit amet vehicula posuere. Morbi
-                        tristique sem sed ipsum malesuada, id lacinia quam rhoncus. Donec varius ligula vitae mi
-                        sagittis tristique nullam.</p>
+                    <p>Technologie</p>
+                    {% for technology in user.technology %}
+                        <li>{{ technology.name }}</li>
+                    {% endfor %}
+                    <hr>
+                    About me
+                    <p>{{  user.info }}</p>
                 </div>
             </div>
             <button class="navico" id="message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button>
 
+            {% if user.username == app.user.username %}
             <div class="form-post">
-
                 <img id="post-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="70" height="70">
-                <textarea rows="3" class="form-control" name="description" maxlength=400></textarea>
-                <button class="button-post">Opublikuj</button>
+                <form action="{{ path('create_wall_post') }}" method="post">
+                        <input type="text" name="text" class="form-control" required>
+                        <input type="hidden" name="username" value={{ app.user.username }}>
+                        <input type="submit" id="button-rem" class="button-post" value="Opublikuj"><br>
+
+                </form>
             </div>
+            {% endif %}
+            {% for post in posts %}
+                <div class="comment">
+                    <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
 
+                    <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> - {{ post.timestamp.format('Y-m-d H:i:s') }}
+                    <p class="comment-content">{{  post.text}}</p>
+                </div>
+            {% endfor %}
 
-            <div class="comment">
-                <a href=""><img id="comment-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
-
-                <p class="project-title" href=" ">Imie i Nazwisko</p> - data
-                <p class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris diam enim,
-                    pulvinar sit amet nisl id, vestibulum ornare velit.</p>
-            </div>
 
 
         </div>

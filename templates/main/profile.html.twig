@@ -47,7 +47,7 @@
             <div class="form-post">
                 <img id="post-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="70" height="70">
                 <form action="{{ path('create_wall_post') }}" method="post">
-                        <input type="text" name="text" class="form-control" required>
+                        <input type="text" maxlength="250" name="text" class="form-control" required>
                         <input type="hidden" name="username" value={{ app.user.username }}>
                         <input type="submit" id="button-rem" class="button-post" value="Opublikuj"><br>
 
@@ -58,7 +58,7 @@
                 <div class="comment">
                     <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
 
-                    <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> - {{ post.timestamp.format('Y-m-d H:i:s') }}
+                    <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
                     <p class="comment-content">{{  post.text}}</p>
                 </div>
             {% endfor %}

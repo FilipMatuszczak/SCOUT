@@ -1,0 +1,42 @@
+
+.edit-profile{
+    background-color: rgba(235,235,235,0.2);
+    border: 3px dashed  #7DA2AA;
+    padding: 5%;
+    text-align: center;
+}
+h1{
+    color: grey;
+}
+
+
+.name {
+  width: 39%;
+  background-color: white;
+  border: 1px solid #7DA2AA;
+  padding: 4px;
+
+}
+
+#upload{
+    background-color: #7DA2AA;
+    border: none;
+    width: 60%;
+    height: 30px;
+}
+
+#upload:hover{
+    background-color:#608a94; 
+}
+.bio{
+    width: 80%;
+     padding: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  border: 1px solid #7DA2AA;
+}
+
+hr{
+    width: 100%;
+    border-bottom: 3px solid #7DA2AA;
+}

@@ -1,0 +1,104 @@
+
+{% extends 'main/parent.html.twig' %}
+
+
+    {% block stylesheets %}
+        <link href="{{ asset('web/styles/edit-user.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+        <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
+    {% endblock %}
+
+
+{% block body %}
+
+    
+    
+    <div class="edit-profile">
+        <h1>Edytuj swój profil:</h1>
+        <div class="edit-container">
+            
+            <input type="text" class="name" placeholder="Imię" maxlength="50" />
+            
+            <input type="text" class="name" placeholder="Nazwisko" maxlength="50"  /><br>
+            
+            <input type="text" class="bio" placeholder="Info" maxlength="250"/><br>
+            
+            
+            <input type="text" class="bio" placeholder="Miasto" maxlength="50"  /><br>
+            
+            
+            <input type="submit" value="Zapisz zmiany" name="submit" />
+             <hr>
+            
+            
+            
+             <input type="text" class="bio" placeholder="Język" maxlength="50" id="lang" /><br>
+            
+            <input type="submit" value="Dodaj język" name="submit" id="add-lang"/>
+            <div id="languages"></div>
+            
+            <hr>
+             <input type="text" class="bio" id="tech" placeholder="Technologie" maxlength="50"  /><br>
+            
+            <input type="submit" value="Dodaj technologie" name="submit" id="add-tech"/>
+        <div id="Technologies"></div>
+
+            
+            <hr>
+           
+            
+            
+            
+            
+            
+            <label>Data urodzenia:</label> <br>
+            <input type="date" name="bdaytime">
+            
+            
+    <form action="" method="post" enctype="multipart/form-data">
+        <br>
+    Wybierz zdjęcie: <br> <br>
+    <input type="file" name="fileToUpload" id="fileToUpload" style="background-color: none;"> <br><br><br>
+        
+         <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
+        
+</form>
+</div>
+</div>
+   ///////////////////////
+    <script>
+   $(document).ready(function(){ 
+   
+       var technologies = []; ///powinna byc pobierana
+       var languages = [];
+       
+   $('#add-tech').click(function() {
+        
+        var technology = $('#tech').val()
+        technologies.push(technology);
+        
+      $('#Technologies').html('<p>' + technologies + ' </p>');
+       document. getElementById('tech').value ="";
+        
+    } );
+   
+   $('#add-lang').click(function() {
+        
+        var language = $('#lang').val()
+        languages.push(language);
+        
+      $('#languages').html('<p>' + languages + ' </p>');
+       document. getElementById('lang').value ="";
+        
+    } );
+       
+       
+       
+   });
+
+    
+</script>
+    
+    
+    
+{% endblock %}

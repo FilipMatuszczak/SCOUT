@@ -121,10 +121,12 @@
 
 .comment-content{
     margin: 1px;
+    text-align: justify;
 }
 
 p{
-    padding-right: 5px;
+    padding-right: 5%;
+    padding-left: 5%;
 }
 
 

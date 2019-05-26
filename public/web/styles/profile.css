@@ -5,7 +5,7 @@
     float: left;
     background: rgba(235,235,235,0.4);
     border:1px solid #7DA2AA;
-    height: 500px;
+    min-height: 300px;
     overflow: hidden;
     text-align: justify;
 }
@@ -55,6 +55,7 @@
     margin-top: 16px;
     resize: none;
     border-radius: 5px;
+    height: 50px;
 }
 
 .button-post{
@@ -77,7 +78,12 @@
 
 #message-ico{
     float: right;
-    font-size: 
+}
+
+#mess{
+    width: 100%;
+    float:left;
+    margin-bottom: 5px;
 }
 
 #comment-avatar{
@@ -92,7 +98,7 @@
 .project-title{
     text-decoration: none;
     color: #4f4a41;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
     margin: 1px;
     display:contents;
@@ -104,6 +110,8 @@
     height: 85px;
     border: 1px solid #7DA2AA;
     overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .comment:hover{

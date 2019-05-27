@@ -19,6 +19,17 @@ class CountryRepository extends ServiceEntityRepository
         parent::__construct($registry, Country::class);
     }
 
+    public function fetchSimilarNamesByPrefix($prefix, $limit)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.name')
+            ->where('p.name like :prefix' )
+            ->setParameter('prefix','%'. $prefix .'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Country[] Returns an array of Country objects
     //  */

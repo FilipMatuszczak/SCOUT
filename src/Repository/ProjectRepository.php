@@ -19,6 +19,17 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    public function fetchSimilarNamesByPrefix($prefix, $limit)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.title')
+            ->where('p.title like :prefix' )
+            ->setParameter('prefix','%'. $prefix .'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

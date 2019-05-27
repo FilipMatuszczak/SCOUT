@@ -19,6 +19,17 @@ class LanguageRepository extends ServiceEntityRepository
         parent::__construct($registry, Language::class);
     }
 
+    public function fetchSimilarNamesByPrefix($prefix, $limit)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.name')
+            ->where('p.name like :prefix' )
+            ->setParameter('prefix','%'. $prefix .'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Language[] Returns an array of Language objects
     //  */

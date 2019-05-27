@@ -19,6 +19,17 @@ class TechnologyRepository extends ServiceEntityRepository
         parent::__construct($registry, Technology::class);
     }
 
+    public function fetchSimilarNamesByPrefix($prefix, $limit)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.name')
+            ->where('p.name like :prefix' )
+            ->setParameter('prefix','%'. $prefix .'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Technology[] Returns an array of Technology objects
     //  */

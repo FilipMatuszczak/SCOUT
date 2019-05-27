@@ -59,3 +59,28 @@ create_wall_post:
     path: /create_wall_post
     controller:  App\Controller\ProfileController:createPostOnWall
     methods: POST
+
+filter_city_names:
+    path: /filter/city/{prefix}/{limit<\d+>?5}
+    controller: App\Controller\FilterController:getCityNameFilterAction
+    methods: GET
+
+filter_country_names:
+    path: /filter/country/{prefix}/{limit<\d+>?5}
+    controller: App\Controller\FilterController:getCountryNameFilterAction
+    methods: GET
+
+filter_language_names:
+    path: /filter/language/{prefix}/{limit<\d+>?5}
+    controller: App\Controller\FilterController:getLanguageNameFilterAction
+    methods: GET
+
+filter_technology_names:
+    path: /filter/technology/{prefix}/{limit<\d+>?5}
+    controller: App\Controller\FilterController:getTechnologyNameFilterAction
+    methods: GET
+
+filter_project_names:
+    path: /filter/project/{prefix}/{limit<\d+>?5}
+    controller: App\Controller\FilterController:getProjectNameFilterAction
+    methods: GET

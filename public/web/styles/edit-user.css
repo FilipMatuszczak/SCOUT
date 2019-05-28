@@ -4,6 +4,7 @@
     border: 3px dashed  #7DA2AA;
     padding: 5%;
     text-align: center;
+   
 }
 h1{
     color: grey;
@@ -30,7 +31,7 @@ h1{
 }
 .bio{
     width: 80%;
-     padding: 4px;
+    padding: 4px;
     margin-top: 5px;
     margin-bottom: 5px;
   border: 1px solid #7DA2AA;
@@ -40,3 +41,11 @@ hr{
     width: 100%;
     border-bottom: 3px solid #7DA2AA;
 }
+
+#photo-edit{
+    margin-top:2%;
+    margin-left: 2%;
+    float:left;
+
+}
+

@@ -24,6 +24,7 @@
 .profile-right{
     float: left;
     width:  60%;
+    
 }
 
 
@@ -83,6 +84,7 @@
 #mess{
     width: 100%;
     float:left;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -132,4 +134,10 @@ p{
 
 hr{
     width: 90%;
+}
+
+.infos{
+    text-align: center;
+    font-weight: bold;
+    color:darkgray;
 }

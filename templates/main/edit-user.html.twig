@@ -5,7 +5,13 @@
     {% block stylesheets %}
         <link href="{{ asset('web/styles/edit-user.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+        
         <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
+        
+     
+
+</script>
+        
     {% endblock %}
 
 
@@ -21,10 +27,20 @@
             
             <input type="text" class="name" placeholder="Nazwisko" maxlength="50"  /><br>
             
+            <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
+            <label>Data urodzenia:</label> <br>
+            <input type="date" name="bdaytime" style="border: 1px solid #7DA2AA;">
+            
+            </div>
+                
             <input type="text" class="bio" placeholder="Info" maxlength="250"/><br>
             
+                
+            <input type="text" class="bio" placeholder="Miasto" maxlength="50" id="city" list="CityList">
+            <datalist id="CityList">
             
-            <input type="text" class="bio" placeholder="Miasto" maxlength="50"  /><br>
+            </datalist>
+            <br>
             
             
             <input type="submit" value="Zapisz zmiany" name="submit" />
@@ -32,13 +48,30 @@
             
             
             
-             <input type="text" class="bio" placeholder="Język" maxlength="50" id="lang" /><br>
+             <input type="text" class="bio" placeholder="Język" maxlength="50" id="lang" list="LangList">
+            <datalist id="LangList">
+            
+            </datalist>
+           
+            
+            <br>
             
             <input type="submit" value="Dodaj język" name="submit" id="add-lang"/>
+            
+            
             <div id="languages"></div>
             
             <hr>
-             <input type="text" class="bio" id="tech" placeholder="Technologie" maxlength="50"  /><br>
+            
+            
+            
+            
+             <input type="text" class="bio" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
+            <datalist id="TechList">
+            
+            </datalist>
+            
+             
             
             <input type="submit" value="Dodaj technologie" name="submit" id="add-tech"/>
         <div id="Technologies"></div>
@@ -51,10 +84,11 @@
             
             
             
-            <label>Data urodzenia:</label> <br>
-            <input type="date" name="bdaytime">
             
+            <div id="photo">
             
+                <img id="photo-edit" src="{{ asset('web/images/krowa.jpg') }}" width="120" height="120">
+                
     <form action="" method="post" enctype="multipart/form-data">
         <br>
     Wybierz zdjęcie: <br> <br>
@@ -62,11 +96,23 @@
         
          <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
         
+        </div>
+        
+        
+  
+        
 </form>
 </div>
 </div>
-   ///////////////////////
+    
+    
+    <script src="{{ asset('web/scripts/edit-profile.js') }}"></script>
+    
     <script>
+        
+        
+   ///////////////////////
+        
    $(document).ready(function(){ 
    
        var technologies = []; ///powinna byc pobierana
@@ -98,6 +144,12 @@
 
     
 </script>
+    
+    
+    
+    
+   
+    
     
     
     

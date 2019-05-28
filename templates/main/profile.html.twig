@@ -20,20 +20,37 @@
                 <div class="profile-right">
                     <p id="name-profile">{{ user.firstname }} {{ user.lastname }}</p>
                     <p>{{ age }} lat</p>
-                    Miasto:
+                    
+                    {% if user.city is not empty %}
+                        <p class="infos">Miasto </p><p> 
                     {% for city in user.city %}
                         {{ city.name }}, 
                     {% endfor %}
+                    {% else %}
+                            <p>Brak miejsca zamieszkania
+                    {% endif %} </p>
+                    
+                    
                     <hr>
-                    Języki:
-                    {% for language in user.language %}
+                    
+                    {% if user.language is not empty %}
+                        <p class="infos">Języki </p><p> 
+                        {% for language in user.language %}
                         {{ language.name }},
                     {% endfor %}
+                        {% else %}
+                        <p>Brak języków obcych
+                            {% endif %} </p>
                     <hr>
-                    Technologie:
-                    {% for technology in user.technology %}
+                    
+                    {% if user.technology is not empty %}
+                        <p class="infos">Technologie </p><p> 
+                        {% for technology in user.technology %}
                         {{ technology.name }},
                     {% endfor %}
+                        {% else %}
+                        <p>Brak znajomości technologii
+                            {% endif %} </p>
                     <hr>
                     <p>{{  user.info }}</p>
                 </div>

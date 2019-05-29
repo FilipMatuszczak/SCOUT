@@ -55,6 +55,10 @@ user_profile:
     path: /profile/{username}
     controller:  App\Controller\ProfileController:profileIndexAction
 
+edit_profile:
+    path: /profile/{username}/edit
+    controller: App\Controller\ProfileController:editIndexAction
+
 create_wall_post:
     path: /create_wall_post
     controller:  App\Controller\ProfileController:createPostOnWall
@@ -84,3 +88,4 @@ filter_project_names:
     path: /filter/project/{prefix}/{limit<\d+>?5}
     controller: App\Controller\FilterController:getProjectNameFilterAction
     methods: GET
+

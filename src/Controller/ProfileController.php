@@ -53,4 +53,14 @@ class ProfileController extends AbstractController
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }
+
+    public function editIndexAction($username)
+    {
+        $currentUsername = $user = $this->security->getUser()->getUsername();
+        if ($currentUsername !== $username) {
+            throw $this->createAccessDeniedException('Unauthorized editing');
+        }
+
+        return $this->render('main/edit-user.html.twig', []);
+    }
 }

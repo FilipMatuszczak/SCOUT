@@ -18,13 +18,17 @@
                 </div>
 
                 <div class="profile-right">
-                    <p id="name-profile">{{ user.firstname }} {{ user.lastname }}</p>
-                    <p>{{ age }} lat</p>
-                    
+                    <p id="name-profile">{{ user.firstname }} {{ user.lastname }}, {{ age }} 
+                        
+                    </p>
                     {% if user.city is not empty %}
                         <p class="infos">Miasto </p><p> 
                     {% for city in user.city %}
+                        {% if not loop.last %}
                         {{ city.name }}, 
+                             {% else %}
+                            {{ city.name }}
+                        {% endif %}
                     {% endfor %}
                     {% else %}
                             <p>Brak miejsca zamieszkania
@@ -36,7 +40,11 @@
                     {% if user.language is not empty %}
                         <p class="infos">Języki </p><p> 
                         {% for language in user.language %}
+                            {% if not loop.last %}
                         {{ language.name }},
+                                {% else %}
+                            {{ language.name }}
+                        {% endif %}
                     {% endfor %}
                         {% else %}
                         <p>Brak języków obcych
@@ -46,8 +54,12 @@
                     {% if user.technology is not empty %}
                         <p class="infos">Technologie </p><p> 
                         {% for technology in user.technology %}
-                        {{ technology.name }},
-                    {% endfor %}
+                        {% if not loop.last %}
+                        {{ technology.name }}, 
+                        {% else %}
+                            {{ technology.name }}
+                        {% endif %}
+                        {% endfor %}
                         {% else %}
                         <p>Brak znajomości technologii
                             {% endif %} </p>

@@ -1,45 +1,33 @@
-
 {% extends 'main/parent.html.twig' %}
-
-
     {% block stylesheets %}
         <link href="{{ asset('web/styles/edit-user.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
         
         <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
         
-     
-
-</script>
-        
     {% endblock %}
-
-
 {% block body %}
-
-    
-    
     <div class="edit-profile">
         <h1>Edytuj swój profil:</h1>
         <div class="edit-container">
             
-            <input type="text" class="name" placeholder="Imię" maxlength="50" />
+            <input type="text" class="name" placeholder="Imię" maxlength="50" value={{ user.firstname }} />
             
-            <input type="text" class="name" placeholder="Nazwisko" maxlength="50"  /><br>
+            <input type="text" class="name" placeholder="Nazwisko" maxlength="50" value={{ user.lastname }} /><br>
             
             <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
             <label>Data urodzenia:</label> <br>
-            <input type="date" name="bdaytime" style="border: 1px solid #7DA2AA;">
+            <input type="date" value={{ user.dateOfBirth.format('Y-m-d') }} name="bdaytime"  style="border: 1px solid #7DA2AA;">
             
             </div>
                 
-            <input type="text" class="bio" placeholder="Info" maxlength="250"/><br>
-            
-                
-            <input type="text" class="bio" placeholder="Miasto" maxlength="50" id="city" list="CityList">
+            <input type="text" class="bio" placeholder="Info"  maxlength="250" value="{{ user.info }}" /><br>
+
+                <!--
+            <input type="text" class="bio" placeholder="Miasto"  maxlength="50" id="city" list="CityList" value ="Poznań">
             <datalist id="CityList">
             
-            </datalist>
+            </datalist> -->
             <br>
             
             
@@ -96,7 +84,7 @@
        
          <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
         
-        </div>
+
         
         
   

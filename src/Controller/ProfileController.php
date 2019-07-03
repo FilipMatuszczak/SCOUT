@@ -58,9 +58,10 @@ class ProfileController extends AbstractController
     {
         $currentUsername = $user = $this->security->getUser()->getUsername();
         if ($currentUsername !== $username) {
-            throw $this->createAccessDeniedException('Unauthorized editing');
+            return $this->redirectToRoute('main');
         }
+        $user = $this->userProvider->loadUserByUsername($username);
 
-        return $this->render('main/edit-user.html.twig', []);
+        return $this->render('main/edit-user.html.twig', ['user' => $user]);
     }
 }

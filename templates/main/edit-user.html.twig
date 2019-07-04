@@ -10,80 +10,82 @@
     <div class="edit-profile">
         <h1>Edytuj swój profil:</h1>
         <div class="edit-container">
-            
-            <input type="text" class="name" placeholder="Imię" maxlength="50" value={{ user.firstname }} />
-            
-            <input type="text" class="name" placeholder="Nazwisko" maxlength="50" value={{ user.lastname }} /><br>
-            
+            <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} )}},  method="post"  >
+            <input type="text" class="name" placeholder="Imię" name = "firstname" maxlength="50" value={{ user.firstname }} />
+
+            <input type="text" class="name" placeholder="Nazwisko"  name = "lastname" maxlength="50" value={{ user.lastname }} /><br>
+
             <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
             <label>Data urodzenia:</label> <br>
             <input type="date" value={{ user.dateOfBirth.format('Y-m-d') }} name="bdaytime"  style="border: 1px solid #7DA2AA;">
-            
-            </div>
-                
-            <input type="text" class="bio" placeholder="Info"  maxlength="250" value="{{ user.info }}" /><br>
 
-                <!--
+            </div>
+
+            <input type="text" class="bio" placeholder="Info"  name = "info" maxlength="250" value="{{ user.info }}" /><br>
+                <br>
+
+
+                <input type="submit" value="Zapisz zmiany" name="submit" />
+            </form>
+
+
             <input type="text" class="bio" placeholder="Miasto"  maxlength="50" id="city" list="CityList" value ="Poznań">
             <datalist id="CityList">
-            
-            </datalist> -->
-            <br>
-            
-            
-            <input type="submit" value="Zapisz zmiany" name="submit" />
+
+            </datalist>
+
              <hr>
-            
-            
-            
+
+
+
              <input type="text" class="bio" placeholder="Język" maxlength="50" id="lang" list="LangList">
             <datalist id="LangList">
-            
             </datalist>
-           
-            
+
+
             <br>
-            
+
             <input type="submit" value="Dodaj język" name="submit" id="add-lang"/>
-            
-            
+
+
             <div id="languages"></div>
-            
+
             <hr>
-            
-            
-            
-            
+
+
+
+
              <input type="text" class="bio" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
             <datalist id="TechList">
-            
+
             </datalist>
-            
-             
-            
+
+
+
             <input type="submit" value="Dodaj technologie" name="submit" id="add-tech"/>
         <div id="Technologies"></div>
 
-            
+
             <hr>
-           
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
             <div id="photo">
-            
+
                 <img id="photo-edit" src="{{ asset('web/images/krowa.jpg') }}" width="120" height="120">
-                
+
     <form action="" method="post" enctype="multipart/form-data">
         <br>
     Wybierz zdjęcie: <br> <br>
-    <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload" style="background-color: none;"> <br><br><br>
-       
+
+    <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload" style="background-color: none;"/> <br><br><br>
+
          <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
-        
+
 
         
         
@@ -100,34 +102,34 @@
         
         
    ///////////////////////
-        
-   $(document).ready(function(){ 
-   
+
+   $(document).ready(function(){
+
        var technologies = []; ///powinna byc pobierana
        var languages = [];
-       
+
    $('#add-tech').click(function() {
-        
+
         var technology = $('#tech').val()
         technologies.push(technology);
-        
+
       $('#Technologies').html('<p>' + technologies + ' </p>');
        document. getElementById('tech').value ="";
-        
+
     } );
-   
+
    $('#add-lang').click(function() {
-        
+
         var language = $('#lang').val()
         languages.push(language);
-        
+
       $('#languages').html('<p>' + languages + ' </p>');
        document. getElementById('lang').value ="";
-        
+
     } );
-       
-       
-       
+
+
+
    });
 
     

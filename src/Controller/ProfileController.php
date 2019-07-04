@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Repository\PostRepository;
 use App\Security\UserProvider;
 use App\Services\PostCreator;
+use App\Services\ProfileEditHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -24,12 +25,22 @@ class ProfileController extends AbstractController
     /** @var PostRepository */
     private $postRepository;
 
-    public function __construct(UserProvider $userProvider, PostCreator $postCreator, Security $security, PostRepository $postRepository)
+    /** @var ProfileEditHandler */
+    private $profileEditHandler;
+
+    public function __construct(
+        UserProvider $userProvider,
+        PostCreator $postCreator,
+        Security $security,
+        PostRepository $postRepository,
+        ProfileEditHandler $profileEditHandler
+    )
     {
         $this->userProvider = $userProvider;
         $this->postCreator = $postCreator;
         $this->security = $security;
         $this->postRepository = $postRepository;
+        $this->profileEditHandler = $profileEditHandler;
     }
 
     public function profileIndexAction($username)
@@ -50,6 +61,24 @@ class ProfileController extends AbstractController
         $user = $this->userProvider->loadUserByUsername($username);
 
         $this->postCreator->createPostForUser($user, $request->get('text'));
+
+        return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
+    }
+
+    public function editBasicInfoAction(Request $request, $username)
+    {
+        $currentUsername = $user = $this->security->getUser();
+        if ($currentUsername !== $username) {
+            return $this->redirectToRoute('main');
+        }
+        $user = $this->userProvider->loadUserByUsername($currentUsername);
+
+        $firstname = $request->get('firstname');
+        $lastname = $request->get('lastname');
+        $birthDate = $request->get('bdaytime');
+        $info = $request->get('info');
+
+        $this->profileEditHandler->saveBasicInfo($user, $firstname, $lastname, $birthDate, $info);
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }

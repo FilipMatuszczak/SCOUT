@@ -24,7 +24,7 @@ class LanguageRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p.name')
             ->where('p.name like :prefix' )
-            ->setParameter('prefix','%'. $prefix .'%')
+            ->setParameter('prefix', $prefix .'%')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();

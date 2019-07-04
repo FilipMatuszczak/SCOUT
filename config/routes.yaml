@@ -89,3 +89,7 @@ filter_project_names:
     controller: App\Controller\FilterController:getProjectNameFilterAction
     methods: GET
 
+edit_basic_profile_info:
+    path: /profile/{username}/edit
+    controller: App\Controller\ProfileController:editBasicInfoAction
+    methods: POST

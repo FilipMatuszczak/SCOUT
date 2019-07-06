@@ -20,7 +20,6 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-
     public function fetchUserWallPosts(User $user)
     {
         $qb = $this->createQueryBuilder('p');
@@ -28,6 +27,7 @@ class PostRepository extends ServiceEntityRepository
             ->select('p')
             ->where($qb->expr()->isNull('p.project'))
             ->andWhere('p.user = :user')
+            ->orderBy('p.timestamp', 'DESC')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();

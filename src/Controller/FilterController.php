@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Repository\CityRepository;
 use App\Repository\CountryRepository;
@@ -12,6 +10,7 @@ use App\Repository\TechnologyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/** */
 class FilterController extends AbstractController
 {
     /** @var CityRepository */
@@ -29,6 +28,13 @@ class FilterController extends AbstractController
     /** @var TechnologyRepository */
     private $technologyRepository;
 
+    /**
+     * @param CityRepository $cityRepository
+     * @param TechnologyRepository $technologyRepository
+     * @param ProjectRepository $projectRepository
+     * @param CountryRepository $countryRepository
+     * @param LanguageRepository $languageRepository
+     */
     public function __construct(
         CityRepository $cityRepository,
         TechnologyRepository $technologyRepository,
@@ -44,6 +50,12 @@ class FilterController extends AbstractController
         $this->technologyRepository = $technologyRepository;
     }
 
+    /**
+     * @param string $prefix
+     * @param int    $limit
+     *
+     * @return JsonResponse
+     */
     public function getCityNameFilterAction($prefix, $limit)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -54,6 +66,12 @@ class FilterController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $limit
+     * @param $prefix
+     *
+     * @return JsonResponse
+     */
     public function getCountryNameFilterAction($limit, $prefix)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -64,6 +82,12 @@ class FilterController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $limit
+     * @param $prefix
+     *
+     * @return JsonResponse
+     */
     public function getLanguageNameFilterAction($limit, $prefix)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -74,6 +98,12 @@ class FilterController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $limit
+     * @param $prefix
+     *
+     * @return JsonResponse
+     */
     public function getProjectNameFilterAction($limit, $prefix)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -84,6 +114,12 @@ class FilterController extends AbstractController
         ]);
     }
 
+    /**
+     * @param $limit
+     * @param $prefix
+     *
+     * @return JsonResponse
+     */
     public function getTechnologyNameFilterAction($limit, $prefix)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

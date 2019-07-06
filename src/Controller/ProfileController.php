@@ -67,7 +67,7 @@ class ProfileController extends AbstractController
 
     public function editBasicInfoAction(Request $request, $username)
     {
-        $currentUsername = $user = $this->security->getUser();
+        $currentUsername = $user = $this->security->getUser()->getUsername();
         if ($currentUsername !== $username) {
             return $this->redirectToRoute('main');
         }
@@ -75,7 +75,7 @@ class ProfileController extends AbstractController
 
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
-        $birthDate = $request->get('bdaytime');
+        $birthDate =  new \DateTime($request->get('bdaytime'));
         $info = $request->get('info');
 
         $this->profileEditHandler->saveBasicInfo($user, $firstname, $lastname, $birthDate, $info);

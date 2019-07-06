@@ -10,7 +10,7 @@
     <div class="edit-profile">
         <h1>Edytuj swój profil:</h1>
         <div class="edit-container">
-            <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} )}},  method="post"  >
+            <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} )}}"  method="post"  >
             <input type="text" class="name" placeholder="Imię" name = "firstname" maxlength="50" value={{ user.firstname }} />
 
             <input type="text" class="name" placeholder="Nazwisko"  name = "lastname" maxlength="50" value={{ user.lastname }} /><br>

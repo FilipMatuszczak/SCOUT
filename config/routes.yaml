@@ -90,6 +90,6 @@ filter_project_names:
     methods: GET
 
 edit_basic_profile_info:
-    path: /profile/{username}/edit
+    path: /profile/{username}/edit_basic
     controller: App\Controller\ProfileController:editBasicInfoAction
     methods: POST

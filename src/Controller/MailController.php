@@ -5,6 +5,8 @@ namespace App\Controller;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MailController extends AbstractController
@@ -22,7 +24,7 @@ class MailController extends AbstractController
      * @param string $username
      * @param string $authenticationLink
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function sendRegisterMailAction($email, $username, $authenticationLink)
     {
@@ -55,6 +57,13 @@ class MailController extends AbstractController
         return $this->redirectToRoute('email_confirmation_sent', [], 301);
     }
 
+    /**
+     * @param string $email
+     * @param string $username
+     * @param string $changePasswordLink
+     *
+     * @return RedirectResponse
+     */
     public function sendChangePasswordAction($email, $username, $changePasswordLink)
     {
         $changePasswordLink = $this->generateUrl
@@ -83,6 +92,7 @@ class MailController extends AbstractController
 
         $this->mailer->send($message);
         $this->get('session')->getFlashBag()->set('notice', 'Na twoją skrzynkę pocztową został wysłany email umożliwiający zmianę hasła');
+
         return $this->redirectToRoute('index');
     }
 }

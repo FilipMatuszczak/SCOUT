@@ -10,6 +10,7 @@ use App\Services\PasswordHandler;
 use App\Services\RegisterHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
@@ -68,8 +69,9 @@ class LoginController extends AbstractController
     }
 
     /**
-     * @param $message
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @param string $message
+     *
+     * @return Response
      */
     public function indexAction($message=null)
     {
@@ -83,6 +85,12 @@ class LoginController extends AbstractController
         return $this->render('main/index.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'message' => $message]);
     }
 
+    /**
+     * @param Request $request
+     * @param string  $username
+     *
+     * @return JsonResponse
+     */
     public function userExistsAction(Request $request, $username)
     {
         $userExists = $this->registerHandler->userExists($username);
@@ -114,6 +122,12 @@ class LoginController extends AbstractController
         return $this->render('main/activate-web.html.twig', ['name' => $username]);
     }
 
+    /**
+     * @param $username
+     * @param $changePasswordLink
+     *
+     * @return Response
+     */
     public function changePasswordAction($username, $changePasswordLink)
     {
         $user = $this->mailerService->verifyChangePasswordLink($username, $changePasswordLink);
@@ -151,11 +165,19 @@ class LoginController extends AbstractController
         ]);
     }
 
+    /**
+     * @return Response
+     */
     public function emailConfirmationSentAction()
     {
         return $this->render('main/registered-web.html.twig', []);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response|null
+     */
     public function loginEmailAction(Request $request)
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));
@@ -169,6 +191,11 @@ class LoginController extends AbstractController
             );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function submitChangePasswordAction(Request $request)
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));
@@ -177,10 +204,15 @@ class LoginController extends AbstractController
         $credentials = $this->passwordHandler->generateHashAndSalt($newPassowrd);
         $this->passwordHandler->updateUserCredentials($credentials, $user);
         $this->get('session')->getFlashBag()->set('notice', 'Twoje hasło zostało zmienione, możesz teraz się zalogować używając swojego nowego hasła');
-        return $this->redirectToRoute('index',[]);
 
+        return $this->redirectToRoute('index',[]);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function changePasswordEmailAction(Request $request)
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));

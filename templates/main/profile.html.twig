@@ -14,7 +14,7 @@
     
             <div id="profile">
                 <div class="profile-left">
-                    <img id="profile-picture" src="{{ asset('web/images/krowa.jpg') }}" width="230" height="280">
+                    <img id="profile-picture" src="data:image/jpeg;base64,{{img}}" width="230" height="280">
                 </div>
 
                 <div class="profile-right">
@@ -74,7 +74,7 @@
     
             {% if user.username == app.user.username %}
             <div class="form-post">
-                <img id="post-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="70" height="70">
+                <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
                 <form action="{{ path('create_wall_post') }}" method="post">
                     <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
                         <input type="hidden" name="username" value={{ app.user.username }}>
@@ -85,7 +85,7 @@
             {% endif %}
             {% for post in posts %}
                 <div class="comment">
-                    <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
+                    <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70"></a>
 
                     <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
                     <p class="comment-content">{{  post.text}}</p>

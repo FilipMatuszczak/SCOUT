@@ -51,12 +51,21 @@ class ProfileController extends AbstractController
         $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;
         $posts = $this->postRepository->fetchUserWallPosts($user);
 
-        return $this->render('main/profile.html.twig', ['user' => $user, 'age' => $userAge, 'posts' => $posts]);
+        $photo = stream_get_contents($user->getPhoto());
+
+        return $this->render('main/profile.html.twig',
+            [
+                'user' => $user,
+                'age' => $userAge,
+                'posts' => $posts,
+                'img' => base64_encode($photo),
+            ]
+        );
     }
 
     public function createPostOnWall(Request $request)
     {
-        $username = $user = $this->security->getUser()->getUsername();
+        $username = $this->security->getUser()->getUsername();
 
         $user = $this->userProvider->loadUserByUsername($username);
 
@@ -67,11 +76,9 @@ class ProfileController extends AbstractController
 
     public function editBasicInfoAction(Request $request, $username)
     {
-        $currentUsername = $user = $this->security->getUser()->getUsername();
-        if ($currentUsername !== $username) {
+        if (!$user = $this->canEdit($username)) {
             return $this->redirectToRoute('main');
         }
-        $user = $this->userProvider->loadUserByUsername($currentUsername);
 
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
@@ -83,14 +90,39 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }
 
-    public function editIndexAction($username)
+    public function editUserPhoto(Request $request, $username)
     {
-        $currentUsername = $user = $this->security->getUser()->getUsername();
-        if ($currentUsername !== $username) {
+        $photoFile = $request->files->get('fileToUpload');
+
+        if (!$user = $this->canEdit($username)) {
             return $this->redirectToRoute('main');
         }
-        $user = $this->userProvider->loadUserByUsername($username);
 
-        return $this->render('main/edit-user.html.twig', ['user' => $user]);
+        $this->profileEditHandler->saveNewProfilePhoto($user, $photoFile);
+
+        return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
+    }
+
+    public function editIndexAction($username)
+    {
+        if (!$user = $this->canEdit($username)) {
+            return $this->redirectToRoute('main');
+        }
+
+        $user = $this->userProvider->loadUserByUsername($username);
+        $photo = stream_get_contents($user->getPhoto());
+
+        return $this->render('main/edit-user.html.twig', ['user' => $user, 'img' => base64_encode($photo)]);
+    }
+
+    private function canEdit($username)
+    {
+        $currentUsername = $user = $this->security->getUser()->getUsername();
+
+        if ($currentUsername !== $username) {
+            return null;
+        }
+
+        return $this->userProvider->loadUserByUsername($username);
     }
 }

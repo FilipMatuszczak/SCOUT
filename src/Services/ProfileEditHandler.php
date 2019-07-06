@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /** */
 class ProfileEditHandler
@@ -33,10 +34,15 @@ class ProfileEditHandler
      * @param string $filename
      * @param string $tempFilePath
      */
-    public function saveNewProfilePhoto(User $user, $filename, $tempFilePath)
+    public function saveNewProfilePhoto(User $user, File $file)
     {
-        $content = file_get_contents($_FILES[$filename][$tempFilePath]);
-        $user->setPhoto($content);
+        if (null === $file) {
+            return;
+        }
+
+        $strm = fopen($file->getRealPath(),'rb');
+
+        $user->setPhoto(stream_get_contents($strm));
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

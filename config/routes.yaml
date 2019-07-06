@@ -93,3 +93,8 @@ edit_basic_profile_info:
     path: /profile/{username}/edit_basic
     controller: App\Controller\ProfileController:editBasicInfoAction
     methods: POST
+
+edit_user_photo:
+    path: /profile/{username}/edit_user_photo
+    controller: App\Controller\ProfileController:editUserPhoto
+    methods: POST

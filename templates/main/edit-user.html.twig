@@ -52,15 +52,10 @@
 
             <hr>
 
-
-
-
              <input type="text" class="bio" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
             <datalist id="TechList">
 
             </datalist>
-
-
 
             <input type="submit" value="Dodaj technologie" name="submit" id="add-tech"/>
         <div id="Technologies"></div>
@@ -68,28 +63,17 @@
 
             <hr>
 
-
-
-
-
-
-
             <div id="photo">
 
-                <img id="photo-edit" src="{{ asset('web/images/krowa.jpg') }}" width="120" height="120">
+                <img id="photo-edit"  src="data:image/jpeg;base64,{{ img }}" width="120" height="120">
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{ path('edit_user_photo',  {'username' : user.username} )}}" enctype="multipart/form-data" method="post">
         <br>
     Wybierz zdjęcie: <br> <br>
 
     <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload" style="background-color: none;"/> <br><br><br>
 
          <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
-
-
-        
-        
-  
         
 </form>
 </div>

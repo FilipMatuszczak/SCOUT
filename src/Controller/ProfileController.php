@@ -48,7 +48,11 @@ class ProfileController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $user = $this->userProvider->loadUserByUsername($username);
-        $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;
+        if ($user->getDateOfBirth()) {
+        $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;}
+        else{
+            $userAge = '';
+        }
         $posts = $this->postRepository->fetchUserWallPosts($user);
 
         if ($photo = $user->getPhoto()){
@@ -112,7 +116,12 @@ class ProfileController extends AbstractController
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-        $photo = stream_get_contents($user->getPhoto());
+        if ($user->getPhoto())
+        {
+        $photo = stream_get_contents($user->getPhoto()); }
+        else {
+            $photo = null;
+        }
 
         return $this->render('main/edit-user.html.twig', ['user' => $user, 'img' => base64_encode($photo)]);
     }

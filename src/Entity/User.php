@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -99,7 +100,7 @@ class User implements UserInterface
     private $info;
 
     /**
-     * @var resource|null
+     * @var TextType|null
      *
      * @ORM\Column(name="photo", type="blob", length=65535, nullable=true)
      */

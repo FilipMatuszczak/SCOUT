@@ -51,7 +51,9 @@ class ProfileController extends AbstractController
         $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;
         $posts = $this->postRepository->fetchUserWallPosts($user);
 
-        $photo = stream_get_contents($user->getPhoto());
+        if ($photo = $user->getPhoto()){
+        $photo = stream_get_contents($photo);
+        }
 
         return $this->render('main/profile.html.twig',
             [

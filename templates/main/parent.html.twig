@@ -49,7 +49,7 @@
         </div>
 
         <div id="navigation">
-            <a href="{{ path('user_profile', {'username': app.user.username}) }}"><img id="navigation-avatar" src="{{ asset('web/images/krowa.jpg') }}" width="100"
+            <a href="{{ path('user_profile', {'username': app.user.username}) }}"><img id="navigation-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}" width="100"
                                          height="100"></a>
 
             <button class="navico"><i class="fa fa-suitcase"></i></button>

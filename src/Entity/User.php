@@ -100,7 +100,7 @@ class User implements UserInterface
     private $info;
 
     /**
-     * @var TextType|null
+     * @var resource|null
      *
      * @ORM\Column(name="photo", type="blob", length=65535, nullable=true)
      */

@@ -115,7 +115,6 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        $user = $this->userProvider->loadUserByUsername($username);
         if ($user->getPhoto())
         {
         $photo = stream_get_contents($user->getPhoto()); }

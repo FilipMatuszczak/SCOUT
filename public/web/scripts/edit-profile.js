@@ -6,22 +6,22 @@ $(document).ready(function(){
   
   var tech = $('#tech').val()
        
-    ///console.log(lang);
+    ///console.log(tech);
     if(tech!=''){
         
          
         
         
-        var request = new XMLHttpRequest()
+        var requestTech = new XMLHttpRequest()
         var exists = 0;
         
-request.open('GET', 'http://127.0.0.1:8000/filter/technology/'+ tech, true)
-request.onload = function() {
+requestTech.open('GET', 'http://127.0.0.1:8000/filter/technology/'+ tech, true)
+requestTech.onload = function() {
     
   var data = JSON.parse(this.response)
 $('#TechList').html('');
   
-  if (request.status >= 200 && request.status < 400) {
+  if (requestTech.status >= 200 && requestTech.status < 400) {
     
       for (i = 0; i<data.names.length;i++){
       ////console.log(data.names[i].name);
@@ -39,7 +39,7 @@ $('#TechList').html('');
   
 }
 
-request.send()
+requestTech .send()
         
         
     }
@@ -64,16 +64,16 @@ request.send()
          
         
         
-        var request = new XMLHttpRequest()
+        var requestLang = new XMLHttpRequest()
         var exists = 0;
         
-request.open('GET', 'http://127.0.0.1:8000/filter/language/'+ lang, true)
-request.onload = function() {
+requestLang.open('GET', 'http://127.0.0.1:8000/filter/language/'+ lang, true)
+requestLang.onload = function() {
     
   var data = JSON.parse(this.response)
 $('#LangList').html('');
   
-  if (request.status >= 200 && request.status < 400) {
+  if (requestLang.status >= 200 && requestLang.status < 400) {
     
       for (i = 0; i<data.names.length;i++){
       ////console.log(data.names[i].name);
@@ -91,7 +91,7 @@ $('#LangList').html('');
   
 }
 
-request.send()
+requestLang.send()
         
         
     }

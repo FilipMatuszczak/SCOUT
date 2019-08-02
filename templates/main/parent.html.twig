@@ -60,9 +60,22 @@
 
             <p class="anavig">Witaj, {{ app.user.username }} <br>
                 <a class="logout" href={{ path('app_logout') }}> Wyloguj się</a></p>
+            
+            
+            
+            
+            
+      
+            
         </div>
+        
+        {% block left %}{% endblock %}  
     </div>
+    
+    
 
+    
+    
     <div class="columnRight">
         <div id="contents">
 

@@ -21,13 +21,16 @@ h1{
 
 #upload{
     background-color: #7DA2AA;
+    border-radius: 5px;
     border: none;
-    width: 60%;
+    width: 50%;
     height: 30px;
+    color: white;
 }
 
-#upload:hover{
-    background-color:#608a94; 
+#upload:hover{ 
+    color: white;
+    box-shadow: 0 0 8px #7DA2AA;
 }
 .bio{
     width: 80%;

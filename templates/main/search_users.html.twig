@@ -1,0 +1,90 @@
+
+{% extends 'main/parent.html.twig' %}
+
+
+    {% block stylesheets %}
+        <link href="{{ asset('web/styles/search_projects.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+        <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
+    {% endblock %}
+
+{% block left %}
+
+<div class="filter">
+        <div class="title">Filtruj użytkowników</div>
+        
+        <hr><div class="bio-title">
+        Imię 
+        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..."> </div>
+        <br>
+    
+        <div class="bio-title">
+        Nazwisko 
+        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..."> </div>
+        <br>
+    
+        <div class="bio-title">
+        Język   
+          <input type="LangList" class="bio" placeholder="..." maxlength="50" id="lang" list="LangList">
+            <datalist id="LangList">
+                <option value="polski">
+            </datalist> 
+   
+    </div>
+        <br>
+        
+       <div class="bio-title">
+        Technologia  
+        <input type="TechList" class="bio" id="tech" placeholder="..." maxlength="50" list="TechList">
+            <datalist id="TechList">
+
+            </datalist>
+        </div>
+    <br>
+        <div class="bio-title">
+        Miasto
+<input type="CityList" class="bio" placeholder="..."  maxlength="50" id="city" list="CityList" value ="Poznań">
+            <datalist id="CityList">
+
+            </datalist>
+        </div>
+    
+        <hr>
+    <div class="sort">
+        Sortuj według: 
+    
+    <select name="Sort by">
+    <option value="A-Z">A-Z</option>
+    <option value="Z-A">Z-A</option>
+    <option value="Najstarsi">Najstarsi</option>
+    <option value="Najmłodsi">Najmłodsi</option>
+   
+  </select>
+    <br>
+    <div class="btn-search">
+        <input type="submit" value="Szukaj" name="submit" id="upload"/>
+        </div>
+        </div>
+</div>
+
+{% endblock %}
+
+
+{% block body %}
+
+    
+    
+            <div class="post" id="usr-post">
+                <a href=""><img id="user-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
+
+                <a class="project-title" href=" ">Imię i nazwisko</a><br>
+                <a class="project-lang" href=" ">Technologie</a><br>
+                <a class="project-lang" href=" ">Języki</a>
+                <a class="project-autors" href=" ">Miasto</a>
+            </div>
+
+
+    <script src="{{ asset('web/scripts/edit-profile.js') }}"></script>
+   
+    
+{% endblock %}

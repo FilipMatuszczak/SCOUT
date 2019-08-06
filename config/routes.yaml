@@ -98,3 +98,13 @@ edit_user_photo:
     path: /profile/{username}/edit_user_photo
     controller: App\Controller\ProfileController:editUserPhoto
     methods: POST
+
+projectcs_main:
+    path: /projects
+    controller: App\Controller\ProjectsController:indexAction
+    methods: GET
+
+users_main:
+    path: /users
+    controller: App\Controller\UsersController:indexAction
+    methods: GET

@@ -1,17 +1,52 @@
 $(document).ready(function(){
     
+    
+      /////////more forms
+    $('#button-more').click(function() {
+        ///todo dodaje nowe okno formularza
+        i++;    
+        
+       $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+      
+        
+      ///////////
+    });
+    
+    
+     $('#languages-forms').on("click", ".less", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        i--;
+    })
+    
+    /////////////////
+    
+     $('#button-moret').click(function() {
+        ///todo dodaje nowe okno formularza
+        i++;    
+        
+       $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+      
+        
+      ///////////
+    });
+    
+    
+     $('#tech-forms').on("click", ".less", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        i--;
+    })
+    
+    
     //////Function for getting technologies
-  $('#tech').keyup(function(callback)           
+  $('#tech-forms').on("keyup",".tech",function(callback)           
                        {
   
-  var tech = $('#tech').val()
+  var tech = $(this).val()
        
     ///console.log(tech);
-    if(tech!=''){
-        
-         
-        
-        
+    if(tech!=''){     
         var requestTech = new XMLHttpRequest()
         var exists = 0;
         
@@ -39,26 +74,22 @@ $('#TechList').html('');
   
 }
 
-requestTech .send()
-        
-        
+requestTech .send()    
     }
-    else {
-         
+    else {     
     }
-    
     });
 //////
 
   
     
     ////getting languages
-    $('#lang').keyup(function(callback)           
+    $('#languages-forms').on("keyup",".lang",function(callback)           
                        {
-  
-  var lang = $('#lang').val()
+ // console.log("a");
+  var lang = $(this).val()
        
-    ///console.log(lang);
+   // console.log(lang);
     if(lang!=''){
         
          
@@ -177,6 +208,10 @@ $("#fileToUpload").change(function() {
 });
    //// 
     
+    
+        var i=1;
+    
+  
     
     
     

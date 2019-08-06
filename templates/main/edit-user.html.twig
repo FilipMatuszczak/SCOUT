@@ -27,7 +27,7 @@
                 <br>
 
 
-                <input type="submit" value="Zapisz zmiany" name="submit" />
+                <input type="submit" value="Zapisz zmiany" name="submit" class="upload smaller"/>
             </form>
 
 
@@ -38,28 +38,30 @@
 
              <hr>
 
-
-
-             <input type="LangList" class="bio" placeholder="Język" maxlength="50" id="lang" list="LangList">
+            <div id="languages-forms" class="forms">
+             <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" list="LangList">
             <datalist id="LangList">
             </datalist>
-
-
+           <button type="button" id="button-more" class="button-more btad">+</button>
             <br>
-
-            <input type="submit" value="Dodaj język" name="submit" id="add-lang"/>
+            </div>
+            <input type="submit" value="Dodaj język" name="submit" id="add-lang" class="upload smaller"/>
 
 
             <div id="languages"></div>
 
+            
+            
             <hr>
-
-             <input type="TechList" class="bio" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
+            <div id="tech-forms" class="forms">
+             <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
             <datalist id="TechList">
 
             </datalist>
-
-            <input type="submit" value="Dodaj technologie" name="submit" id="add-tech"/>
+<button type="button" id="button-moret" class="button-moret btad">+</button> <br>
+            </div>
+            
+            <input type="submit" value="Dodaj technologie" name="submit" id="add-tech" class="upload smaller"/>
         <div id="Technologies"></div>
 
 
@@ -75,7 +77,7 @@
 
     <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload" style="background-color: none;"/> <br><br><br>
 
-         <input type="submit" value="Wrzuć fotę" name="submit" id="upload"/>
+         <input type="submit" value="Wrzuć fotę" name="submit" id="upload" class="upload"/>
         
 </form>
 </div>
@@ -88,7 +90,7 @@
         
         
    ///////////////////////
-
+/*
    $(document).ready(function(){
 
        var technologies = []; ///powinna byc pobierana
@@ -118,7 +120,7 @@
 
    });
 
-    
+    */
 </script>
     
     

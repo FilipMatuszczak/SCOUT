@@ -19,7 +19,7 @@ h1{
 
 }
 
-#upload{
+.upload{
     background-color: #7DA2AA;
     border-radius: 5px;
     border: none;
@@ -28,16 +28,26 @@ h1{
     color: white;
 }
 
-#upload:hover{ 
+.upload:hover{ 
     color: white;
     box-shadow: 0 0 8px #7DA2AA;
 }
+.smaller{
+    width: 30%;
+    margin: 3px;
+}
+
 .bio{
     width: 80%;
     padding: 4px;
     margin-top: 5px;
     margin-bottom: 5px;
   border: 1px solid #7DA2AA;
+}
+
+.forms{
+    
+    ---todo
 }
 
 hr{
@@ -52,3 +62,17 @@ hr{
 
 }
 
+.btad{
+    background-color: #F8F9F9;
+    color: #7DA2AA;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 500px;
+    border: none;
+    width: 30px;
+}
+
+.forms{
+   
+    
+}

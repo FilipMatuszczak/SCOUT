@@ -2,12 +2,24 @@
 
 namespace App\Controller;
 
+use App\Security\UserProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 
 /** */
 class MainController extends AbstractController
 {
+    private $userProvider;
+
+    private $security;
+
+    public function __construct(UserProvider $userProvider, Security $security)
+    {
+        $this->userProvider = $userProvider;
+        $this->security = $security;
+    }
+
     /**
      * @return Response
      */
@@ -15,6 +27,10 @@ class MainController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        return $this->render('main/main.html.twig', []);
+        $userToken = $this->security->getUser();
+
+        $user = $this->userProvider->loadUserByUsername($userToken->getUsername());
+
+        return $this->render('main/main.html.twig', ["projects" => $user->getProject()]);
     }
 }

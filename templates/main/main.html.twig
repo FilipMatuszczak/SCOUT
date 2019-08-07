@@ -9,16 +9,13 @@
 
 
 {% block body %}
-
-    
+            {%  for project in projects %}
             <div class="post">
-                <a href=""><img id="project-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
-
-                <a class="project-title" href=" ">Tytuł Projektu</a><br>
-                <a class="project-lang" href=" ">Technologie Projektu</a>
-                <a class="project-autors" href=" ">Autorzy Projektu</a>
+                <a href=""><img id="project-avatar" src="" width="70" height="70"></a>
+                <a class="project-title" href=" ">{{ project.title }}</a><br>
+                {%  for technology in project.technology %}
+                <a class="project-lang" href=" ">{{ technology.name }}</a>
+                {% endfor %}
             </div>
-
-
-   
+            {% endfor %}
 {% endblock %}

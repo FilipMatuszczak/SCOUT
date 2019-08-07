@@ -73,16 +73,22 @@
 {% block body %}
 
     
-    
+        {% for user in users %}
             <div class="post" id="usr-post">
-                <a href=""><img id="user-avatar" src="{{ asset('web/images/kot.jpg') }}" width="70" height="70"></a>
+                <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="user-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByUsername(user.username) }}" width="70" height="70"></a>
 
-                <a class="project-title" href=" ">Imię i nazwisko</a><br>
-                <a class="project-lang" href=" ">Technologie</a><br>
-                <a class="project-lang" href=" ">Języki</a>
-                <a class="project-autors" href=" ">Miasto</a>
+                <a class="project-title" href=" ">{{ user.firstname }} {{ user.lastname }}</a><br>
+                {%  for technology in user.technology %}
+                    <a class="project-lang" href=" ">{{ technology.name }}</a>
+                {% endfor %}
+                {%  for language in user.language %}
+                    <a class="project-lang" href=" ">{{ language.name }}</a>
+                {% endfor %}
+                {%  for city in user.city %}
+                    <a class="project-autors" href=" ">{{ city.name }}</a>
+                {% endfor %}
             </div>
-
+        {% endfor %}
 
     <script src="{{ asset('web/scripts/edit-profile.js') }}"></script>
    

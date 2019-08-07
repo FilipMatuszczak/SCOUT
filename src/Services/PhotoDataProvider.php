@@ -25,8 +25,22 @@ class PhotoDataProvider
     {
         $username = $this->security->getUser()->getUsername();
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
-        rewind($photo);
+
+        return $this->getEncodedPhoto($photo);
+    }
+
+    public function getPhotoByUsername($username)
+    {
+        $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
+
+        return $this->getEncodedPhoto($photo);
+    }
+
+    private function getEncodedPhoto($photo)
+    {
+
         if ($photo){
+            rewind($photo);
             $photo = stream_get_contents($photo);
             return base64_encode($photo);
         }

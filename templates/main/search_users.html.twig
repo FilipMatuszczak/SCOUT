@@ -9,7 +9,7 @@
     {% endblock %}
 
 {% block left %}
-
+    <form action="{{ path('users_main') }}" method="get">
 <div class="filter">
         <div class="title">Filtruj użytkowników</div>
         
@@ -66,7 +66,7 @@
         </div>
         </div>
 </div>
-
+    </form>
 {% endblock %}
 
 
@@ -74,18 +74,18 @@
 
     
         {% for user in users %}
-            <div class="post" id="usr-post">
-                <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="user-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByUsername(user.username) }}" width="70" height="70"></a>
+            <div class="post" id="usr-post" >
+                <a href="{{ path('user_profile', {'username': user.username}) }}" ><img id="user-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByUsername(user.username) }}" width="70" height="70"></a>
 
-                <a class="project-title" href=" ">{{ user.firstname }} {{ user.lastname }}</a><br>
+                <a class="project-title">{{ user.firstname }} {{ user.lastname }}</a><br>
                 {%  for technology in user.technology %}
-                    <a class="project-lang" href=" ">{{ technology.name }}</a>
+                    <a class="project-lang">{{ technology.name }}</a>
                 {% endfor %}
                 {%  for language in user.language %}
-                    <a class="project-lang" href=" ">{{ language.name }}</a>
+                    <a class="project-lang">{{ language.name }}</a>
                 {% endfor %}
                 {%  for city in user.city %}
-                    <a class="project-autors" href=" ">{{ city.name }}</a>
+                    <a class="project-autors">{{ city.name }}</a>
                 {% endfor %}
             </div>
         {% endfor %}

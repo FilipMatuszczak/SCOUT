@@ -52,4 +52,20 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function fetchUsersByFilters($from, $to, $sorting = 'ASC', $firstName = null, $lastName = null)
+    {
+        $queryBuilder =  $this->createQueryBuilder('u');
+            if ($firstName) {
+                $queryBuilder->andWhere('u.' . User::COLUMN_FIRST_NAME . ' = :firstName')
+                    ->setParameter('firstName', $firstName);
+            }
+            if ($lastName) {
+                $queryBuilder->andWhere('u.' . User::COLUMN_LAST_NAME . ' = :lastName')
+                ->setParameter('lastName', $lastName);
+            }
+            $queryBuilder->setFirstResult($from)->setMaxResults($to)->orderBy(User::COLUMN_FIRST_NAME, $sorting);
+
+            return $queryBuilder->getQuery()->getResult();
+    }
 }

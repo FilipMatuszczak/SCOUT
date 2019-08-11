@@ -4,6 +4,9 @@
 namespace App\Services;
 
 
+use App\Repository\CityRepository;
+use App\Repository\LanguageRepository;
+use App\Repository\TechnologyRepository;
 use App\Repository\UserRepository;
 
 class UserFilterDataProvider
@@ -13,22 +16,51 @@ class UserFilterDataProvider
     /** @var UserRepository */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    /** @var TechnologyRepository */
+    private $technologyRepository;
+
+    /** @var TechnologyRepository */
+    private $languageRepository;
+
+    /** @var CityRepository */
+    private $cityRepository;
+
+    public function __construct(
+        UserRepository $userRepository,
+        TechnologyRepository $technologyRepository,
+        LanguageRepository $languageRepository,
+        CityRepository $countryRepository
+    )
     {
         $this->userRepository = $userRepository;
+        $this->technologyRepository = $technologyRepository;
+        $this->languageRepository = $languageRepository;
+        $this->cityRepository = $countryRepository;
     }
 
-    public function getUsersByFilters($page, $firstName, $lastName, $sorting)
+    public function getUsersByFilters($page, $firstName, $lastName, $sorting, $languageName, $technologyName, $cityName)
     {
         $from = ($page-1) * self::USERS_PER_PAGE;
         $max = self::USERS_PER_PAGE;
+        if (!empty($technologyName)) {
+            $technology = $this->technologyRepository->findOneBy(['name' => $technologyName]); }
+        else {$technology = null;}
+        if (!empty($cityName)) {
+            $city = $this->cityRepository->findOneBy(['name' => $cityName]); }
+        else {$city = null;}
+        if (!empty($languageName)) {
+            $language = $this->languageRepository->findOneBy(['name' => $languageName]); }
+        else {$language = null;}
 
         return $this->userRepository->fetchUsersByFilters(
             $from,
             $max,
             $this->convertToSqlSorting($sorting),
             $firstName,
-            $lastName
+            $lastName,
+            $technology,
+            $city,
+            $language
         );
     }
 

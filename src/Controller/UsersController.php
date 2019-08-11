@@ -33,7 +33,11 @@ class UsersController extends AbstractController
             $sorting = 'A-Z';
         }
 
-        $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting);
+        $technology = !empty($request->get('technology')) ? $request->get('technology') : '';
+        $language = !empty($request->get('language')) ? $request->get('language') : '';
+        $city = !empty($request->get('city')) ? $request->get('city') : '';
+
+        $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting, $language, $technology, $city);
 
         return $this->render('main/search_users.html.twig', ['users' => $users, 'page' => $page]);
     }

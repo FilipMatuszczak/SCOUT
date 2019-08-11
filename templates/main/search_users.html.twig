@@ -15,14 +15,14 @@
         
         <hr><div class="bio-title">
         Imię 
-        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..."> </div>
+        <input class="bio" type="text" size="30" name="firstName" id="inputTitle" placeholder="..."> </div>
         <br>
     
         <div class="bio-title">
         Nazwisko 
-        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..."> </div>
+        <input class="bio" type="text" size="30" name="lastName" id="inputTitle" placeholder="..."> </div>
         <br>
-    
+        <input type="hidden" name="page" value={{ page }} />
         <div class="bio-title">
         Język   
           <input type="LangList" class="bio" placeholder="..." maxlength="50" id="lang" list="LangList">
@@ -53,16 +53,16 @@
     <div class="sort">
         Sortuj według: 
     
-    <select name="Sort by">
+    <select name="sorting">
     <option value="A-Z">A-Z</option>
     <option value="Z-A">Z-A</option>
     <option value="Najstarsi">Najstarsi</option>
-    <option value="Najmłodsi">Najmłodsi</option>
+    <option value="Najmlodsi">Najmłodsi</option>
    
   </select>
     <br>
     <div class="btn-search">
-        <input type="submit" value="Szukaj" name="submit" id="upload"/>
+        <input type="submit" id="upload"/>
         </div>
         </div>
 </div>

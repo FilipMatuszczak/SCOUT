@@ -1,27 +1,40 @@
 <?php
 
-
 namespace App\Controller;
 
-
-use App\Repository\UserRepository;
+use App\Services\UserFilterDataProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class UsersController extends AbstractController
 {
-    private $userRepository;
+    /** @var UserFilterDataProvider */
+    private $userFilterDataProvier;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserFilterDataProvider $userFilterDataProvier)
     {
-        $this->userRepository = $userRepository;
+        $this->userFilterDataProvier = $userFilterDataProvier;
     }
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $users = $this->userRepository->findAll();
+        $page = $request->get('page');
+        if (!isset($page))
+        {
+            $page = 1;
+        }
+        $firstName = $request->get('firstName');
+        $lastName = $request->get('lastName');
+        $sorting = $request->get('sorting');
+        if (!isset($sorting))
+        {
+            $sorting = 'A-Z';
+        }
 
-        return $this->render('main/search_users.html.twig', ['users' => $users]);
+        $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting);
+
+        return $this->render('main/search_users.html.twig', ['users' => $users, 'page' => $page]);
     }
 }

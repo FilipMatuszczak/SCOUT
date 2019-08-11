@@ -53,18 +53,19 @@ class UserRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function fetchUsersByFilters($from, $to, $sorting = 'ASC', $firstName = null, $lastName = null)
+    public function fetchUsersByFilters($from, $to, $sorting, $firstName = null, $lastName = null)
     {
         $queryBuilder =  $this->createQueryBuilder('u');
-            if ($firstName) {
-                $queryBuilder->andWhere('u.' . User::COLUMN_FIRST_NAME . ' = :firstName')
-                    ->setParameter('firstName', $firstName);
+            if (!empty($firstName)) {
+                $queryBuilder->andWhere('u.firstname like :firstname')
+                    ->setParameter('firstname', $firstName);
             }
-            if ($lastName) {
-                $queryBuilder->andWhere('u.' . User::COLUMN_LAST_NAME . ' = :lastName')
-                ->setParameter('lastName', $lastName);
+            if (!empty($lastName)) {
+                $queryBuilder->andWhere('u.lastname like :lastname')
+                ->setParameter('lastname', $lastName);
             }
-            $queryBuilder->setFirstResult($from)->setMaxResults($to)->orderBy(User::COLUMN_FIRST_NAME, $sorting);
+
+            $queryBuilder->setFirstResult($from)->setMaxResults($to)->orderBy('u.' . $sorting['sortKey'], $sorting['dir']);
 
             return $queryBuilder->getQuery()->getResult();
     }

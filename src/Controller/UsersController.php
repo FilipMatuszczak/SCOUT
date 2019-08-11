@@ -39,6 +39,15 @@ class UsersController extends AbstractController
 
         $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting, $language, $technology, $city);
 
-        return $this->render('main/search_users.html.twig', ['users' => $users, 'page' => $page]);
+        return $this->render('main/search_users.html.twig', [
+            'users' => $users,
+            'page' => $page,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'sorting' => $sorting,
+            'technology' => $technology,
+            'language' => $language,
+            'city' => $city,
+        ]);
     }
 }

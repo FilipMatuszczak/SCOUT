@@ -16,12 +16,12 @@
         
         <hr><div class="bio-title">
         Nazwa  
-        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..."> </div>
+        <input class="bio" type="text" size="30" name="title" id="inputTitle" placeholder="..." value="{{ title }}"> </div>
         <br>
         
         <div class="bio-title">
         Członek
-          <input type="text" name="member" class="bio" placeholder="..." maxlength="50" id="lang" >
+          <input type="text" name="member" class="bio" placeholder="..."   maxlength="50" id="lang" value="{{ member }}">
            
     <input type="hidden" name="page" value={{ page }}>
     </div>
@@ -29,7 +29,7 @@
         
        <div class="bio-title">
         Technologia  
-        <input type="TechList" class="bio" name="technology" id="tech" placeholder="..." maxlength="50" list="TechList">
+        <input type="TechList" class="bio" name="technology" id="tech" placeholder="..." maxlength="50" list="TechList" value={{ technology }}>
             <datalist id="TechList">
 
             </datalist>
@@ -42,10 +42,12 @@
         Sortuj według: 
     
     <select name="sorting">
+
     <option value="Najnowsze">Najnowsze</option>
     <option value="Najstarsze">Najstarsze</option>
     <option value="A-Z">A-Z</option>
     <option value="Z-A">Z-A</option>
+        <option selected="selected">{{ sorting }}</option>
   </select>
     <br>
     <div class="btn-search">

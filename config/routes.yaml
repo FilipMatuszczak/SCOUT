@@ -100,13 +100,9 @@ edit_user_photo:
     methods: POST
 
 projectcs_main:
-    path: /projects/{page}
+    path: /projects/
     controller: App\Controller\ProjectsController:indexAction
     methods: GET
-    defaults:
-        page: 1
-        sorting: 'title'
-        dir: 'ASC'
 
 users_main:
     path: /users

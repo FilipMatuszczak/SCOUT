@@ -18,16 +18,18 @@ class ProjectsController extends AbstractController
         $this->projectDataProvider = $projectDataProvider;
     }
 
-    public function indexAction(Request $request, $page)
+    public function indexAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $sorting = $request->attributes->get('sorting');
-        $dir = $request->attributes->get('dir');
-        $title = $request->attributes->get('title');
+        $sorting = !empty($request->get('sorting')) ? $request->get('sorting') : 'A-Z';
+        $page = !empty($request->get('page')) ? $request->get('page') : 1;
+        $technology = !empty($request->get('technology')) ? $request->get('technology') : '';
+        $title = !empty($request->get('title')) ? $request->get('title') : '';
+        $member = !empty($request->get('member')) ? $request->get('member') : '';
 
-        $projects = $this->projectDataProvider->getProjectsByFilters($sorting, $dir, $page-1, $title);
+        $projects = $this->projectDataProvider->getProjectsByFilters($sorting, $page, $technology, $title, $member);
 
-        return $this->render('main/search_projects.html.twig', ['projects' => $projects]);
+        return $this->render('main/search_projects.html.twig', ['projects' => $projects, 'page' => $page]);
     }
 }

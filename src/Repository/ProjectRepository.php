@@ -30,26 +30,34 @@ class ProjectRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
-     * @param $sorting
-     * @param $sort
-     * @param $firstResult
-     * @param $maxResult
-     * @param null $title
-     * @param null $author
-     *
-     * @return mixed
-     */
-    public function fetchProjectsByFilters($sorting, $sort, $firstResult, $maxResult, $title = null)
+    public function fetchProjectsByFilters(
+        $from,
+        $to,
+        $sorting,
+        $title,
+        $technology,
+        $member
+    )
     {
-        $qb = $this->createQueryBuilder('p');
+        $queryBuilder =  $this->createQueryBuilder('p');
 
-            if ($title) {
-                $qb->andWhere('p.title = %:title%')->setParameter('title', $title);
-            }
+        if (!empty($title)) {
+            $queryBuilder->andWhere('p.title like :title')
+                ->setParameter('title', $title);
+        }
 
-            $qb->orderBy('p.' . $sorting, $sort)->setFirstResult($firstResult)->setMaxResults($maxResult);
+        if (isset($technology)) {
+            $queryBuilder->andWhere(':technology MEMBER OF p.technology')
+                ->setParameter('technology', $technology);
+        }
 
-            return $qb->getQuery()->getResult();
+        if (isset($member)) {
+            $queryBuilder->andWhere(':member MEMBER OF p.user')
+                ->setParameter('member', $member);
+        }
+
+        $queryBuilder->setFirstResult($from)->setMaxResults($to)->orderBy('p.' . $sorting['sortKey'], $sorting['dir']);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

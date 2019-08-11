@@ -9,6 +9,7 @@
     {% endblock %}
 
 {% block left %}
+    <form action="{{ path('projectcs_main') }}" method="get">
 
 <div class="filter">
         <div class="title">Filtruj projekty</div>
@@ -19,16 +20,16 @@
         <br>
         
         <div class="bio-title">
-        Autor  
-          <input type="text" class="bio" placeholder="..." maxlength="50" id="lang" >
+        Członek
+          <input type="text" name="member" class="bio" placeholder="..." maxlength="50" id="lang" >
            
-   
+    <input type="hidden" name="page" value={{ page }}>
     </div>
         <br>
         
        <div class="bio-title">
         Technologia  
-        <input type="TechList" class="bio" id="tech" placeholder="..." maxlength="50" list="TechList">
+        <input type="TechList" class="bio" name="technology" id="tech" placeholder="..." maxlength="50" list="TechList">
             <datalist id="TechList">
 
             </datalist>
@@ -40,7 +41,7 @@
     <div class="sort">
         Sortuj według: 
     
-    <select name="Sort by">
+    <select name="sorting">
     <option value="Najnowsze">Najnowsze</option>
     <option value="Najstarsze">Najstarsze</option>
     <option value="A-Z">A-Z</option>
@@ -48,11 +49,11 @@
   </select>
     <br>
     <div class="btn-search">
-        <input type="submit" value="Szukaj" name="submit" id="upload"/>
+        <input type="submit" id="upload"/>
         </div>
         </div>
 </div>
-
+    </form>
 {% endblock %}
 
 

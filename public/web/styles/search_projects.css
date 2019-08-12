@@ -4,6 +4,7 @@
     height: 85px;
     border: 1px solid #7DA2AA;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .post:hover{

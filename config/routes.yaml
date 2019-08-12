@@ -108,3 +108,8 @@ users_main:
     path: /users
     controller: App\Controller\UsersController:indexAction
     methods: GET
+
+new_project_index:
+    path: /project/create
+    controller: App\Controller\ProjectsController:createProjectIndexAction
+    methods: GET

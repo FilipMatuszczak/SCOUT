@@ -39,4 +39,9 @@ class ProjectsController extends AbstractController
             'member' => $member
         ]);
     }
+
+    public function createProjectIndexAction()
+    {
+        return $this->render('main/new-project.html.twig');
+    }
 }

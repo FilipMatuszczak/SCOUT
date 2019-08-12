@@ -1,0 +1,183 @@
+{% extends 'main/parent.html.twig' %}
+    {% block stylesheets %}
+        <link href="{{ asset('web/styles/new-project.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+        
+        <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
+        
+    {% endblock %}
+{% block body %}
+    <div class="edit-profile">
+        <h1>Utwórz nowy projekt:</h1>
+        <div class="edit-container">
+            
+            
+        <div id="up">  
+            
+            
+            
+    <div id="photo">
+
+        <form action=""  method="post"  >
+        <br>
+
+    <label for="image">
+      <input type="file" name="image" id="image" class="fileToUpload" style="display:none;"/>
+      <img id="photo-edit"  src="{{ asset('web/images/upload_photo.jpg') }}" width="120" height="120">
+   </label>
+        
+        <br><br><br>
+
+                           
+</div>
+        <div class="name_div">
+            <input type="text" class="name" placeholder="Tytuł" name = "firstname" maxlength="50" />
+</div>    
+        
+            </div>
+            
+            
+            <div class="info" style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
+            
+                <p class="opis">Opis:</p> 
+                <textarea name="text" class="bio" rows="10" cols="25"></textarea>
+                       
+                
+            <input type="hidden" class="bio" placeholder="Opis"  name="info" maxlength="250" /><br>
+                <br>
+
+        </div>
+             
+           
+
+
+           
+            <hr>
+            <div id="tech-forms" class="forms">
+             <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
+            <datalist id="TechList">
+
+            </datalist>
+                <button type="button" id="button-moret" class="button-moret btad">+</button> <br>
+            </div>
+            
+            <input type="submit" value="Utwórz projekt" name="submit" id="add-tech" class="upload smaller"/>
+        <div id="Technologies"></div>
+
+ </form>
+           
+</div>
+        </div> 
+    
+ 
+    <script>
+        
+         $(document).ready(function(){
+             
+             
+             
+             /////////////////
+    
+     $('#button-moret').click(function() {
+        ///todo dodaje nowe okno formularza
+          
+        
+       $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+      
+        
+      ///////////
+    });
+    
+    
+     $('#tech-forms').on("click", ".less", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        
+    }) 
+             
+             
+     //////////////////////////////////
+              //////Function for getting technologies
+  $('#tech-forms').on("keyup",".tech",function(callback)           
+                       {
+  
+  var tech = $(this).val()
+       
+    ///console.log(tech);
+    if(tech!=''){     
+        var requestTech = new XMLHttpRequest()
+        var exists = 0;
+        
+requestTech.open('GET', 'http://127.0.0.1:8000/filter/technology/'+ tech, true)
+requestTech.onload = function() {
+    
+  var data = JSON.parse(this.response)
+$('#TechList').html('');
+  
+  if (requestTech.status >= 200 && requestTech.status < 400) {
+    
+      for (i = 0; i<data.names.length;i++){
+      ////console.log(data.names[i].name);
+          
+          if(data.names[i].name != tech){
+          
+      $('#TechList').append('<option value="' + data.names[i].name + '">');
+      }
+  }
+  } else {
+    console.log('error')
+  }
+  
+  
+  
+}
+
+requestTech .send()    
+    }
+    else {     
+    }
+    });
+//////
+
+             
+             
+             
+             
+             
+             
+             
+             
+    //////////////photo preview
+    function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#photo-edit').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$(".fileToUpload").change(function() {
+  readURL(this);
+});
+   //// 
+    
+        
+        
+       
+        
+        });
+        
+        </script>
+    
+    
+   
+    
+    
+    
+    
+{% endblock %}

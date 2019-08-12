@@ -105,3 +105,28 @@
 #usr-post{
     height: 100px;
 }
+
+.pagination-a{
+    text-decoration: none;
+     color: black;
+}
+.pagination-button{
+   background: none;
+  color: #112d32;
+  font-size: 25px;
+  border: none; 
+  cursor: pointer;
+}
+.pagination-button:hover{
+    color: #7DA2AA;
+}
+.prev{
+    float:left;
+}
+.next{
+   float:right;
+}
+.pagination{
+    text-align: center;
+    
+}

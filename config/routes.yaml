@@ -113,3 +113,8 @@ new_project_index:
     path: /project/create
     controller: App\Controller\ProjectsController:createProjectIndexAction
     methods: GET
+
+create_project:
+    path: /project/create/new
+    controller: App\Controller\ProjectsController:createProjectAction
+    methods: POST

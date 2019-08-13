@@ -65,7 +65,7 @@
 
     {%  for project in projects %}
         <div class="post">
-            <a href=""><img id="project-avatar" src="" width="70" height="70"></a>
+            <a href=""><img id="project-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="70" height="70"></a>
             <a class="project-title" href=" ">{{ project.title }}</a><br>
             {%  for technology in project.technology %}
                 <a class="project-lang" href=" ">{{ technology.name }}</a>

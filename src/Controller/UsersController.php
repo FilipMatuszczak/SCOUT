@@ -38,6 +38,12 @@ class UsersController extends AbstractController
         $city = !empty($request->get('city')) ? $request->get('city') : '';
 
         $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting, $language, $technology, $city);
+        $nextUsers = $this->userFilterDataProvier->getUsersByFilters($page+1, $firstName, $lastName, $sorting, $language, $technology, $city);
+
+        $nextPage = $page;
+        if (sizeof($nextUsers) != 0){
+            $nextPage = $page +1;
+        }
 
         return $this->render('main/search_users.html.twig', [
             'users' => $users,
@@ -48,6 +54,7 @@ class UsersController extends AbstractController
             'technology' => $technology,
             'language' => $language,
             'city' => $city,
+            'nextPage' => $nextPage,
         ]);
     }
 }

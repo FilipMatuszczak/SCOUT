@@ -2,49 +2,35 @@
 
 namespace App\Repository;
 
-use App\Entity\UserProject;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Query\QueryBuilder;
 
-/**
- * @method UserProject|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserProject|null findOneBy(array $criteria, array $orderBy = null)
- * @method UserProject[]    findAll()
- * @method UserProject[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class UserProjectRepository extends ServiceEntityRepository
+class UserProjectRepository
 {
-    public function __construct(RegistryInterface $registry)
+    const TABLE = 'users_projects';
+
+    /** @var Connection */
+    private $connection;
+
+    public function __construct(Connection $connection)
     {
-        parent::__construct($registry, UserProject::class);
+        $this->connection = $connection;
     }
 
-    // /**
-    //  * @return UserProject[] Returns an array of UserProject objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function setUserAsAuthor($userId, $projectId)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = new QueryBuilder($this->connection);
 
-    /*
-    public function findOneBySomeField($value): ?UserProject
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb->update(self::TABLE, '')
+            ->set('options', 1)
+            ->where('user_id = :userId')
+            ->andWhere('project_id = :projectId')
+            ->setParameters(
+                [
+                    'userId' => $userId,
+                    'projectId' => $projectId,
+                ]
+            )
+            ->execute();
     }
-    */
 }

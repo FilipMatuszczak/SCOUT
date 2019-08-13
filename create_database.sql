@@ -142,6 +142,7 @@ project_id INT auto_increment,
 title VARCHAR(50) NOT NULL,
 description TEXT NULL,
 created_date DATETIME NOT NULL,
+photo LONGBLOB NULL,
 primary key (project_id)
 );
 

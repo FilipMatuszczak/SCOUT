@@ -3,7 +3,9 @@
 namespace App\Services;
 
 
+use App\Entity\Project;
 use App\Entity\User;
+use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
 
@@ -15,10 +17,14 @@ class PhotoDataProvider
     /** @var UserRepository */
     private $userRepository;
 
-    public function __construct(Security $security, UserRepository $userRepository)
+    /** @var ProjectRepository */
+    private $projectRepository;
+
+    public function __construct(Security $security, UserRepository $userRepository, ProjectRepository $projectRepository)
     {
         $this->security = $security;
         $this->userRepository = $userRepository;
+        $this->projectRepository = $projectRepository;
     }
 
     public function getCurrentUserPhotoData()
@@ -32,6 +38,13 @@ class PhotoDataProvider
     public function getPhotoByUsername($username)
     {
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
+
+        return $this->getEncodedPhoto($photo);
+    }
+
+    public function getPhotoByProjectTitle($title)
+    {
+        $photo = $this->projectRepository->findOneBy(['title' => $title])->getPhoto();
 
         return $this->getEncodedPhoto($photo);
     }

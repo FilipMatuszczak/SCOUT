@@ -57,6 +57,13 @@ class Project
     private $user;
 
     /**
+     * @var resource|null
+     *
+     * @ORM\Column(name="photo", type="blob", length=4294967295 , nullable=true)
+     */
+    private $photo;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -158,6 +165,18 @@ class Project
             $this->user->removeElement($user);
             $user->removeProject($this);
         }
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

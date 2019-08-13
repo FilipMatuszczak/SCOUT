@@ -102,7 +102,7 @@ class User implements UserInterface
     /**
      * @var resource|null
      *
-     * @ORM\Column(name="photo", type="blob", length=65535, nullable=true)
+     * @ORM\Column(name="photo", type="blob", length=4294967295 , nullable=true)
      */
     private $photo;
 

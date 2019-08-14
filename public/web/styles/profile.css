@@ -141,3 +141,32 @@ hr{
     font-weight: bold;
     color:darkgray;
 }
+.photo-textarea{
+    position: relative;
+}
+.photo-textarea i{
+    position: absolute;
+    float:right;
+    margin-left: -25px;
+    margin-top: 50px;
+    color: grey;
+}
+.photo-textarea i:hover{
+    color: #7DA2AA;
+}
+.photo-textarea button {
+	position: absolute;
+    float:right;
+    margin-left: -100px;
+    margin-top: 49px;
+    max-width: 70px;
+    max-height: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: none;
+    background-color: grey;
+    opacity: 0.4;
+}
+.photo-textarea button:hover{
+    opacity: 0.6;
+}

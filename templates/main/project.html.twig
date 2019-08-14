@@ -19,61 +19,35 @@
                 </div>
 
                 <div class="profile-right">
-                    <p id="name-profile">{{ user.firstname }} {{ user.lastname }}, {{ age }} 
-                        
+                    <p id="name-profile">TYTUŁ PROJEKTU  <button class="navico message-ico"><i class="fa fa-pencil"></i></button>  {# edycja #} 
                     </p>
-                    {% if user.city is not empty %}
-                        <p class="infos">Miasto </p><p> 
-                    {% for city in user.city %}
-                        {% if not loop.last %}
-                        {{ city.name }}, 
-                             {% else %}
-                            {{ city.name }}
-                        {% endif %}
-                    {% endfor %}
-                    {% else %}
-                            <p>Brak miejsca zamieszkania
-                    {% endif %} </p>
                     
                     
+                    
+                    
+                   
+                        <p class="infos">TECHNOLOGIE</p>
+                        
                     <hr>
                     
-                    {% if user.language is not empty %}
-                        <p class="infos">Języki </p><p> 
-                        {% for language in user.language %}
-                            {% if not loop.last %}
-                        {{ language.name }},
-                                {% else %}
-                            {{ language.name }}
-                        {% endif %}
-                    {% endfor %}
-                        {% else %}
-                        <p>Brak języków obcych
-                            {% endif %} </p>
+                    
+                        <p class="infos">AUTORZY</p>
+                       
                     <hr>
                     
-                    {% if user.technology is not empty %}
-                        <p class="infos">Technologie </p><p> 
-                        {% for technology in user.technology %}
-                        {% if not loop.last %}
-                        {{ technology.name }}, 
-                        {% else %}
-                            {{ technology.name }}
-                        {% endif %}
-                        {% endfor %}
-                        {% else %}
-                        <p>Brak znajomości technologii
-                            {% endif %} </p>
-                    <hr>
-                    <p>{{  user.info }}</p>
+                    
+                    <p>OPIS</p>
                 </div>
             </div>
 
             <div id="mess">
-            <button class="navico message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button>
+            <button class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
+            
+            <button class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
+
             </div>
     
-            {% if user.username == app.user.username %}
+            {# if #}
             <div class="form-post">
                 <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
                 <form action="{{ path('create_wall_post') }}" method="post">
@@ -94,7 +68,9 @@
 
                 </form>
             </div>
-            {% endif %}
+                {# endif #}
+                
+        {# nie wiem do końca kto moze komentować projekty xD #}
             {% for post in posts %}
                 <div class="comment">
                     <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70"></a>

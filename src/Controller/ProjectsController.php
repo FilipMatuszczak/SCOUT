@@ -49,14 +49,20 @@ class ProjectsController extends AbstractController
         $member = !empty($request->get('member')) ? $request->get('member') : '';
 
         $projects = $this->projectDataProvider->getProjectsByFilters($sorting, $page, $technology, $title, $member);
+        $nextProjects = $this->projectDataProvider->getProjectsByFilters($sorting, $page+1, $technology, $title, $member);
 
+        $nextPage = $page;
+        if (sizeof($nextProjects) != 0){
+            $nextPage = $page +1;
+        }
         return $this->render('main/search_projects.html.twig', [
             'projects' => $projects,
             'page' => $page,
             'sorting' => $sorting,
             'technology' => $technology,
             'title' => $title,
-            'member' => $member
+            'member' => $member,
+            'nextPage' => $nextPage,
         ]);
     }
 

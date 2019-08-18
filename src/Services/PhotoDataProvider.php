@@ -32,21 +32,33 @@ class PhotoDataProvider
         $username = $this->security->getUser()->getUsername();
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
 
-        return $this->getEncodedPhoto($photo);
+        if ($userPhoto = $this->getEncodedPhoto($photo)){
+            return $userPhoto;
+        }
+
+        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_user.jpg', "r"));
     }
 
     public function getPhotoByUsername($username)
     {
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
 
-        return $this->getEncodedPhoto($photo);
+        if ($userPhoto = $this->getEncodedPhoto($photo)){
+            return $userPhoto;
+        }
+
+        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_user.jpg', "r"));
     }
 
     public function getPhotoByProjectTitle($title)
     {
         $photo = $this->projectRepository->findOneBy(['title' => $title])->getPhoto();
 
-        return $this->getEncodedPhoto($photo);
+        if ($projectPhoto = $this->getEncodedPhoto($photo)){
+            return $projectPhoto;
+        }
+
+        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_project.jpg', "r"));
     }
 
     private function getEncodedPhoto($photo)

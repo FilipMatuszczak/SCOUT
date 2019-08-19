@@ -118,3 +118,8 @@ create_project:
     path: /project/create/new
     controller: App\Controller\ProjectsController:createProjectAction
     methods: POST
+
+project_profile:
+    path: /project/{projectId}
+    controller: App\Controller\ProjectsController:projectProfileAction
+    methods: GET

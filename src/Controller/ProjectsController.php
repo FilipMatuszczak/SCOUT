@@ -66,6 +66,11 @@ class ProjectsController extends AbstractController
         ]);
     }
 
+    public function projectProfileAction($projectId)
+    {
+        return $this->render("main/project.html.twig");
+    }
+
     public function createProjectIndexAction()
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

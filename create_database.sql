@@ -215,26 +215,13 @@ create table if not exists users_cities(
 
 insert into users_cities (user_id, city_id) VALUES (1,1), (2,2), (3,3), (4,4);
 
-
-
- create table if not exists photos(
-     photo_id int auto_increment,
-     user_id INT not null ,
-     project_id INT null,
-     photo LONGBLOB NOT NULL,
-     timestamp DATETIME not null,
-     description text not null,
-     primary key (photo_id),
-     FOREIGN KEY (user_id) REFERENCES users(user_id),
-     FOREIGN KEY (project_id) REFERENCES projects(project_id)
- );
-
 create table if not exists posts(
     post_id int auto_increment,
     user_id INT not null ,
     project_id INT null,
     timestamp DATETIME not null,
     text text not null,
+    photo longblob null,
     primary key (post_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (project_id) REFERENCES projects(project_id)
@@ -257,8 +244,7 @@ create table if not exists reports(
     options TINYINT(4) DEFAULT 0,
     primary key (report_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (post_id) REFERENCES posts(post_id),
-    FOREIGN KEY (photo_id) REFERENCES photos(photo_id)
+    FOREIGN KEY (post_id) REFERENCES posts(post_id)
 );
 
 insert into reports (user_id, post_id, photo_id, reason, timestamp) VALUES

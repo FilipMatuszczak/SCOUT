@@ -34,6 +34,13 @@ class Post
     private $text;
 
     /**
+     * @var resource|null
+     *
+     * @ORM\Column(name="photo", type="blob", length=4294967295 , nullable=true)
+     */
+    private $photo;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User")
@@ -106,5 +113,15 @@ class Post
         return $this;
     }
 
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
 
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
 }

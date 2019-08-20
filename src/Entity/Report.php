@@ -60,16 +60,6 @@ class Report
      */
     private $post;
 
-    /**
-     * @var Photo
-     *
-     * @ORM\ManyToOne(targetEntity="Photo")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="photo_id", referencedColumnName="photo_id")
-     * })
-     */
-    private $photo;
-
     public function getReportId(): ?int
     {
         return $this->reportId;
@@ -134,18 +124,4 @@ class Report
 
         return $this;
     }
-
-    public function getPhoto(): ?Photo
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?Photo $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-
 }

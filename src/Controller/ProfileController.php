@@ -74,8 +74,9 @@ class ProfileController extends AbstractController
         $username = $this->security->getUser()->getUsername();
 
         $user = $this->userProvider->loadUserByUsername($username);
-
-        $this->postCreator->createPostForUser($user, $request->get('text'));
+        $photoFile = $request->files->get('photo');
+        $text =  $request->get('text');
+        $this->postCreator->createPostForUser($user, $text, $photoFile);
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }

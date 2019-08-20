@@ -76,7 +76,7 @@
             {% if user.username == app.user.username %}
             <div class="form-post">
                 <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
-                <form action="{{ path('create_wall_post') }}" method="post">
+                <form action="{{ path('create_wall_post') }}" enctype="multipart/form-data" method="post">
                     
                     <div class="photo-textarea"> 
                     <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
@@ -85,7 +85,7 @@
         
          <button style="display:none;" id="file-cancel"></button>       
         <label>
-      <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload" style="display:none;"/>
+      <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload" name="photo" style="display:none;"/>
       <span><i class="fa fa-image"></i></span>
    </label>
                 
@@ -101,6 +101,9 @@
 
                     <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
                     <p class="comment-content">{{  post.text}}</p>
+                    {% if post.photo %}
+                    <a><img id="comment-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByPostId(post.postId) }}" width="70" height="70"></a>
+                    {% endif %}
                 </div>
             {% endfor %}
     

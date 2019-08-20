@@ -30,9 +30,8 @@ class ProfileEditHandler
     }
 
     /**
-     * @param User   $user
-     * @param string $filename
-     * @param string $tempFilePath
+     * @param User $user
+     * @param File $file
      */
     public function saveNewProfilePhoto(User $user, File $file)
     {

@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Entity\Project;
 use App\Entity\User;
+use App\Repository\PostRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
@@ -20,11 +21,20 @@ class PhotoDataProvider
     /** @var ProjectRepository */
     private $projectRepository;
 
-    public function __construct(Security $security, UserRepository $userRepository, ProjectRepository $projectRepository)
+    /** @var PostRepository */
+    private $postRepository;
+
+    public function __construct(
+        Security $security,
+        UserRepository $userRepository,
+        ProjectRepository $projectRepository,
+        PostRepository $postRepository
+    )
     {
         $this->security = $security;
         $this->userRepository = $userRepository;
         $this->projectRepository = $projectRepository;
+        $this->postRepository = $postRepository;
     }
 
     public function getCurrentUserPhotoData()
@@ -59,6 +69,17 @@ class PhotoDataProvider
         }
 
         return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_project.jpg', "r"));
+    }
+
+    public function getPhotoByPostId($postId)
+    {
+        $photo = $this->postRepository->findOneBy(['postId' => $postId])->getPhoto();
+
+        if ($projectPhoto = $this->getEncodedPhoto($photo)){
+            return $projectPhoto;
+        }
+
+        return null;
     }
 
     private function getEncodedPhoto($photo)

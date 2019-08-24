@@ -27,13 +27,23 @@ class PostRepository extends ServiceEntityRepository
             ->select('p')
             ->where($qb->expr()->isNull('p.project'))
             ->andWhere('p.user = :user')
-            ->andWhere('p.project is null')
             ->orderBy('p.timestamp', 'DESC')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult();
     }
 
+    public function fetchProjectPosts($project)
+    {
+        $qb = $this->createQueryBuilder('p');
+        return $qb
+            ->select('p')
+            ->andWhere('p.project = :project')
+            ->orderBy('p.timestamp', 'DESC')
+            ->setParameter('project', $project)
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Post

@@ -123,3 +123,8 @@ project_profile:
     path: /project/{projectId}
     controller: App\Controller\ProjectsController:projectProfileAction
     methods: GET
+
+create_project_post:
+    path: /create_project_post
+    controller:  App\Controller\ProjectsController:createPostForProject
+    methods: POST

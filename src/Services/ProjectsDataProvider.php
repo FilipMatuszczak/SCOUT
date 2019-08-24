@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repository\PostRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\TechnologyRepository;
 use App\Repository\UserProjectRepository;
@@ -26,17 +27,22 @@ class ProjectsDataProvider
     /** @var UserProjectRepository */
     private $userProjectRepository;
 
+    /** @var PostRepository */
+    private $postRepository;
+
     public function __construct(
         ProjectRepository $projectRepository,
         TechnologyRepository $technologyRepository,
         UserRepository $userRepository,
-        UserProjectRepository $userProjectRepository
+        UserProjectRepository $userProjectRepository,
+        PostRepository $postRepository
     )
     {
         $this->projectRepository = $projectRepository;
         $this->technologyRepository = $technologyRepository;
         $this->userRepository = $userRepository;
         $this->userProjectRepository = $userProjectRepository;
+        $this->postRepository = $postRepository;
     }
 
     public function getProjectsByFilters($sorting, $page, $technologyName, $title, $memberName)
@@ -73,7 +79,7 @@ class ProjectsDataProvider
     public function getUserProjectStatus($userId, $projectId)
     {
         $status = $this->userProjectRepository->getOptionsByUserIdAndProjectId($userId, $projectId);
-        if ($status === false){
+        if ($status === false) {
             return self::USER_NOT_MEMBER;
         }
 
@@ -83,6 +89,11 @@ class ProjectsDataProvider
             default:
                 return self::USER_MEMBER;
         }
+    }
+
+    public function getProjectPosts($project)
+    {
+        return $this->postRepository->fetchProjectPosts($project);
     }
 
     private function convertToSqlSorting($sorting)

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Security\UserProvider;
+use App\Services\PostCreator;
 use App\Services\ProjectCreator;
 use App\Services\ProjectsDataProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,17 +26,22 @@ class ProjectsController extends AbstractController
     /** @var UserProvider */
     private $userProvider;
 
+    /** @var PostCreator */
+    private $postCreator;
+
     public function __construct(
         ProjectsDataProvider $projectDataProvider,
         ProjectCreator $projectCreator,
         Security $security,
-        UserProvider $userProvider
+        UserProvider $userProvider,
+        PostCreator $postCreator
     )
     {
         $this->projectDataProvider = $projectDataProvider;
         $this->projectCreator = $projectCreator;
         $this->security = $security;
         $this->userProvider = $userProvider;
+        $this->postCreator = $postCreator;
     }
 
     public function indexAction(Request $request)
@@ -85,7 +91,9 @@ class ProjectsController extends AbstractController
             $isMember = true;
         }
 
-        return $this->render("main/project.html.twig", ['project' => $project, 'isMember' => $isMember, 'isAuthor' => $isAuthor]);
+        $posts = $this->projectDataProvider->getProjectPosts($project);
+
+        return $this->render("main/project.html.twig", ['project' => $project, 'isMember' => $isMember, 'isAuthor' => $isAuthor, 'posts' => $posts]);
     }
 
     public function createProjectIndexAction()
@@ -110,6 +118,20 @@ class ProjectsController extends AbstractController
         $this->projectCreator->createProject($title, $description, $photo, $technologies, $user);
 
         return $this->redirectToRoute('main');
+    }
+
+    public function createPostForProject(Request $request)
+    {
+        $username = $this->security->getUser()->getUsername();
+
+        $user = $this->userProvider->loadUserByUsername($username);
+        $photoFile = $request->files->get('photo');
+        $text = $request->get('text');
+        $project = $this->projectDataProvider->getProjectById($request->get('projectId'));
+
+        $this->postCreator->createPostForProject($user, $text, $project, $photoFile);
+
+        return $this->redirectToRoute('project_profile', ['projectId' => $project->getProjectId()]);
     }
 
     private function canEdit($username)

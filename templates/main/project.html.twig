@@ -14,13 +14,15 @@
 
     <div id="profile">
         <div class="profile-left">
-            <img id="profile-picture" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="230" height="280">
+            <img id="profile-picture"
+                 src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}"
+                 width="230" height="280">
         </div>
 
         <div class="profile-right">
             <p id="name-profile">{{ project.title }}
                 {% if isAuthor %}
-                <button class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
+                    <button class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
                 {% endif %}
             </p>
 
@@ -39,60 +41,63 @@
             <p class="infos">CZŁONKOWIE</p>
             {% for user in project.user %}
                 {% if not loop.last %}
-                    {{ user.firstname }} ({{user.username}}) {{ user.lastname }},
+                    {{ user.firstname }} ({{ user.username }}) {{ user.lastname }},
                 {% else %}
-                    {{ user.firstname }} ({{user.username}}) {{ user.lastname }}
+                    {{ user.firstname }} ({{ user.username }}) {{ user.lastname }}
                 {% endif %}
             {% endfor %}
             <hr>
 
 
-            <p>{{project.description}}</p>
+            <p>{{ project.description }}</p>
         </div>
     </div>
     {% if not isMember %}
-    <div id="mess">
-        <button class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
+        <div id="mess">
+            <button class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
 
-        <button class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
+            <button class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
 
-    </div>
+        </div>
     {% endif %}
     {% if isMember %}
-    <div class="form-post">
-        <img id="post-avatar"  src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}" width="70" height="70">
-        <form action="{{ path('create_wall_post') }}" method="post">
+        <div class="form-post">
+            <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}"
+                 width="70" height="70">
+            <form action="{{ path('create_project_post') }}" enctype="multipart/form-data" method="post">
 
-            <div class="photo-textarea">
-                <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
+                <div class="photo-textarea">
+                    <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                <input type="hidden" name="username" value={{ app.user.username }}>
+                    <input type="hidden" name="username" value={{ app.user.username }}>
 
-                <button style="display:none;" id="file-cancel"></button>
-                <label>
-                    <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload"
-                           style="display:none;"/>
-                    <span><i class="fa fa-image"></i></span>
-                </label>
+                    <button style="display:none;" id="file-cancel"></button>
+                    <label>
+                        <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload"
+                               name="photo" style="display:none;"/>
+                        <span><i class="fa fa-image"></i></span>
+                    </label>
 
+                    <input type="hidden" name="projectId" value={{ project.projectId }}>
+                    <input type="submit" id="button-rem" class="button-post" value="Opublikuj"></div>
+                <br>
 
-                <input type="submit" id="button-rem" class="button-post" value="Opublikuj"></div>
-            <br>
+            </form>
+        </div>
 
-        </form>
-    </div>
+        {% for post in posts %}
+            <div class="comment">
+                <a href="{{ path('user_profile', {'username': post.user.username}) }}"><img id="comment-avatar"
+                                                                                            src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username) }}"
+                                                                                            width="70" height="70"></a>
+
+                <p class="project-title"
+                   href="{{ path('user_profile', {'username': post.user.username}) }} ">{{ post.user.firstname }} {{ post.user.lastname }}</p>
+                ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
+                <p class="comment-content">{{ post.text }}</p>
+            </div>
+        {% endfor %}
     {% endif %}
-
-    {# nie wiem do końca kto moze komentować projekty xD #}
-    {#  {% for post in posts %}
-          <div class="comment">
-              <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70"></a>
-
-              <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
-              <p class="comment-content">{{  post.text}}</p>
-          </div>
-      {% endfor %} #}
-
 
     <script>
         $(document).ready(function () {

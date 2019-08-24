@@ -2,136 +2,140 @@
     {% block stylesheets %}
         <link href="{{ asset('web/styles/edit-user.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
-        
+
         <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
-        
+
     {% endblock %}
 {% block body %}
     <div class="edit-profile">
-        <h1>Edytuj swój profil:</h1>
-        <div class="edit-container">
-            <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} )}}"  method="post"  >
-            <input type="text" class="name" placeholder="Imię" name = "firstname" maxlength="50" value={{ user.firstname }} />
+    <h1>Edytuj swój profil:</h1>
+    <div class="edit-container">
+        <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} ) }}" method="post">
+            <input type="text" class="name" placeholder="Imię" name="firstname" maxlength="50"
+                   value={{ user.firstname }}/>
 
-            <input type="text" class="name" placeholder="Nazwisko"  name = "lastname" maxlength="50" value={{ user.lastname }} /><br>
+            <input type="text" class="name" placeholder="Nazwisko" name="lastname" maxlength="50"
+                   value={{ user.lastname }}/><br>
 
             <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
-            <label>Data urodzenia:</label> <br>
-            <input type="date" {% if user.dateOfBirth is defined %}
-                   value={{ user.dateOfBirth.format('Y-m-d') }}
-                   {% endif %} name="bdaytime"  style="border: 1px solid #7DA2AA;">
+                <label>Data urodzenia:</label> <br>
+                <input type="date" {% if user.dateOfBirth is defined %}
+                       value={{ user.dateOfBirth.format('Y-m-d') }}
+                   {% endif %} name="bdaytime" style="border: 1px solid #7DA2AA;">
 
             </div>
 
-            <input type="text" class="bio" placeholder="Info"  name = "info" maxlength="250" value="{{ user.info }}" /><br>
-               <label>
+            <input type="text" class="bio" placeholder="Info" name="info" maxlength="250" value="{{ user.info }}"/><br>
+            <label>
                 <input type="checkbox" name="vehicle" value="Car" checked>Chcę otrzymywać newslettera.
-                </label><br>
-                
-                <br>
+            </label><br>
 
-                <input type="submit" value="Zapisz zmiany" name="submit" class="upload smaller"/>
-            </form>
+            <br>
+
+            <input type="submit" value="Zapisz zmiany" name="submit" class="upload smaller"/>
+        </form>
 
 
-            <input type="CityList" class="bio" placeholder="Miasto"  maxlength="50" id="city" list="CityList" value ="Poznań">
-            <datalist id="CityList">
+        <input type="CityList" class="bio" placeholder="Miasto" maxlength="50" id="city" list="CityList" value="Poznań">
+        <datalist id="CityList">
 
-            </datalist>
+        </datalist>
 
-             <hr>
+        <hr>
 
-            <div id="languages-forms" class="forms">
-             <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" list="LangList">
+        <div id="languages-forms" class="forms">
+            <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" list="LangList">
             <datalist id="LangList">
             </datalist>
-           <button type="button" id="button-more" class="button-more btad">+</button>
+            <button type="button" id="button-more" class="button-more btad">+</button>
             <br>
-            </div>
-            <input type="submit" value="Dodaj język" name="submit" id="add-lang" class="upload smaller"/>
+        </div>
+        <input type="submit" value="Dodaj język" name="submit" id="add-lang" class="upload smaller"/>
 
 
-            <div id="languages"></div>
+        <div id="languages"></div>
 
-            
-            
-            <hr>
-            <div id="tech-forms" class="forms">
-             <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
+
+        <hr>
+        <div id="tech-forms" class="forms">
+            <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
             <datalist id="TechList">
 
             </datalist>
-<button type="button" id="button-moret" class="button-moret btad">+</button> <br>
-            </div>
-            
-            <input type="submit" value="Dodaj technologie" name="submit" id="add-tech" class="upload smaller"/>
+            <button type="button" id="button-moret" class="button-moret btad">+</button>
+            <br>
+        </div>
+
+        <input type="submit" value="Dodaj technologie" name="submit" id="add-tech" class="upload smaller"/>
         <div id="Technologies"></div>
 
 
-            <hr>
+        <hr>
 
-            <div id="photo">
+        <div id="photo">
 
-                <img id="photo-edit"  src="data:image/jpeg;base64,{{ img }}" width="120" height="120">
+            <img id="photo-edit" src="data:image/jpeg;base64,{{ img }}" width="120" height="120">
 
-    <form action="{{ path('edit_user_photo',  {'username' : user.username} )}}" enctype="multipart/form-data" method="post">
-        <br>
-    Wybierz zdjęcie: <br> <br>
+            <form action="{{ path('edit_user_photo',  {'username' : user.username} ) }}" enctype="multipart/form-data"
+                  method="post">
+                <br>
+                Wybierz zdjęcie: <br> <br>
 
-    <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload" style="background-color: none;"/> <br><br><br>
+                <input type="file" name="fileToUpload" accept="image/jpeg, image/png" id="fileToUpload"
+                       style="background-color: none;"/> <br><br><br>
 
-         <input type="submit" value="Wrzuć fotę" name="submit" id="upload" class="upload"/>
-        
-</form>
-</div>
-</div>
-    
-    
+                <input type="submit" value="Wrzuć fotę" name="submit" id="upload" class="upload"/>
+
+            </form>
+        </div>
+    </div>
+
+
     <script src="{{ asset('web/scripts/edit-profile.js') }}"></script>
-    
+
     <script>
-        
-        
-   ///////////////////////
-/*
-   $(document).ready(function(){
-
-       var technologies = []; ///powinna byc pobierana
-       var languages = [];
-
-   $('#add-tech').click(function() {
-
-        var technology = $('#tech').val()
-        technologies.push(technology);
-
-      $('#Technologies').html('<p>' + technologies + ' </p>');
-       document. getElementById('tech').value ="";
-
-    } );
-
-   $('#add-lang').click(function() {
-
-        var language = $('#lang').val()
-        languages.push(language);
-
-      $('#languages').html('<p>' + languages + ' </p>');
-       document. getElementById('lang').value ="";
-
-    } );
 
 
+        ///////////////////////
+        /*
+           $(document).ready(function(){
 
-   });
+               var technologies = []; ///powinna byc pobierana
+               var languages = [];
 
-    */
-</script>
-    
-    
-    
-    
-   
-    
-    
-    
-    
+           $('#add-tech').click(function() {
+
+                var technology = $('#tech').val()
+                technologies.push(technology);
+
+              $('#Technologies').html('<p>' + technologies + ' </p>');
+               document. getElementById('tech').value ="";
+
+            } );
+
+           $('#add-lang').click(function() {
+
+                var language = $('#lang').val()
+                languages.push(language);
+
+              $('#languages').html('<p>' + languages + ' </p>');
+               document. getElementById('lang').value ="";
+
+            } );
+
+
+
+           });
+
+            */
+    </script>
+
+
+
+
+
+
+
+
+
 {% endblock %}

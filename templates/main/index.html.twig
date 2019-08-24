@@ -3,9 +3,9 @@
 
 <head>
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('web/images/icon.ico') }}" />
-    
-<script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('web/images/icon.ico') }}"/>
+
+    <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
     {% block stylesheets %}
         <link href="{{ asset('web/styles/index.css') }}" rel="stylesheet" type="text/css"/>
     {% endblock %}
@@ -23,61 +23,62 @@
 <div class="row">
 
     <div class="block">
-        <a href="" ><img src="{{ asset('web/images/logov22.png') }}"></a>
-        <div id="id00"> 
-        <form action="{{ path('login_user') }}" method="post"  >
-            {% if error %}
-                <p>Niepoprawne dane logowania</p>
-            {% endif %}
+        <a href=""><img src="{{ asset('web/images/logov22.png') }}"></a>
+        <div id="id00">
+            <form action="{{ path('login_user') }}" method="post">
+                {% if error %}
+                    <p>Niepoprawne dane logowania</p>
+                {% endif %}
 
-            {% for flashMessage in app.session.flashbag.get('notice') %}
+                {% for flashMessage in app.session.flashbag.get('notice') %}
 
-                {{ flashMessage }}
+                    {{ flashMessage }}
 
-            {% endfor %}
+                {% endfor %}
 
-            <input type="text" size="30" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
-            
-            <input type="password" size="30" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+                <input type="text" size="30" value="{{ last_username }}" name="username" id="inputUsername"
+                       class="form-control" placeholder="Login" required autofocus>
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}">
-               
-                    {#<label class="checkRem">
-                        <input id="remcheck" type="checkbox" name="_remember_me"> Zapamiętaj mnie
-                    </label>#}
+                <input type="password" size="30" name="password" id="inputPassword" class="form-control"
+                       placeholder="Hasło" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}">
+
+                {#<label class="checkRem">
+                    <input id="remcheck" type="checkbox" name="_remember_me"> Zapamiętaj mnie
+                </label>#}
 
 
-            <input type="submit" id="button-log" value="Zaloguj się"><br>
-            
-            <button id="Pswdrem" onclick="document.getElementById('id00').style.display='none'; document.getElementById('id02').style.display='block'; ">Nie pamiętasz hasła?</button>
+                <input type="submit" id="button-log" value="Zaloguj się"><br>
+
+                <button id="Pswdrem"
+                        onclick="document.getElementById('id00').style.display='none'; document.getElementById('id02').style.display='block'; ">
+                    Nie pamiętasz hasła?
+                </button>
+        </div>
+        </form>
+
+        <form action="{{ path('email_change_password') }}" method="post">
+
+
+            <div id="id02" style="display:none;">Wygeneruj nowe hasło:
+                <input type="text"
+                       placeholder="Podaj email lub login" name="username" required>
+
+                <input type="submit" id="button-rem" value="Przypomnij"><br>
+
             </div>
         </form>
-        
-        <form action="{{ path('email_change_password') }}" method="post">
-        
-        
-        <div id="id02" style="display:none;">Wygeneruj nowe hasło:
-        <input type="text" 
-        placeholder="Podaj email lub login" name="username" required>
-            
-            <input type="submit" id="button-rem" value="Przypomnij"><br>
-            
-            </div>
-            </form>
         <p>Nie masz konta? Dołącz do społeczności składającej się z tysięcy użytkowników i rozwijaj swoje pasje,
             rozszerzaj horyzonty, znajduj przyjaciół i zarabiaj! <br> Zarejestruj się już teraz!
-            
-            
-            
-            
+
+
         </p>
-                
+
         <hr>
 
-        
-        
-        
+
         <button id="button-reg" onclick="document.getElementById('id01').style.display='block'">Załóż konto</button>
         <!-- Button to open the modal -->
 
@@ -91,54 +92,59 @@
 <div id="id01" class="modal" style="min-width: 1000px;">
     <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">X</span>
     <form class="modal-content" action="{{ path('create_user') }}" method="post">
-            <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
-            <hr>
+        <h1>Podaj swoje dane osobowe i wkrocz do ogromnej społeczności S-COUT!</h1>
+        <hr>
         <div class="username form">
-                        
-            
+
+
             <label for="username" id="status"><b>Nazwa użytkownika</b></label>
 
             <input type="text" placeholder="Podaj nazwę" name="username" id="username" required>
         </div>
-            
-                <div class="first-name">
-                    <label for="first-name"><b>Imię</b></label>
-                    <input type="text" placeholder="Podaj imię" name="firstname" required></div>
-        
-                <div id="last-name" class="first-name">
-                    <label for="last-name"><b>Nazwisko</b></label>
-                    <input type="text" placeholder="Podaj nazwisko" name="lastname" required></div>
-        
-        
+
+        <div class="first-name">
+            <label for="first-name"><b>Imię</b></label>
+            <input type="text" placeholder="Podaj imię" name="firstname" required></div>
+
+        <div id="last-name" class="first-name">
+            <label for="last-name"><b>Nazwisko</b></label>
+            <input type="text" placeholder="Podaj nazwisko" name="lastname" required></div>
+
+
         <div class="email form">
             <label for="email"><b>Email</b></label>
             <input type="text" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$"
                    placeholder="Podaj email" name="email" required>
         </div>
-        
-        
-        
+
+
         <div class="password form">
             <label for="password"><b>Podaj hasło</b></label>
-            <input type="password" placeholder="Podaj hasło" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków." required>
-        
+            <input type="password" placeholder="Podaj hasło" name="password" id="password"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                   title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków."
+                   required>
+
             <label for="psw-repeat"><b>Powtórz hasło</b></label>
-            <input type="password" placeholder="Powtórz hasło" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw-repeat" title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków." required>
-</div>
-
-        
-        
-           
-                <input type="checkbox" name="remember" style="margin-left: 10px; margin-top: -20px; transform: scale(1.5);" required> <p id="regulamin"> Zaznaczając to pole oświadczasz, że akceptujesz <a href="#" style="color:#4f4a41">regulamin</a>.</p>
-        
+            <input type="password" placeholder="Powtórz hasło" id="confirm_password"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw-repeat"
+                   title="Hasło musi składać się z conajmniej jednej wielkiej i jednej małej litery, jednej cyfry i o długości conajmniej 8 znaków."
+                   required>
+        </div>
 
 
-            <div class="clearfix">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'"  class="cancelbtn">
-                    Anuluj
-                </button>
-                <button type="submit" id="register-form" class="signup">Zarejestruj się</button>
-            </div>
+        <input type="checkbox" name="remember" style="margin-left: 10px; margin-top: -20px; transform: scale(1.5);"
+               required>
+        <p id="regulamin"> Zaznaczając to pole oświadczasz, że akceptujesz <a href="#"
+                                                                              style="color:#4f4a41">regulamin</a>.</p>
+
+
+        <div class="clearfix">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                Anuluj
+            </button>
+            <button type="submit" id="register-form" class="signup">Zarejestruj się</button>
+        </div>
     </form>
 </div>
 
@@ -148,7 +154,7 @@
     // Get the modal
     var modal = document.getElementById('id01');
 
- 
+
     ////////////////////////////////////////////
     //passwords
     //
@@ -166,7 +172,7 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 
-    
+
 </script>
 
 <script src="{{ asset('web/scripts/main.js') }}"></script>

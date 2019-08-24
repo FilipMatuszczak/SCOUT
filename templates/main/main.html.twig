@@ -1,4 +1,3 @@
-
 {% extends 'main/parent.html.twig' %}
 
 
@@ -9,13 +8,16 @@
 
 
 {% block body %}
-            {%  for project in projects %}
-            <div class="post">
-                <a href="{{ path('project_profile', {'projectId': project.projectId}) }}"><img id="project-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="70" height="70"></a>
-                <a class="project-title" href="{{ path('project_profile', {'projectId': project.projectId}) }}">{{ project.title }}</a><br>
-                {%  for technology in project.technology %}
+    {% for project in projects %}
+        <div class="post">
+            <a href="{{ path('project_profile', {'projectId': project.projectId}) }}"><img id="project-avatar"
+                                                                                           src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}"
+                                                                                           width="70" height="70"></a>
+            <a class="project-title"
+               href="{{ path('project_profile', {'projectId': project.projectId}) }}">{{ project.title }}</a><br>
+            {% for technology in project.technology %}
                 <a class="project-lang" href=" ">{{ technology.name }}</a>
-                {% endfor %}
-            </div> 
             {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -1,5 +1,5 @@
 <h3>Thank you for registering {{ name }}, your account is now active! Go ahead and login</h3>
-<form action="{{ path('login_email') }}" method="post"  >
+<form action="{{ path('login_email') }}" method="post">
     <input type="hidden" name="username"
            value="{{ name }}">
     <input type="submit" id="button-log" value="Zaloguj się"><br>

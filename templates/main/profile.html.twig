@@ -1,151 +1,156 @@
-
 {% extends 'main/parent.html.twig' %}
 
 {% block stylesheets %}
-        <link href="{{ asset('web/styles/profile.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('web/styles/profile.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
     <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
-    {% endblock %}
+{% endblock %}
 
 
 
 {% block body %}
-    
-   
-    
-            <div id="profile">
-                <div class="profile-left">
-                    <img id="profile-picture" src="data:image/jpeg;base64,{{img}}" width="230" height="280">
-                </div>
 
-                <div class="profile-right">
-                    <p id="name-profile">{{ user.firstname }} {{ user.lastname }}, {{ age }} 
-                        
-                    </p>
-                    {% if user.city is not empty %}
-                        <p class="infos">Miasto </p><p> 
-                    {% for city in user.city %}
-                        {% if not loop.last %}
-                        {{ city.name }}, 
-                             {% else %}
-                            {{ city.name }}
-                        {% endif %}
-                    {% endfor %}
-                    {% else %}
-                            <p>Brak miejsca zamieszkania
-                    {% endif %} </p>
-                    
-                    
-                    <hr>
-                    
-                    {% if user.language is not empty %}
-                        <p class="infos">Języki </p><p> 
-                        {% for language in user.language %}
-                            {% if not loop.last %}
-                        {{ language.name }},
-                                {% else %}
-                            {{ language.name }}
-                        {% endif %}
-                    {% endfor %}
-                        {% else %}
-                        <p>Brak języków obcych
-                            {% endif %} </p>
-                    <hr>
-                    
-                    {% if user.technology is not empty %}
-                        <p class="infos">Technologie </p><p> 
-                        {% for technology in user.technology %}
-                        {% if not loop.last %}
-                        {{ technology.name }}, 
-                        {% else %}
-                            {{ technology.name }}
-                        {% endif %}
-                        {% endfor %}
-                        {% else %}
-                        <p>Brak znajomości technologii
-                            {% endif %} </p>
-                    <hr>
-                    <p>{{  user.info }}</p>
-                </div>
-            </div>
 
-            <div id="mess">
-            <button class="navico message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button>
-            </div>
-    
-            {% if user.username == app.user.username %}
-            <div class="form-post">
-                <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
-                <form action="{{ path('create_wall_post') }}" enctype="multipart/form-data" method="post">
-                    
-                    <div class="photo-textarea"> 
-                    <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
-                    
-                        <input type="hidden" name="username" value={{ app.user.username }}>
-        
-         <button style="display:none;" id="file-cancel"></button>       
-        <label>
-      <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload" name="photo" style="display:none;"/>
-      <span><i class="fa fa-image"></i></span>
-   </label>
-                
-                    
-                        <input type="submit" id="button-rem" class="button-post" value="Opublikuj"> </div><br>
 
-                </form>
-            </div>
-            {% endif %}
-            {% for post in posts %}
-                <div class="comment">
-                    <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70"></a>
+    <div id="profile">
+        <div class="profile-left">
+            <img id="profile-picture" src="data:image/jpeg;base64,{{ img }}" width="230" height="280">
+        </div>
 
-                    <p class="project-title" href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p> ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
-                    <p class="comment-content">{{  post.text}}</p>
-                    {% if post.photo %}
-                    <a><img id="comment-avatar" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByPostId(post.postId) }}" width="70" height="70"></a>
-                    {% endif %}
-                </div>
+        <div class="profile-right">
+            <p id="name-profile">{{ user.firstname }} {{ user.lastname }}, {{ age }}
+
+            </p>
+            {% if user.city is not empty %}
+            <p class="infos">Miasto </p><p>
+            {% for city in user.city %}
+                {% if not loop.last %}
+                    {{ city.name }},
+                {% else %}
+                    {{ city.name }}
+                {% endif %}
             {% endfor %}
-    
-    
-<script>
-$(document).ready(function(){
-    
+        {% else %}
+            <p>Brak miejsca zamieszkania
+                {% endif %} </p>
 
-    
-        //////////////photo preview
-    function readURL(input) {
 
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-  var filename = (input.files[0].name);
-      
-    reader.onload = function(e) {
-      $('#file-cancel').html(filename + " x");
-        $('#file-cancel').show();
-    }
+            <hr>
 
-    reader.readAsDataURL(input.files[0]);
-  }
-}
+            {% if user.language is not empty %}
+            <p class="infos">Języki </p><p>
+            {% for language in user.language %}
+                {% if not loop.last %}
+                    {{ language.name }},
+                {% else %}
+                    {{ language.name }}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Brak języków obcych
+                {% endif %} </p>
+            <hr>
 
-$("#add-image").change(function() {
-  readURL(this);
-});
-   /////////////////
-    
-    $("#file-cancel").on("click", function () {
-        event.preventDefault();
-         $('#add-image').val("");
-   $('#file-cancel').hide();
-});
-    
-    
-    
-    
-});
-</script>
-   
-    
-    
+            {% if user.technology is not empty %}
+            <p class="infos">Technologie </p>
+            <p>
+                {% for technology in user.technology %}
+                    {% if not loop.last %}
+                        {{ technology.name }},
+                    {% else %}
+                        {{ technology.name }}
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+            <p>Brak znajomości technologii
+                {% endif %} </p>
+            <hr>
+            <p>{{ user.info }}</p>
+        </div>
+    </div>
+
+    <div id="mess">
+        <button class="navico message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button>
+    </div>
+
+    {% if user.username == app.user.username %}
+        <div class="form-post">
+            <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
+            <form action="{{ path('create_wall_post') }}" enctype="multipart/form-data" method="post">
+
+                <div class="photo-textarea">
+                    <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
+
+                    <input type="hidden" name="username" value={{ app.user.username }}>
+
+                    <button style="display:none;" id="file-cancel"></button>
+                    <label>
+                        <input type="file" id="add-image" accept="image/jpeg, image/png" class="fileToUpload"
+                               name="photo" style="display:none;"/>
+                        <span><i class="fa fa-image"></i></span>
+                    </label>
+
+
+                    <input type="submit" id="button-rem" class="button-post" value="Opublikuj"></div>
+                <br>
+
+            </form>
+        </div>
+    {% endif %}
+    {% for post in posts %}
+        <div class="comment">
+            <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar"
+                                                                                   src="data:image/jpeg;base64,{{ img }}"
+                                                                                   width="70" height="70"></a>
+
+            <p class="project-title"
+               href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p>
+            ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
+            <p class="comment-content">{{ post.text }}</p>
+            {% if post.photo %}
+                <a><img id="comment-avatar"
+                        src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByPostId(post.postId) }}" width="70"
+                        height="70"></a>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+
+    <script>
+        $(document).ready(function () {
+
+
+            //////////////photo preview
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    var filename = (input.files[0].name);
+
+                    reader.onload = function (e) {
+                        $('#file-cancel').html(filename + " x");
+                        $('#file-cancel').show();
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#add-image").change(function () {
+                readURL(this);
+            });
+            /////////////////
+
+            $("#file-cancel").on("click", function () {
+                event.preventDefault();
+                $('#add-image').val("");
+                $('#file-cancel').hide();
+            });
+
+
+        });
+    </script>
+
+
+
 {% endblock %}

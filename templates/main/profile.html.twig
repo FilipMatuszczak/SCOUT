@@ -14,7 +14,7 @@
 
     <div id="profile">
         <div class="profile-left">
-            <img id="profile-picture" src="data:image/jpeg;base64,{{ img }}" width="230" height="280">
+            <img id="profile-picture" src="data:image/jpeg;base64,{{  photo_data_provider.getPhotoByUsername(user.username) }}" width="230" height="280">
         </div>
 
         <div class="profile-right">

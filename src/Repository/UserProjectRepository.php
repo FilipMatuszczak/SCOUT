@@ -33,4 +33,22 @@ class UserProjectRepository
             )
             ->execute();
     }
+
+    public function getOptionsByUserIdAndProjectId($userId, $projectId)
+    {
+        $qb = new QueryBuilder($this->connection);
+
+        return $qb->select('options')
+            ->from(self::TABLE, '')
+            ->where('user_id = :userId')
+            ->andWhere('project_id = :projectId')
+            ->setParameters(
+                [
+                    'userId' => $userId,
+                    'projectId' => $projectId,
+                ]
+            )
+            ->execute()
+            ->fetchColumn();
+    }
 }

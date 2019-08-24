@@ -4,11 +4,15 @@ namespace App\Services;
 
 use App\Repository\ProjectRepository;
 use App\Repository\TechnologyRepository;
+use App\Repository\UserProjectRepository;
 use App\Repository\UserRepository;
 
 class ProjectsDataProvider
 {
     const PROJECTS_PER_PAGE = 10;
+    const USER_NOT_MEMBER = 0;
+    const USER_MEMBER = 1;
+    const USER_AUTHOR = 2;
 
     /** @var ProjectRepository */
     private $projectRepository;
@@ -19,15 +23,20 @@ class ProjectsDataProvider
     /** @var UserRepository */
     private $userRepository;
 
+    /** @var UserProjectRepository */
+    private $userProjectRepository;
+
     public function __construct(
         ProjectRepository $projectRepository,
         TechnologyRepository $technologyRepository,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UserProjectRepository $userProjectRepository
     )
     {
         $this->projectRepository = $projectRepository;
         $this->technologyRepository = $technologyRepository;
         $this->userRepository = $userRepository;
+        $this->userProjectRepository = $userProjectRepository;
     }
 
     public function getProjectsByFilters($sorting, $page, $technologyName, $title, $memberName)
@@ -54,6 +63,26 @@ class ProjectsDataProvider
         }
 
         return $this->projectRepository->fetchProjectsByFilters($from, $max, $this->convertToSqlSorting($sorting), $title, $technology, $member);
+    }
+
+    public function getProjectById($projectId)
+    {
+        return $this->projectRepository->findOneBy(['projectId' => $projectId]);
+    }
+
+    public function getUserProjectStatus($userId, $projectId)
+    {
+        $status = $this->userProjectRepository->getOptionsByUserIdAndProjectId($userId, $projectId);
+        if ($status === false){
+            return self::USER_NOT_MEMBER;
+        }
+
+        switch ($status) {
+            case $status | 1:
+                return self::USER_AUTHOR;
+            default:
+                return self::USER_MEMBER;
+        }
     }
 
     private function convertToSqlSorting($sorting)

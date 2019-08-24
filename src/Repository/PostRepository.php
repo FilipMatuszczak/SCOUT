@@ -27,6 +27,7 @@ class PostRepository extends ServiceEntityRepository
             ->select('p')
             ->where($qb->expr()->isNull('p.project'))
             ->andWhere('p.user = :user')
+            ->andWhere('p.project is null')
             ->orderBy('p.timestamp', 'DESC')
             ->setParameter('user', $user)
             ->getQuery()

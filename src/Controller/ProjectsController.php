@@ -68,7 +68,24 @@ class ProjectsController extends AbstractController
 
     public function projectProfileAction($projectId)
     {
-        return $this->render("main/project.html.twig");
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $userId = $this->userProvider->loadUserByUsername($this->security->getUser()->getUsername())->getUserId();
+        $project = $this->projectDataProvider->getProjectById($projectId);
+        $isAuthor = false;
+        $isMember = false;
+        $status = $this->projectDataProvider->getUserProjectStatus($userId, $projectId);
+
+        if ($status === ProjectsDataProvider::USER_MEMBER) {
+            $isMember = true;
+        }
+
+        if ($status === ProjectsDataProvider::USER_AUTHOR) {
+            $isAuthor = true;
+            $isMember = true;
+        }
+
+        return $this->render("main/project.html.twig", ['project' => $project, 'isMember' => $isMember, 'isAuthor' => $isAuthor]);
     }
 
     public function createProjectIndexAction()
@@ -80,6 +97,8 @@ class ProjectsController extends AbstractController
 
     public function createProjectAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $username = $this->security->getUser()->getUsername();
         $user = $this->userProvider->loadUserByUsername($username);
 

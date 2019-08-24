@@ -14,39 +14,53 @@
 
     <div id="profile">
         <div class="profile-left">
-            <img id="profile-picture" src="data:image/jpeg;base64" width="230" height="280">
+            <img id="profile-picture" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="230" height="280">
         </div>
 
         <div class="profile-right">
-            <p id="name-profile">TYTUŁ PROJEKTU
+            <p id="name-profile">{{ project.title }}
+                {% if isAuthor %}
                 <button class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
+                {% endif %}
             </p>
 
 
             <p class="infos">TECHNOLOGIE</p>
-
+            {% for technology in project.technology %}
+                {% if not loop.last %}
+                    {{ technology.name }},
+                {% else %}
+                    {{ technology.name }}
+                {% endif %}
+            {% endfor %}
             <hr>
 
 
-            <p class="infos">AUTORZY</p>
-
+            <p class="infos">CZŁONKOWIE</p>
+            {% for user in project.user %}
+                {% if not loop.last %}
+                    {{ user.firstname }} ({{user.username}}) {{ user.lastname }},
+                {% else %}
+                    {{ user.firstname }} ({{user.username}}) {{ user.lastname }}
+                {% endif %}
+            {% endfor %}
             <hr>
 
 
-            <p>OPIS</p>
+            <p>{{project.description}}</p>
         </div>
     </div>
-
+    {% if not isMember %}
     <div id="mess">
         <button class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
 
         <button class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
 
     </div>
-
-    {# if #}
+    {% endif %}
+    {% if isMember %}
     <div class="form-post">
-        <img id="post-avatar" src="data:image/jpeg;base64" width="70" height="70">
+        <img id="post-avatar"  src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}" width="70" height="70">
         <form action="{{ path('create_wall_post') }}" method="post">
 
             <div class="photo-textarea">
@@ -67,7 +81,7 @@
 
         </form>
     </div>
-    {# endif #}
+    {% endif %}
 
     {# nie wiem do końca kto moze komentować projekty xD #}
     {#  {% for post in posts %}

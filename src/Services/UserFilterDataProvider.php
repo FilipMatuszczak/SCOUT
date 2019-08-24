@@ -38,29 +38,32 @@ class UserFilterDataProvider
 
     public function getUsersByFilters($page, $firstName, $lastName, $sorting, $languageName, $technologyName, $cityName)
     {
-        $from = ($page-1) * self::USERS_PER_PAGE;
+        $from = ($page - 1) * self::USERS_PER_PAGE;
         $max = self::USERS_PER_PAGE;
         if (!empty($technologyName)) {
             $technology = $this->technologyRepository->findOneBy(['name' => $technologyName]);
             if (empty($technology)) {
                 return [];
             }
+        } else {
+            $technology = null;
         }
-        else {$technology = null;}
         if (!empty($cityName)) {
             $city = $this->cityRepository->findOneBy(['name' => $cityName]);
             if (empty($city)) {
                 return [];
             }
+        } else {
+            $city = null;
         }
-        else {$city = null;}
         if (!empty($languageName)) {
             $language = $this->languageRepository->findOneBy(['name' => $languageName]);
             if (empty($language)) {
                 return [];
             }
+        } else {
+            $language = null;
         }
-        else {$language = null;}
 
         return $this->userRepository->fetchUsersByFilters(
             $from,

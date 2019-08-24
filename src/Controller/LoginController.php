@@ -37,7 +37,7 @@ class LoginController extends AbstractController
     /** @var GuardAuthenticatorHandler */
     private $guardAuthenticatorHandler;
 
-    /** @var PasswordHandler  */
+    /** @var PasswordHandler */
     private $passwordHandler;
 
     /**
@@ -73,7 +73,7 @@ class LoginController extends AbstractController
      *
      * @return Response
      */
-    public function indexAction($message=null)
+    public function indexAction($message = null)
     {
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('main');
@@ -87,7 +87,7 @@ class LoginController extends AbstractController
 
     /**
      * @param Request $request
-     * @param string  $username
+     * @param string $username
      *
      * @return JsonResponse
      */
@@ -205,7 +205,7 @@ class LoginController extends AbstractController
         $this->passwordHandler->updateUserCredentials($credentials, $user);
         $this->get('session')->getFlashBag()->set('notice', 'Twoje hasło zostało zmienione, możesz teraz się zalogować używając swojego nowego hasła');
 
-        return $this->redirectToRoute('index',[]);
+        return $this->redirectToRoute('index', []);
     }
 
     /**
@@ -217,8 +217,7 @@ class LoginController extends AbstractController
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));
 
-        if (empty($user))
-        {
+        if (empty($user)) {
             throw $this->createNotFoundException(
                 'Cannot verify user ' . $request->get('username')
             );

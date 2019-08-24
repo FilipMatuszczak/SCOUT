@@ -49,14 +49,14 @@ class ProfileController extends AbstractController
 
         $user = $this->userProvider->loadUserByUsername($username);
         if ($user->getDateOfBirth()) {
-        $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;}
-        else{
+            $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;
+        } else {
             $userAge = '';
         }
         $posts = $this->postRepository->fetchUserWallPosts($user);
 
-        if ($photo = $user->getPhoto()){
-        $photo = stream_get_contents($photo);
+        if ($photo = $user->getPhoto()) {
+            $photo = stream_get_contents($photo);
         }
 
         return $this->render('main/profile.html.twig',
@@ -75,7 +75,7 @@ class ProfileController extends AbstractController
 
         $user = $this->userProvider->loadUserByUsername($username);
         $photoFile = $request->files->get('photo');
-        $text =  $request->get('text');
+        $text = $request->get('text');
         $this->postCreator->createPostForUser($user, $text, $photoFile);
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
@@ -89,7 +89,7 @@ class ProfileController extends AbstractController
 
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
-        $birthDate =  new \DateTime($request->get('bdaytime'));
+        $birthDate = new \DateTime($request->get('bdaytime'));
         $info = $request->get('info');
 
         $this->profileEditHandler->saveBasicInfo($user, $firstname, $lastname, $birthDate, $info);
@@ -116,10 +116,9 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        if ($user->getPhoto())
-        {
-        $photo = stream_get_contents($user->getPhoto()); }
-        else {
+        if ($user->getPhoto()) {
+            $photo = stream_get_contents($user->getPhoto());
+        } else {
             $photo = null;
         }
 

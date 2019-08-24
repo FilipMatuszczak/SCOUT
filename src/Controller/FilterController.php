@@ -52,7 +52,7 @@ class FilterController extends AbstractController
 
     /**
      * @param string $prefix
-     * @param int    $limit
+     * @param int $limit
      *
      * @return JsonResponse
      */

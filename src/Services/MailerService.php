@@ -2,10 +2,9 @@
 
 namespace App\Services;
 
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class MailerService
 {
@@ -32,8 +31,7 @@ class MailerService
         $user = $this->userRepository
             ->findCreatedUserByUsernameAndAuthenticationLink($username, $authenticationLink);
 
-        if ($user)
-        {
+        if ($user) {
             $user->setOptions($user->getOptions() | User::USER_VERIFIED);
 
             $this->entityManager->persist($user);
@@ -56,8 +54,7 @@ class MailerService
         $user = $this->userRepository
             ->findCreatedUserByUsernameAndChangePasswordLink($username, $changePasswordLink);
 
-        if ($user)
-        {
+        if ($user) {
             $user->setOptions($user->getOptions() ^ User::USER_CHANGING_PASSWORD);
 
             $this->entityManager->persist($user);

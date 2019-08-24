@@ -4,9 +4,7 @@ namespace App\Services;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 
 class RegisterHandler
 {
@@ -74,8 +72,7 @@ class RegisterHandler
      */
     public function userExists($username)
     {
-        if ($this->userRepository->findOneBy([User::COLUMN_USERNAME => $username]))
-        {
+        if ($this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])) {
             return true;
         }
 

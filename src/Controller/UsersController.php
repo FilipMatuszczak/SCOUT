@@ -21,15 +21,13 @@ class UsersController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $page = $request->get('page');
-        if (!isset($page))
-        {
+        if (!isset($page)) {
             $page = 1;
         }
         $firstName = $request->get('firstName');
         $lastName = $request->get('lastName');
         $sorting = $request->get('sorting');
-        if (!isset($sorting))
-        {
+        if (!isset($sorting)) {
             $sorting = 'A-Z';
         }
 
@@ -38,11 +36,11 @@ class UsersController extends AbstractController
         $city = !empty($request->get('city')) ? $request->get('city') : '';
 
         $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting, $language, $technology, $city);
-        $nextUsers = $this->userFilterDataProvier->getUsersByFilters($page+1, $firstName, $lastName, $sorting, $language, $technology, $city);
+        $nextUsers = $this->userFilterDataProvier->getUsersByFilters($page + 1, $firstName, $lastName, $sorting, $language, $technology, $city);
 
         $nextPage = $page;
-        if (sizeof($nextUsers) != 0){
-            $nextPage = $page +1;
+        if (sizeof($nextUsers) != 0) {
+            $nextPage = $page + 1;
         }
 
         return $this->render('main/search_users.html.twig', [

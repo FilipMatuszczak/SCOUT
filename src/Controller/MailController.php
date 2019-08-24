@@ -34,7 +34,7 @@ class MailController extends AbstractController
             [
                 'username' => $username,
                 'authenticationLink' => $authenticationLink,
-                ],
+            ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 

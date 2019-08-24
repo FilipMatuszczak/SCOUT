@@ -39,7 +39,7 @@ class ProjectCreator
         $project->setTitle($title);
         $project->setDescription($description);
 
-        $strm = fopen($photo->getRealPath(),'rb');
+        $strm = fopen($photo->getRealPath(), 'rb');
         $project->setPhoto(stream_get_contents($strm));
 
         $project->setCreatedDate(new \DateTime('now'));

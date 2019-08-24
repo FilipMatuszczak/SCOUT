@@ -28,9 +28,10 @@ class PostCreator
     {
         $newPost = new Post();
         $newPost->setText($content)->setProject(null)->setTimestamp(new \DateTime('now'))->setUser($user);
-        if ($photo !== null){
-        $strm = fopen($photo->getRealPath(),'rb');
-        $newPost->setPhoto(stream_get_contents($strm));}
+        if ($photo !== null) {
+            $strm = fopen($photo->getRealPath(), 'rb');
+            $newPost->setPhoto(stream_get_contents($strm));
+        }
 
         $this->entityManager->persist($newPost);
         $this->entityManager->flush();

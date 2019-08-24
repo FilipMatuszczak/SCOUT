@@ -32,7 +32,7 @@ class ProjectsDataProvider
 
     public function getProjectsByFilters($sorting, $page, $technologyName, $title, $memberName)
     {
-        $from = ($page-1) * self::PROJECTS_PER_PAGE;
+        $from = ($page - 1) * self::PROJECTS_PER_PAGE;
         $max = self::PROJECTS_PER_PAGE;
 
         if (!empty($technologyName)) {
@@ -40,16 +40,18 @@ class ProjectsDataProvider
             if (empty($technology)) {
                 return [];
             }
+        } else {
+            $technology = null;
         }
-        else {$technology = null;}
 
         if (!empty($memberName)) {
             $member = $this->userRepository->findOneBy(['username' => $memberName]);
             if (empty($member)) {
                 return [];
             }
+        } else {
+            $member = null;
         }
-        else {$member = null;}
 
         return $this->projectRepository->fetchProjectsByFilters($from, $max, $this->convertToSqlSorting($sorting), $title, $technology, $member);
     }

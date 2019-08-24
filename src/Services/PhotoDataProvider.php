@@ -3,7 +3,6 @@
 namespace App\Services;
 
 
-use App\Entity\Project;
 use App\Entity\User;
 use App\Repository\PostRepository;
 use App\Repository\ProjectRepository;
@@ -42,40 +41,40 @@ class PhotoDataProvider
         $username = $this->security->getUser()->getUsername();
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
 
-        if ($userPhoto = $this->getEncodedPhoto($photo)){
+        if ($userPhoto = $this->getEncodedPhoto($photo)) {
             return $userPhoto;
         }
 
-        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_user.jpg', "r"));
+        return $this->getEncodedPhoto(fopen(getcwd() . '\web\images\default_user.jpg', "r"));
     }
 
     public function getPhotoByUsername($username)
     {
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
 
-        if ($userPhoto = $this->getEncodedPhoto($photo)){
+        if ($userPhoto = $this->getEncodedPhoto($photo)) {
             return $userPhoto;
         }
 
-        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_user.jpg', "r"));
+        return $this->getEncodedPhoto(fopen(getcwd() . '\web\images\default_user.jpg', "r"));
     }
 
     public function getPhotoByProjectTitle($title)
     {
         $photo = $this->projectRepository->findOneBy(['title' => $title])->getPhoto();
 
-        if ($projectPhoto = $this->getEncodedPhoto($photo)){
+        if ($projectPhoto = $this->getEncodedPhoto($photo)) {
             return $projectPhoto;
         }
 
-        return $this->getEncodedPhoto(fopen(getcwd().'\web\images\default_project.jpg', "r"));
+        return $this->getEncodedPhoto(fopen(getcwd() . '\web\images\default_project.jpg', "r"));
     }
 
     public function getPhotoByPostId($postId)
     {
         $photo = $this->postRepository->findOneBy(['postId' => $postId])->getPhoto();
 
-        if ($projectPhoto = $this->getEncodedPhoto($photo)){
+        if ($projectPhoto = $this->getEncodedPhoto($photo)) {
             return $projectPhoto;
         }
 
@@ -85,7 +84,7 @@ class PhotoDataProvider
     private function getEncodedPhoto($photo)
     {
 
-        if ($photo){
+        if ($photo) {
             rewind($photo);
             $photo = stream_get_contents($photo);
             return base64_encode($photo);

@@ -39,7 +39,7 @@ class ProfileEditHandler
             return;
         }
 
-        $strm = fopen($file->getRealPath(),'rb');
+        $strm = fopen($file->getRealPath(), 'rb');
 
         $user->setPhoto(stream_get_contents($strm));
 
@@ -48,11 +48,11 @@ class ProfileEditHandler
     }
 
     /**
-     * @param User     $user
-     * @param string   $firstname
-     * @param string   $lastname
+     * @param User $user
+     * @param string $firstname
+     * @param string $lastname
      * @param Datetime $birthDate
-     * @param string   $info
+     * @param string $info
      */
     public function saveBasicInfo(User $user, $firstname, $lastname, $birthDate, $info)
     {

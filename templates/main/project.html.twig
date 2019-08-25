@@ -87,15 +87,19 @@
 
         {% for post in posts %}
             <div class="comment">
-                <a href="{{ path('user_profile', {'username': post.user.username}) }}"><img id="comment-avatar"
-                                                                                            src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username) }}"
-                                                                                            width="70" height="70"></a>
+                <a href="{{ path('user_profile', {'username': post.user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username) }}"
+                                            width="70" height="70"></a>
 
                 <p class="project-title"
                    href="{{ path('user_profile', {'username': post.user.username}) }} ">{{ post.user.firstname }} {{ post.user.lastname }}</p>
                 ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
-                <p class="comment-content">{{ post.text }}</p>
-            </div>
+                 <p class="comment-content">{{ post.text }}</p>
+            {% if post.photo %}
+                <div class="comment-image"><img image-zoom
+                        src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByPostId(post.postId) }}" width="250"
+                        ></div>
+            {% endif %}
+        </div>
         {% endfor %}
     {% endif %}
 
@@ -130,6 +134,22 @@
                 $('#file-cancel').hide();
             });
 
+              ///////photo preview comment
+        
+        $('img[image-zoom]').addClass('img-enlargable').click(function(){
+    var src = $(this).attr('src');
+    $('<div>').css({
+        background: 'RGBA(0,0,0,.7) url('+src+') no-repeat center',
+        backgroundSize: 'contain',
+        width:'100%', height:'100%',
+        position:'fixed',
+        zIndex:'10000',
+        top:'0', left:'0',
+        cursor: 'zoom-out'
+    }).click(function(){
+        $(this).remove();
+    }).appendTo('body');
+});
 
         });
     </script>

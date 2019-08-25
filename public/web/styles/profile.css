@@ -109,7 +109,8 @@
 
 .comment{
     background-color: rgba(235,235,235,0.4);
-    height: 85px;
+    min-height: 85px;
+    ---max-height: 1000px;
     border: 1px solid #7DA2AA;
     overflow: hidden;
     margin-top: 10px;
@@ -124,6 +125,25 @@
 .comment-content{
     margin: 1px;
     text-align: justify;
+}
+
+.comment-image img{  
+  margin: 4px;
+    opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+    cursor: zoom-in;
+}
+
+.comment-image img:hover{  
+  opacity: .8;
+}
+
+.comment-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }
 
 p{

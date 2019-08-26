@@ -54,10 +54,42 @@
     </div>
     {% if not isMember %}
         <div id="mess">
-            <button class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
+            <button id="message" class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
+            
+            <div id="modal-message" class="modal">
+                <div class="modal-content">
+            <span class="close"></span>
+                <p>Napisz wiadomość do <a href="">Autor</a></p>
+                    <div class="photo-textarea">
+       <form>
+                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
 
-            <button class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
+                        <input type="hidden" name="username" value="">
+                    </div>
+                    <div class="buttons">
+                    <button class="cancel-btn">Anuluj</button>
+                    <button id="send-btn">Wyślij</button>
+        </form>
+                        </div>
+                    </div>
+                            </div>
 
+            <button id="add-me" class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
+
+            <div id="modal-add" class="modal">
+                <div class="modal-content">
+            
+                <p>Czy chcesz wysłać prośbę o dołączenie do projektu <a>Tytuł</a>?</p>
+                    
+                    <div class="buttons" style="height: 40px; margin-top: 20px;">
+                    <button class="cancel-btn">Anuluj</button>
+                    <button id="send-btn">Wyślij prośbę</button>
+        
+                        </div>
+                    
+                    </div>
+                            </div>
+            
         </div>
     {% endif %}
     {% if isMember %}
@@ -106,7 +138,27 @@
     <script>
         $(document).ready(function () {
 
+            ////popup add-me
+            $("#add-me").on("click", function () {
+                event.preventDefault();
+                $('#modal-add').show();
+            });
+            
+                ////popup message
+            $("#message").on("click", function () {
+                event.preventDefault();
+                $('#modal-message').show();
+            });
+            //close modals
+            $(".cancel-btn").on("click", function () {
+                event.preventDefault();
+                $('#mssgtxt').val("");
+                $('#modal-add').hide();
+                $('#modal-message').hide();
+            });
+            
 
+            
             //////////////photo preview
             function readURL(input) {
 

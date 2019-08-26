@@ -72,6 +72,25 @@
     <div id="mess">
         <button class="navico message-ico"><i class="fa fa-envelope"></i> Wyślij wiadomość</button>
     </div>
+    
+    
+            <div id="modal-message" class="modal">
+                <div class="modal-content">
+            <span class="close"></span>
+                <p>Napisz wiadomość do <a>{{ user.firstname }} {{ user.lastname }}</a></p>
+                    <div class="photo-textarea">
+       <form>
+                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+
+                        <input type="hidden" name="username" value="">
+                    </div>
+                    <div class="buttons">
+                    <button class="cancel-btn">Anuluj</button>
+                    <button id="send-btn">Wyślij</button>
+        </form>
+                        </div>
+                    </div>
+                            </div>
 
     {% if user.username == app.user.username %}
         <div class="form-post">
@@ -117,6 +136,19 @@
     <script>
         $(document).ready(function () {
 
+          
+            
+                ////popup message
+            $(".message-ico").on("click", function () {
+                event.preventDefault();
+                $('#modal-message').show();
+            });
+            //close modals
+            $(".cancel-btn").on("click", function () {
+                event.preventDefault();
+                $('#mssgtxt').val("");
+                $('#modal-message').hide();
+            });
 
             //////////////photo preview
             function readURL(input) {

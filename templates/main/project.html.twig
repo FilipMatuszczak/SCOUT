@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link href="{{ asset('web/styles/profile.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('web/styles/project-edit.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('web/styles/style.css') }}" rel="stylesheet" type="text/css"/>
     <script src="{{ asset('web/scripts/jquery-3.4.1.min.js') }}"></script>
 {% endblock %}
@@ -22,10 +23,79 @@
         <div class="profile-right">
             <p id="name-profile">{{ project.title }}
                 {% if isAuthor %}
-                    <button class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
+                    <button id="edit-mode" class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
                 {% endif %}
             </p>
+            
+            
+             {% if isAuthor %}
+                     <div id="modal-edit" class="modal" style="display: hidden;">
+                <div class="modal-content">
+            <span class="close"></span>
+                {#       form         #}
+                    
+                     <div class="edit-profile">
+            
+            <div class="edit-container">
+                <div id="up">
+                    <div id="photo">
 
+
+                        <br>
+
+                        <label for="image">
+                            <input type="file" name="image" id="image" accept="image/jpeg, image/png"
+                                   class="fileToUpload" style="display:none;"/>
+                            <img id="photo-edit" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="120"
+                                 height="120">
+                        </label>
+
+                        <br><br><br>
+
+
+                    </div>
+                    
+                    <div class="name_div">
+                        <input type="text" class="name" placeholder="Tytuł" name="title" maxlength="50" value="{{ project.title }}"/>
+                    </div>
+                </div>
+                <div class="info" style="text-align: left; margin-left:1%; margin-top: 1%; margin-bottom:1%;">
+                    <p class="opis">Opis:</p><br>
+                    <textarea name="text" class="bio" rows="10" cols="25">{{ project.description }}</textarea>
+                    <input type="hidden" class="bio" placeholder="Opis" name="info" maxlength="250"/><br>
+                    
+                    <br>
+                </div>
+                
+                {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
+                <div id="tech-forms" class="forms">
+                    <input type="text" class="bio tech" id="tech" placeholder="Technologie" maxlength="50"
+                           name="technologies[]" list="TechList">
+                    <datalist id="TechList">
+
+                    </datalist>
+                    <button type="button" id="button-moret" class="button-moret btad">+</button>
+                    <br>
+                </div>
+
+                
+                <div id="Technologies"></div>
+
+
+            </div>
+        
+                    
+                    <br>
+                    <div class="buttons">
+                    <button id="cancel-edit" class="button">Anuluj</button>
+                    <input type="submit" id="send-btn" class="button" value="Zapisz">
+        </div>
+                        </div>
+                    </div>
+                            </div>
+                {% endif %}
+            
+            
 
             <p class="infos">TECHNOLOGIE</p>
             {% for technology in project.technology %}
@@ -67,8 +137,8 @@
                         <input type="hidden" name="username" value="">
                     </div>
                     <div class="buttons">
-                    <button class="cancel-btn">Anuluj</button>
-                    <button id="send-btn">Wyślij</button>
+                    <button class="cancel-btn button">Anuluj</button>
+                    <input type="submit" id="send-btn" class="button" value="Wyślij">
         </form>
                         </div>
                     </div>
@@ -82,8 +152,8 @@
                 <p>Czy chcesz wysłać prośbę o dołączenie do projektu <a>{{ project.title }}</a>?</p>
                     
                     <div class="buttons" style="height: 40px; margin-top: 20px;">
-                    <button class="cancel-btn">Anuluj</button>
-                    <button id="send-btn">Wyślij prośbę</button>
+                    <button class="cancel-btn button">Anuluj</button>
+                    <input type="submit" id="send-btn" class="button" value="Wyślij prośbę">
         
                         </div>
                     
@@ -157,7 +227,17 @@
                 $('#modal-message').hide();
             });
             
-
+            
+            //////popup edit mode
+                $("#edit-mode").on("click", function () {
+                event.preventDefault();
+                $('#modal-edit').show();
+            });
+            //cancel edit mode
+            $("#cancel-edit").on("click", function () {
+                event.preventDefault();
+                $('#modal-edit').hide();
+            });
             
             //////////////photo preview
             function readURL(input) {
@@ -167,7 +247,7 @@
                     var filename = (input.files[0].name);
 
                     reader.onload = function (e) {
-                        $('#file-cancel').html(filename + " x");
+                        $('#file-cancel').html("x " + filename);
                         $('#file-cancel').show();
                     }
 
@@ -206,6 +286,6 @@
         });
     </script>
 
-
+ <script src="{{ asset('web/scripts/edit-project.js') }}"></script>
 
 {% endblock %}

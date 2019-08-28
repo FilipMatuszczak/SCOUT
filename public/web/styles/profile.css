@@ -26,8 +26,9 @@
     width:  60%;
     
 }
-
-
+#edit-mode{
+    opacity: 0.5;
+}
 #name-profile{ 
     color: #7DA2AA;
     font-size: 28px;
@@ -204,7 +205,9 @@ hr{
   background-color: rgba(0,0,0,0.4); 
 }
 
-
+.modal::-webkit-scrollbar {
+    display: none;
+}
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; 
@@ -226,7 +229,7 @@ hr{
     width: 90%;
     padding-bottom: 5px;
 }
-.modal button{
+.button{
   margin-top: 5px;
     margin-bottom: 5px;
   padding: 10px 16px;
@@ -235,8 +238,9 @@ hr{
     float:left;
     width: 48%;
      opacity: 0.9;
+    color: white;
 }
-.modal button:hover{
+.modal .button:hover{
      opacity: 1;
 }
 #send-btn{

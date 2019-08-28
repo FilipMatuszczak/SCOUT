@@ -214,9 +214,10 @@ hr{
   margin-left: 42%;
   padding: 20px;
   border: 1px solid #888;
-  width: 35%; /
+  
+    min-width: 500px;
+    width: 35%;
 }
-
 
 .modal textarea{
     width: 97%;

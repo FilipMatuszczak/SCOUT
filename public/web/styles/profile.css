@@ -11,7 +11,7 @@
 }
 
 #profile-picture{
-    margin: 5px;
+    margin: 10% 10% 10% 10%;
     border: 1.5px solid #7DA2AA;
     object-fit: cover;
 }

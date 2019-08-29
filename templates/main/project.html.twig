@@ -97,25 +97,25 @@
             
             
 
-            <p class="infos">TECHNOLOGIE</p>
+            <p class="infos">TECHNOLOGIE</p><p>
             {% for technology in project.technology %}
                 {% if not loop.last %}
                     {{ technology.name }},
                 {% else %}
                     {{ technology.name }}
                 {% endif %}
-            {% endfor %}
+            {% endfor %}</p>
             <hr>
 
 
-            <p class="infos">CZŁONKOWIE</p>
+            <p class="infos">CZŁONKOWIE</p><p>
             {% for user in project.user %}
                 {% if not loop.last %}
                     {{ user.firstname }} ({{ user.username }}) {{ user.lastname }},
                 {% else %}
                     {{ user.firstname }} ({{ user.username }}) {{ user.lastname }}
                 {% endif %}
-            {% endfor %}
+            {% endfor %}</p>
             <hr>
 
 
@@ -151,7 +151,11 @@
             
                 <p>Czy chcesz wysłać prośbę o dołączenie do projektu <a>{{ project.title }}</a>?</p>
                     
-                    <div class="buttons" style="height: 40px; margin-top: 20px;">
+                     <textarea id="addtxt" name="text" class="form-control" placeholder="Napisz dlaczego chcesz dołączyć." rows="5" cols="25"></textarea>
+
+                        <input type="hidden" name="username" value="">
+                    
+                    <div class="buttons" style="height: 40px;">
                     <button class="cancel-btn button">Anuluj</button>
                     <input type="submit" id="send-btn" class="button" value="Wyślij prośbę">
         
@@ -223,6 +227,7 @@
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
                 $('#mssgtxt').val("");
+                $('#addtxt').val("");
                 $('#modal-add').hide();
                 $('#modal-message').hide();
             });

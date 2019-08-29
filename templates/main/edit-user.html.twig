@@ -19,7 +19,7 @@
 
             <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
                 <label>Data urodzenia:</label> <br>
-                <input type="date" {% if user.dateOfBirth is defined %}
+                <input type="date" {% if user.dateOfBirth is not null %}
                        value={{ user.dateOfBirth.format('Y-m-d') }}
                    {% endif %} name="bdaytime" style="border: 1px solid #7DA2AA;">
 

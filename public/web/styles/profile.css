@@ -258,3 +258,13 @@ hr{
     color: #7DA2AA;
     font-weight: bold;
 }
+.reportico{
+    float:right;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: darkred;
+    font-size: 16px;
+}
+.reportico:hover{
+ color: #AF0000;   
+}

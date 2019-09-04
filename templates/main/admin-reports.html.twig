@@ -1,0 +1,79 @@
+
+{% extends 'main/parent-admin.html.twig' %}
+   
+{% block body %}
+    
+      <div class="post">
+          <h6 style="margin: 0px;">Status?</h6>
+                <h5 style="margin-top: 5px;">AUTOR ↔ DATA</h5>
+                    <p> treść 
+          
+    <div class="photo"><img image-zoom
+            src="{{ asset('web/images/krowa.jpg') }}" width="250"
+             > </div>
+          
+          </p>
+                    
+                    <hr>
+                <h5 style="margin-top: 5px;"> ZGŁASZAJĄCY ↔ DATA</h5>
+                <p> powód </p>
+                    <div class="buttons">
+                     
+                    <button id="cancel">Anuluj zgłoszenie</button>
+                    <button id="delete">Usuń post</button>
+                    <button id="block">Zablokuj zgłaszajacego</button>
+                </div>
+    {#   
+     <div id="modal-confirm" class="modal">
+                <div class="modal-content">
+            <span class="close"></span>
+                <p>Czy na pewno chcesz usunąć post <a>USER</a></p>
+                    
+       <form>
+                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+
+                        
+                    <button class="cancel-btn button">Anuluj</button>
+                    <input type="submit" id="send-btn" class="button" value="Wyślij">
+        </form>
+                    </div>
+                            </div>
+     #}
+    
+                </div>
+                
+                <br>
+                
+                <div class="post">
+                <h5 style="margin-top: 5px;">AUTOR ↔ DATA</h5>
+                    
+                    <p> treść 
+                    
+                    
+                        <div class="photo"><img image-zoom
+                        src="{{ asset('web/images/krowa.jpg') }}" width="250"
+                        ></div>
+                        
+                    </p>
+                    
+                    <hr>
+                <h5> ZGŁASZAJĄCY ↔ DATA</h5>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nunc ante, feugiat eget sem id, sodales interdum ipsum. Nam vestibulum, lectus dignissim vestibulum ornare, leo urna pharetra leo, nec vestibulum ipsum augue tristique dolor. Nunc vel ipsum interdum, sollicitudin est nec, porta orci. Aenean nec tristique velit. Curabitur vel hendrerit massa. Sed ullamcorper laoreet fermentum. Aliquam aliquet ornare eros ut egestas. Praesent feugiat, ipsum ac dignissim tempus, dui quam egestas purus, et dignissim ipsum ante nec ligula. Proin id mi sed est gravida dapibus vel ac justo. Pellentesque ultrices placerat sapien eget aliquet. Donec tempor eros vitae ultrices cursus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nunc ante, feugiat eget sem id, sodales interdum ipsum. Nam vestibulum, lectus dignissim vestibulum ornare, leo urna pharetra leo, nec vestibulum ipsum augue tristique dolor. Nunc vel ipsum interdum, sollicitudin est nec, porta orci. Aenean nec tristique velit. Curabitur vel hendrerit massa. Sed ullamcorper laoreet fermentum. Aliquam aliquet ornare eros ut egestas. Praesent feugiat, ipsum ac dignissim tempus, dui quam egestas purus, et dignissim ipsum ante nec ligula. Proin id mi sed est gravida dapibus vel ac justo. Pellentesque ultrices placerat sapien eget aliquet. Donec tempor eros vitae ultrices cursus.
+
+                    Nullam vel dui sed massa pharetra consectetur. Integer rhoncus lacinia eros, a cursus enim maximus sed. In dapibus velit magna. Curabitur fringilla, dui ut scelerisque scelerisque, nulla orci finibus metus, nec posuere arcu libero et neque. Nulla nisi ante, egestas nec ex ac, tincidunt dapibus odio. Pellentesque ac nisi eget odio molestie porttitor ac quis ante. Cras dapibus quam ante, vel suscipit purus lacinia accumsan. In nec volutpat turpis. Nunc vel lorem sed tellus dictum tincidunt id vitae libero. Nunc molestie est commodo, consectetur augue imperdiet, tincidunt elit.
+
+Sed nec neque tempor, egestas elit eu, aliquam metus. Aliquam ac tincidunt tortor. In convallis sed ante a luctus. Cras vel dignissim ligula, eu consequat diam. Fusce accumsan libero eget mi dignissim, eget vestibulum metus luctus. Quisque fermentum lorem in augue sodales hendrerit. Duis dui mi, vehicula ac commodo non, malesuada vel erat. Fusce sed lectus finibus sapien dictum tristique eu non metus. Donec quis facilisis mauris. Morbi a orci non orci facilisis bibendum in sed lacus.
+
+Interdum et malesuada fames ac ante ipsum primis in faucibus. Phasellus neque velit, bibendum a auctor eu, luctus eu ex. Mauris et porta orci. In suscipit eu augue at suscipit. Curabitur viverra turpis sed diam porta, non molestie purus hendrerit. Nunc viverra neque vulputate, pulvinar nunc sit amet, placerat nisi. Aenean facilisis nec turpis sed mattis. Cras vel convallis ex. Mauris varius elementum eleifend. Donec maximus consectetur pretium. Donec at consequat dui, et lacinia risus. Nullam ut nibh sollicitudin ipsum mattis cursus quis nec nulla. Nam ornare nunc nibh, sed tincidunt erat varius et.
+
+Maecenas ut rhoncus est. Donec interdum augue mauris, eget elementum enim porttitor et. Morbi consectetur sem sit amet ipsum venenatis, nec cursus arcu convallis. Praesent ac dictum quam. Sed luctus nisl id ex efficitur, id bibendum velit viverra. Morbi felis ex, ultrices vitae efficitur in, eleifend a libero. Ut nunc turpis, consequat placerat nibh in, efficitur cursus massa. Aenean sollicitudin justo metus, nec sagittis velit elementum nec. Nunc bibendum commodo feugiat. Maecenas sapien lacus, porta vitae porta ac, mattis a tellus. Phasellus auctor neque urna, eu maximus diam molestie a. </p>
+                    <div class="buttons">
+                      
+                    <button id="cancel">Anuluj</button>
+                    <button id="delete">Usuń</button>
+                    <button id="block">Zablokuj zgłaszajacego</button>
+                </div>
+                <br>
+                </div>
+    
+     {% endblock %}

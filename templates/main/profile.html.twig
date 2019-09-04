@@ -91,6 +91,25 @@
                         </div>
                     </div>
                             </div>
+    
+     <div id="modal-report" class="modal">
+                <div class="modal-content">
+            <span class="close"></span>
+                <p>Dlaczego chcesz zgłosić post użytkownika <a>{{ user.firstname }} {{ user.lastname }}</a>?</p>
+                    <div class="photo-textarea">
+       <form>
+                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+
+                        <input type="hidden" name="username" value="">
+                    </div>
+                    <div class="buttons">
+                    <button class="cancel-btn button">Anuluj</button>
+                    <input type="submit" id="send-btn" class="button" value="Zgłoś">
+        </form>
+                        </div>
+                    </div>
+                            </div>
+    
 
     {% if user.username == app.user.username %}
         <div class="form-post">
@@ -123,6 +142,11 @@
             <p class="project-title"
                href="{{ path('user_profile', {'username': user.username}) }} ">{{ user.firstname }} {{ user.lastname }}</p>
             ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
+            
+            
+            <button class="reportico"><i class="fa fa-exclamation-circle"></i></button>
+            
+            
             <p class="comment-content">{{ post.text }}</p>
             {% if post.photo %}
                 <div class="comment-image"><img image-zoom
@@ -143,11 +167,19 @@
                 event.preventDefault();
                 $('#modal-message').show();
             });
+            
+                ////popup report
+            $(".reportico").on("click", function () {
+                event.preventDefault();
+                $('#modal-report').show();
+            });
+            
             //close modals
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
                 $('#mssgtxt').val("");
                 $('#modal-message').hide();
+                $('#modal-report').hide();
             });
 
             //////////////photo preview

@@ -175,9 +175,11 @@
                 <p>Dlaczego chcesz zgłosić post użytkownika <a>AUTOR</a>?</p>
                     <div class="photo-textarea">
        <form>
-                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+                    <textarea id="reptxt"name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="username" value="">
+                        <input type="hidden" name="" value="">
+           
+           
                     </div>
                     <div class="buttons">
                     <button class="cancel-btn button">Anuluj</button>
@@ -221,6 +223,8 @@
                    href="{{ path('user_profile', {'username': post.user.username}) }} ">{{ post.user.firstname }} {{ post.user.lastname }}</p>
                 ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
                 
+                 <input type="hidden" name="" value=""> {#idpostu#}
+                
                 <button id="reportico" class="reportico"><i class="fa fa-exclamation-circle"></i></button>
                 
                  <p class="comment-content">{{ post.text }}</p>
@@ -260,6 +264,7 @@
                 event.preventDefault();
                 $('#mssgtxt').val("");
                 $('#addtxt').val("");
+                $('#reptxt').val("");
                 $('#modal-add').hide();
                 $('#modal-message').hide();
                 $('#modal-report').hide();

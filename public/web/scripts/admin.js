@@ -3,20 +3,33 @@ $(document).ready(function(){
       
       
       
-             ////popup message
-            $(".message-ico").on("click", function () {
+             ////popup delete
+            $(".delete").on("click", function () {
                 event.preventDefault();
-                $('#modal-message').show();
+                $('#modal-delete').show();
             });
+            ////popup ban
+            $(".block").on("click", function () {
+                event.preventDefault();
+                $('#modal-ban').show();
+                ////przekazywanie zmiennej z postu do popupa
+            });
+
             //close modals
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
                 $('#mssgtxt').val("");
-                $('#modal-message').hide();
+                $('#modal-delete').hide();
+                $('#modal-ban').hide();
+                $('#modal-news').hide()
             });
       
       
-      
+         ////popup delete
+            $("#newsletter").on("click", function () {
+                event.preventDefault();
+                $('#modal-news').show();
+            });
       
       
       

@@ -24,7 +24,7 @@
       
   <a class="active" href="">Zgłoszenia</a>
   <a href="">Technologie</a>
- <a >Newsletter</a>       
+ <a id="newsletter" >Newsletter</a>       
   <br> <br> <br>
   <a href="">Wyloguj</a>
 </div>
@@ -34,6 +34,25 @@
             
             <div class="content">
 
+                {% block newsletter %}
+                
+                      <div id="modal-news" class="modal">
+                <div class="modal-content">
+            <span class="close"></span>
+                    
+       <form>
+           
+                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25" placeholder="Wiadomość dla wszystkich użytkowników..."></textarea>
+           
+           <div class="modal-buttons">
+                    <button class="cancel-btn">Anuluj</button>
+                    <input type="submit" id="news-btn" class="button" value="Wyślij"></div>
+        </form>
+                    </div>
+                            </div> 
+                    
+                {% endblock %}
+                
             {% block body %}
             
             

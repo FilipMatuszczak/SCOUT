@@ -82,7 +82,8 @@
        <form>
                     <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="username" value="">
+                        <input type="hidden" name="username" value=""> 
+           
                     </div>
                     <div class="buttons">
                     <button class="cancel-btn button">Anuluj</button>
@@ -92,15 +93,19 @@
                     </div>
                             </div>
     
+    {# reportowanie #}
      <div id="modal-report" class="modal">
                 <div class="modal-content">
             <span class="close"></span>
                 <p>Dlaczego chcesz zgłosić post użytkownika <a>{{ user.firstname }} {{ user.lastname }}</a>?</p>
                     <div class="photo-textarea">
        <form>
-                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+                    <textarea id="reptxt" name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="username" value="">
+           
+                        <input type="hidden" name="" value=""> {#idpostu?#}
+           
+           
                     </div>
                     <div class="buttons">
                     <button class="cancel-btn button">Anuluj</button>
@@ -109,7 +114,7 @@
                         </div>
                     </div>
                             </div>
-    
+    {#   #}
 
     {% if user.username == app.user.username %}
         <div class="form-post">
@@ -178,6 +183,7 @@
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
                 $('#mssgtxt').val("");
+                $('#reptxt').val("");
                 $('#modal-message').hide();
                 $('#modal-report').hide();
             });

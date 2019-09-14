@@ -238,7 +238,6 @@ create table if not exists reports(
     report_id int auto_increment,
     user_id INT not null,
     post_id INT null,
-    photo_id INT null,
     reason TEXT NOT NULL,
     timestamp DATETIME NOT NULL,
     options TINYINT(4) DEFAULT 0,
@@ -247,10 +246,10 @@ create table if not exists reports(
     FOREIGN KEY (post_id) REFERENCES posts(post_id)
 );
 
-insert into reports (user_id, post_id, photo_id, reason, timestamp) VALUES
-(1,2,null,'i dont like it',now()),
-(2,1,null,'its offensive',now()),
-(1,3,null,'please ban it',now());
+insert into reports (user_id, post_id, reason, timestamp) VALUES
+(1,2,'i dont like it',now()),
+(2,1,'its offensive',now()),
+(1,3,'please ban it',now());
 
 create table if not exists technologies(
     technology_id int auto_increment,

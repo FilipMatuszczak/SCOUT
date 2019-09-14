@@ -128,3 +128,8 @@ create_project_post:
     path: /create_project_post
     controller:  App\Controller\ProjectsController:createPostForProject
     methods: POST
+
+report_post:
+    path: /report_post
+    controller: App\Controller\ReportController:reportPostAction
+    methods: POST

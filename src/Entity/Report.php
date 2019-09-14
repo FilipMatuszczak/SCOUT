@@ -5,11 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="reports", indexes={@ORM\Index(name="post_id", columns={"post_id"}), @ORM\Index(name="user_id", columns={"user_id"}), @ORM\Index(name="photo_id", columns={"photo_id"})})
+ * @ORM\Table(name="reports", indexes={@ORM\Index(name="post_id", columns={"post_id"}), @ORM\Index(name="user_id", columns={"user_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ReportRepository")
  */
 class Report
 {
+    const REPORT_NEW = 1;
+    const REPORT_ACCEPTED = 2;
+    const REPORT_DECLINED = 4;
+
     /**
      * @var int
      *

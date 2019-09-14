@@ -26,96 +26,104 @@
                     <button id="edit-mode" class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
                 {% endif %}
             </p>
-            
-            
-             {% if isAuthor %}
-                     <div id="modal-edit" class="modal" style="display: hidden;">
-                <div class="modal-content">
-            <span class="close"></span>
-                {#       form         #}
-                    
-                     <div class="edit-profile">
-            
-            <div class="edit-container">
-                <div id="up">
-                    <div id="photo">
 
 
-                        <br>
+            {% if isAuthor %}
+                <div id="modal-edit" class="modal" style="display: hidden;">
+                    <div class="modal-content">
+                        <span class="close"></span>
+                        {#       form         #}
 
-                        <label for="image">
-                            <input type="file" name="image" id="image" accept="image/jpeg, image/png"
-                                   class="fileToUpload" style="display:none;"/>
-                            <img id="photo-edit" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}" width="120"
-                                 height="120">
-                        </label>
+                        <div class="edit-profile">
 
-                        <br><br><br>
-
-
-                    </div>
-                    
-                    <div class="name_div">
-                        <input type="text" class="name" placeholder="Tytuł" name="title" maxlength="50" value="{{ project.title }}"/>
-                    </div>
-                </div>
-                <div class="info" style="text-align: left; margin-left:1%; margin-top: 1%; margin-bottom:1%;">
-                    <p class="opis">Opis:</p><br>
-                    <textarea name="text" class="bio" rows="10" cols="25">{{ project.description }}</textarea>
-                    <input type="hidden" class="bio" placeholder="Opis" name="info" maxlength="250"/><br>
-                    
-                    <br>
-                </div>
-                
-                {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
-                <div id="tech-forms" class="forms">
-                    <input type="text" class="bio tech" id="tech" placeholder="Technologie" maxlength="50"
-                           name="technologies[]" list="TechList">
-                    <datalist id="TechList">
-
-                    </datalist>
-                    <button type="button" id="button-moret" class="button-moret btad">+</button>
-                    <br>
-                </div>
-
-                
-                <div id="Technologies"></div>
+                            <div class="edit-container">
+                                <div id="up">
+                                    <div id="photo">
 
 
-            </div>
-        
-                    
-                    <br>
-                    <div class="buttons">
-                    <button id="cancel-edit" class="button">Anuluj</button>
-                    <input type="submit" id="send-btn" class="button" value="Zapisz">
-        </div>
+                                        <br>
+
+                                        <label for="image">
+                                            <input type="file" name="image" id="image" accept="image/jpeg, image/png"
+                                                   class="fileToUpload" style="display:none;"/>
+                                            <img id="photo-edit"
+                                                 src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}"
+                                                 width="120"
+                                                 height="120">
+                                        </label>
+
+                                        <br><br><br>
+
+
+                                    </div>
+
+                                    <div class="name_div">
+                                        <input type="text" class="name" placeholder="Tytuł" name="title" maxlength="50"
+                                               value="{{ project.title }}"/>
+                                    </div>
+                                </div>
+                                <div class="info"
+                                     style="text-align: left; margin-left:1%; margin-top: 1%; margin-bottom:1%;">
+                                    <p class="opis">Opis:</p><br>
+                                    <textarea name="text" class="bio" rows="10"
+                                              cols="25">{{ project.description }}</textarea>
+                                    <input type="hidden" class="bio" placeholder="Opis" name="info"
+                                           maxlength="250"/><br>
+
+                                    <br>
+                                </div>
+
+                                {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
+                                <div id="tech-forms" class="forms">
+                                    <input type="text" class="bio tech" id="tech" placeholder="Technologie"
+                                           maxlength="50"
+                                           name="technologies[]" list="TechList">
+                                    <datalist id="TechList">
+
+                                    </datalist>
+                                    <button type="button" id="button-moret" class="button-moret btad">+</button>
+                                    <br>
+                                </div>
+
+
+                                <div id="Technologies"></div>
+
+
+                            </div>
+
+
+                            <br>
+                            <div class="buttons">
+                                <button id="cancel-edit" class="button">Anuluj</button>
+                                <input type="submit" id="send-btn" class="button" value="Zapisz">
+                            </div>
                         </div>
                     </div>
-                            </div>
-                {% endif %}
-            
-            
+                </div>
+            {% endif %}
 
-            <p class="infos">TECHNOLOGIE</p><p>
-            {% for technology in project.technology %}
-                {% if not loop.last %}
-                    {{ technology.name }},
-                {% else %}
-                    {{ technology.name }}
-                {% endif %}
-            {% endfor %}</p>
+
+            <p class="infos">TECHNOLOGIE</p>
+            <p>
+                {% for technology in project.technology %}
+                    {% if not loop.last %}
+                        {{ technology.name }},
+                    {% else %}
+                        {{ technology.name }}
+                    {% endif %}
+                {% endfor %}</p>
             <hr>
 
 
-            <p class="infos">CZŁONKOWIE</p><p>
-            {% for user in project.user %}
-                {% if not loop.last %}
-                    {{ user.firstname }} ({{ user.username }}) {{ user.lastname }},
-                {% else %}
-                    {{ user.firstname }} ({{ user.username }}) {{ user.lastname }}
-                {% endif %}
-            {% endfor %}</p>
+            <p class="infos">CZŁONKOWIE</p>
+            <p>
+                {% for user in project.user %}
+                    {% if not loop.last %}
+                        {{ user.firstname }} ({{ user.username }}) {{ user.lastname }},
+                    {% else %}
+                        {{ user.firstname }} ({{ user.username }}) {{ user.lastname }}
+                    {% endif %}
+                {% endfor %}</p>
             <hr>
 
 
@@ -124,71 +132,74 @@
     </div>
     {% if not isMember %}
         <div id="mess">
-            <button id="message" class="navico message-ico"><i class="fa fa-envelope"></i></button> {# wyslij wiadomosc #}
-            
+            <button id="message" class="navico message-ico"><i class="fa fa-envelope"></i>
+            </button> {# wyslij wiadomosc #}
+
             <div id="modal-message" class="modal">
                 <div class="modal-content">
-            <span class="close"></span>
-                <p>Napisz wiadomość do <a href="">Autor</a></p>
+                    <span class="close"></span>
+                    <p>Napisz wiadomość do <a href="">Autor</a></p>
                     <div class="photo-textarea">
-       <form>
-                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25"></textarea>
+                        <form>
+                            <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="username" value="">
+                            <input type="hidden" name="username" value="">
                     </div>
                     <div class="buttons">
-                    <button class="cancel-btn button">Anuluj</button>
-                    <input type="submit" id="send-btn" class="button" value="Wyślij">
-        </form>
-                        </div>
+                        <button class="cancel-btn button">Anuluj</button>
+                        <input type="submit" id="send-btn" class="button" value="Wyślij">
+                        </form>
                     </div>
-                            </div>
+                </div>
+            </div>
 
-            <button id="add-me" class="navico message-ico"><i class="fa fa-user-plus"></i></button> {# popros o dodanie #}
+            <button id="add-me" class="navico message-ico"><i class="fa fa-user-plus"></i>
+            </button> {# popros o dodanie #}
 
             <div id="modal-add" class="modal">
                 <div class="modal-content">
-            
-                <p>Czy chcesz wysłać prośbę o dołączenie do projektu <a>{{ project.title }}</a>?</p>
-                    
-                     <textarea id="addtxt" name="text" class="form-control" placeholder="Napisz dlaczego chcesz dołączyć." rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="username" value="">
-                    
+                    <p>Czy chcesz wysłać prośbę o dołączenie do projektu <a>{{ project.title }}</a>?</p>
+
+                    <textarea id="addtxt" name="text" class="form-control"
+                              placeholder="Napisz dlaczego chcesz dołączyć." rows="5" cols="25"></textarea>
+
+                    <input type="hidden" name="username" value="">
+
                     <div class="buttons" style="height: 40px;">
-                    <button class="cancel-btn button">Anuluj</button>
-                    <input type="submit" id="send-btn" class="button" value="Wyślij prośbę">
-        
-                        </div>
-                    
+                        <button class="cancel-btn button">Anuluj</button>
+                        <input type="submit" id="send-btn" class="button" value="Wyślij prośbę">
+
                     </div>
-                            </div>
-            
-            
+
+                </div>
+            </div>
+
+
         </div>
     {% endif %}
-    
-     {# reporty #}
-             <div id="modal-report" class="modal">
-                <div class="modal-content">
-            <span class="close"></span>
-                <p>Dlaczego chcesz zgłosić post użytkownika <a>AUTOR</a>?</p>
-                    <div class="photo-textarea">
-       <form>
-                    <textarea id="reptxt"name="text" class="form-control" rows="5" cols="25"></textarea>
 
-                        <input type="hidden" name="" value="">
-           
-           
-                    </div>
-                    <div class="buttons">
-                    <button class="cancel-btn button">Anuluj</button>
-                    <input type="submit" id="send-btn" class="button" value="Zgłoś">
-        </form>
-                        </div>
-                    </div>
-                            </div>
-    
+    {# reporty #}
+    <div id="modal-report" class="modal">
+        <div class="modal-content">
+            <span class="close"></span>
+            <p>Dlaczego chcesz zgłosić post użytkownika <a>AUTOR</a>?</p>
+            <div class="photo-textarea">
+                <form action="{{ path('report_post') }}" method="post">
+                    <textarea id="reptxt" name="reason" class="form-control" rows="5" cols="25"></textarea>
+
+                    <input id="postId" type="hidden" name="postId" value='default'> {#idpostu?#}
+                    <input type="hidden" name="destination" value={{ app.request.attributes.get('_route') }}>
+                    <input type="hidden" name="projectId" value={{ project.projectId }}>
+            </div>
+            <div class="buttons">
+                <button class="cancel-btn button">Anuluj</button>
+                <input type="submit" id="send-btn" class="button" value="Zgłoś">
+                </form>
+            </div>
+        </div>
+    </div>
+
     {% if isMember %}
         <div class="form-post">
             <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}"
@@ -216,28 +227,36 @@
 
         {% for post in posts %}
             <div class="comment">
-                <a href="{{ path('user_profile', {'username': post.user.username}) }}"><img id="comment-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username) }}"
-                                            width="70" height="70"></a>
+                <a href="{{ path('user_profile', {'username': post.user.username}) }}"><img id="comment-avatar"
+                                                                                            src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username) }}"
+                                                                                            width="70" height="70"></a>
 
                 <p class="project-title"
                    href="{{ path('user_profile', {'username': post.user.username}) }} ">{{ post.user.firstname }} {{ post.user.lastname }}</p>
                 ✽ {{ post.timestamp.format('Y-m-d H:i:s') }}
-                
-                 <input type="hidden" name="" value=""> {#idpostu#}
-                
-                <button id="reportico" class="reportico"><i class="fa fa-exclamation-circle"></i></button>
-                
-                 <p class="comment-content">{{ post.text }}</p>
-            {% if post.photo %}
-                <div class="comment-image"><img image-zoom
-                        src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByPostId(post.postId) }}" width="250"
+
+                <input type="hidden" name="" value=""> {#idpostu#}
+                {% if post.user.username != app.user.username %}
+                    <button class="reportico" onclick="reportPost({{ post.postId }})" ><i class="fa fa-exclamation-circle"></i></button>
+                {% endif %}
+                <p class="comment-content">{{ post.text }}</p>
+                {% if post.photo %}
+                    <div class="comment-image"><img image-zoom
+                                                    src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByPostId(post.postId) }}"
+                                                    width="250"
                         ></div>
-            {% endif %}
-        </div>
+                {% endif %}
+            </div>
         {% endfor %}
     {% endif %}
 
     <script>
+        function reportPost(postId) {
+            event.preventDefault();
+            document.getElementById("postId").value = postId;
+            $('#modal-report').show();
+        }
+
         $(document).ready(function () {
 
             ////popup add-me
@@ -245,20 +264,13 @@
                 event.preventDefault();
                 $('#modal-add').show();
             });
-            
-                ////popup message
+
+            ////popup message
             $("#message").on("click", function () {
                 event.preventDefault();
                 $('#modal-message').show();
             });
-            
-             ////popup report
-            $("#reportico").on("click", function () {
-                event.preventDefault();
-                $('#modal-report').show();
-            });
-            
-            
+
             //close modals
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
@@ -269,10 +281,10 @@
                 $('#modal-message').hide();
                 $('#modal-report').hide();
             });
-            
-            
+
+
             //////popup edit mode
-                $("#edit-mode").on("click", function () {
+            $("#edit-mode").on("click", function () {
                 event.preventDefault();
                 $('#modal-edit').show();
             });
@@ -281,7 +293,7 @@
                 event.preventDefault();
                 $('#modal-edit').hide();
             });
-            
+
             //////////////photo preview
             function readURL(input) {
 
@@ -309,26 +321,26 @@
                 $('#file-cancel').hide();
             });
 
-              ///////photo preview comment
-        
-        $('img[image-zoom]').addClass('img-enlargable').click(function(){
-    var src = $(this).attr('src');
-    $('<div>').css({
-        background: 'RGBA(0,0,0,.7) url('+src+') no-repeat center',
-        backgroundSize: 'contain',
-        width:'100%', height:'100%',
-        position:'fixed',
-        zIndex:'10000',
-        top:'0', left:'0',
-        cursor: 'zoom-out'
-    }).click(function(){
-        $(this).remove();
-    }).appendTo('body');
-});
+            ///////photo preview comment
+
+            $('img[image-zoom]').addClass('img-enlargable').click(function () {
+                var src = $(this).attr('src');
+                $('<div>').css({
+                    background: 'RGBA(0,0,0,.7) url(' + src + ') no-repeat center',
+                    backgroundSize: 'contain',
+                    width: '100%', height: '100%',
+                    position: 'fixed',
+                    zIndex: '10000',
+                    top: '0', left: '0',
+                    cursor: 'zoom-out'
+                }).click(function () {
+                    $(this).remove();
+                }).appendTo('body');
+            });
 
         });
     </script>
 
- <script src="{{ asset('web/scripts/edit-project.js') }}"></script>
+    <script src="{{ asset('web/scripts/edit-project.js') }}"></script>
 
 {% endblock %}

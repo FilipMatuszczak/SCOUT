@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    const COLUMN_USER_ID = 'user_id';
+    const COLUMN_USER_ID = 'userId';
     const COLUMN_FIRST_NAME = 'firstname';
     const COLUMN_LAST_NAME = 'lastname';
     const COLUMN_USERNAME = 'username';

@@ -133,3 +133,8 @@ report_post:
     path: /report_post
     controller: App\Controller\ReportController:reportPostAction
     methods: POST
+
+create_message:
+    path: /create_message
+    controller: App\Controller\MessageController:writeMessageToUserAction
+    methods: POST

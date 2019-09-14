@@ -138,3 +138,8 @@ create_message:
     path: /create_message
     controller: App\Controller\MessageController:writeMessageToUserAction
     methods: POST
+
+admin_reports:
+    path: /admin/reports
+    controller: App\Controller\AdminController:adminReportsIndexAction
+    methods: GET

@@ -30,7 +30,9 @@ class MainController extends AbstractController
         $userToken = $this->security->getUser();
 
         $user = $this->userProvider->loadUserByUsername($userToken->getUsername());
-
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_reports');
+        }
         return $this->render('main/main.html.twig', ["projects" => $user->getProject()]);
     }
 }

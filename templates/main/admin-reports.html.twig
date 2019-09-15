@@ -1,84 +1,94 @@
-
 {% extends 'main/parent-admin.html.twig' %}
    
 {% block body %}
-    
-      {# potwierdzenie usuniecia #} 
-     <div id="modal-delete" class="modal">
-                <div class="modal-content">
-            <span class="close"></span>
-                    
-       <form>
-            <input type="hidden" name="" id=""/>
-           
-                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25" placeholder="Powód usunięcia postu..."></textarea>
 
-            <label style="display: block; margin-left: 250px; "><input type="checkbox" name="checkbox" value="value">Zbanuj dodatkowo użytkownika</label> 
-           
-           <div class="modal-buttons">
+    {# potwierdzenie usuniecia #}
+    <div id="modal-delete" class="modal">
+        <div class="modal-content">
+            <span class="close"></span>
+
+            <form>
+                <input type="hidden" name="" id=""/>
+
+                <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"
+                          placeholder="Powód usunięcia postu..."></textarea>
+
+                <label style="display: block; margin-left: 250px; "><input type="checkbox" name="checkbox"
+                                                                           value="value">Zbanuj dodatkowo
+                    użytkownika</label>
+
+                <div class="modal-buttons">
                     <button class="cancel-btn">Anuluj</button>
                     <input type="submit" id="send-btn" class="button sb delete" value="Usuń"></div>
-        </form>
-                    </div>
-                            </div>  
-     {# potwierdzenie zbanowania #} 
-    
+            </form>
+        </div>
+    </div>
+    {# potwierdzenie zbanowania #}
+
     <div id="modal-ban" class="modal">
-                <div class="modal-content">
+        <div class="modal-content">
             <span class="close"></span>
-                    
-       <form>
-           <input type="hidden" name="" id=""/>
-           
-                    <textarea id="mssgtxt"name="text" class="form-control" rows="5" cols="25" placeholder="Powód zbanowania użytkownika..."></textarea>
-           
-           <div class="modal-buttons">
+
+            <form>
+                <input type="hidden" name="" id=""/>
+
+                <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"
+                          placeholder="Powód zbanowania użytkownika..."></textarea>
+
+                <div class="modal-buttons">
                     <button class="cancel-btn">Anuluj</button>
                     <input type="submit" id="ban-btn" class="button sb block" value="Zbanuj"></div>
-        </form>
-                    </div>
-                            </div> 
+            </form>
+        </div>
+    </div>
     {# Dałam powody zbanowania bo zakladam ze chcemy po zbanowaniu wysyłać wiadomość do użytkownika, że jego post został usuniety/zbanowany. Jakby co to mozna usunąć. 
         Do popupa bedzie przekazywany numer zgłoszenia.
          Zastanawialam sie czy dać przycisk zbanuj zgłaszajacego jeśli np namolnie zgłasza posty ktore nie łamia regulaminu ale jestes na wakacjach wiec nie chce ci zawracać dupy. #}
-    
-    
-    
-    
+
+
+
+
     {#start post#}
-    
-      <div class="post">
-          <h6 style="margin: 0px;">IDZgłoszenia - Status</h6>
-                <h5 style="margin-top: 5px;">AUTOR ↔ DATA</h5>
-                    <p> treść 
-          
-    <div class="photo"><img image-zoom
-            src="{{ asset('web/images/krowa.jpg') }}" width="250"
-             > </div>
-          
-          </p>
-                    
-                    <hr>
-                <h5 style="margin-top: 5px;"> ZGŁASZAJĄCY ↔ DATA</h5>
-                <p> powód </p>
-                    <div class="buttons">
-                     
-                    <button class="cancel">Anuluj zgłoszenie</button>
-                    <button class="delete">Usuń post</button>
-                    <button class="block">Zablokuj użytkownika</button>
-                </div>
-   
-    
-    
-    
-    
-                </div>
-                
-                <br>
-                {#end post #}
-                
-    
-    
-    
-    
-     {% endblock %}
+    {% for report in reports %}
+        <div class="post">
+            <h6 style="margin: 0px;">ID: {{ report.reportId }} </h6>
+            <h5 style="margin-top: 5px;">{{ report.post.user.username }}
+                ↔ {{ report.post.timestamp.format('Y-m-d H:i:s') }}</h5>
+            <p>Treść: {{ report.post.text }}
+                {% if report.post.photo %}
+            <div class="photo"><img image-zoom
+                                    src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByPostId(report.post.postId) }}"
+                                    width="250"
+                ></div>
+            {% endif %}
+
+            </p>
+
+            <hr>
+            <h5 style="margin-top: 5px;"> {{ report.user.username }} ↔ {{ report.timestamp.format('Y-m-d H:i:s') }}</h5>
+            <p> {{ report.reason }} </p>
+            <div class="buttons">
+
+                <button class="cancel" onclick="function cancelReport() {
+                        var http = new XMLHttpRequest();
+                        http.open('PATCH', '{{ app.request.baseUrl }}'+'{{ path('cancel_report', {'reportId': report.reportId}) }}', false)
+                        http.send();
+                        window.location.href = '{{ app.request.baseUrl }}'+'{{ path('admin_reports') }}';
+
+                }
+                cancelReport({{ report.reportId }})">Anuluj zgłoszenie</button>
+                <button class="delete">Usuń post</button>
+                <button class="block">Zablokuj użytkownika</button>
+            </div>
+
+
+        </div>
+
+        <br>
+        {#end post #}
+
+    {% endfor %}
+
+
+
+{% endblock %}

@@ -149,7 +149,17 @@ admin_reports:
     controller: App\Controller\AdminController:adminReportsIndexAction
     methods: GET
 
+admin_technologies:
+    path: /admin/technologies
+    controller: App\Controller\AdminController:adminTechnologiesIndexAction
+    methods: GET
+
 send_add_user_to_project_request:
     path: /add_to_project_request
     controller: App\Controller\ProjectsController:sendRequestToAddToProjectAction
     methods: POST
+
+cancel_report:
+    path: /admin/reports/cancel_report/{reportId}
+    controller: App\Controller\AdminController:cancelReportAction
+    methods: PATCH

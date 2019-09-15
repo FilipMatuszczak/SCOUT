@@ -89,7 +89,7 @@ class UserRepository extends ServiceEntityRepository
                     ->setParameter('language', $language);
             }
 
-            $queryBuilder->setFirstResult($from)->setMaxResults($to)->orderBy('u.' . $sorting['sortKey'], $sorting['dir']);
+            $queryBuilder->andWhere('BIT_AND(u.options, 8) = 0')->setFirstResult($from)->setMaxResults($to)->orderBy('u.' . $sorting['sortKey'], $sorting['dir']);
 
             return $queryBuilder->getQuery()->getResult();
     }

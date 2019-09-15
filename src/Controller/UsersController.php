@@ -35,8 +35,8 @@ class UsersController extends AbstractController
         $language = !empty($request->get('language')) ? $request->get('language') : '';
         $city = !empty($request->get('city')) ? $request->get('city') : '';
 
-        $users = $this->userFilterDataProvier->getUsersByFilters($page, $firstName, $lastName, $sorting, $language, $technology, $city);
-        $nextUsers = $this->userFilterDataProvier->getUsersByFilters($page + 1, $firstName, $lastName, $sorting, $language, $technology, $city);
+        $users = $this->userFilterDataProvier->getUsersByFilters((int)$page, $firstName, $lastName, $sorting, $language, $technology, $city);
+        $nextUsers = $this->userFilterDataProvier->getUsersByFilters((int)$page + 1, $firstName, $lastName, $sorting, $language, $technology, $city);
 
         $nextPage = $page;
         if (sizeof($nextUsers) != 0) {

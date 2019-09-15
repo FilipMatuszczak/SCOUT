@@ -96,6 +96,11 @@ class ProjectsDataProvider
         return $this->postRepository->fetchProjectPosts($project);
     }
 
+    public function getAuthor($projectId)
+    {
+        return $this->userRepository->findOneBy(['userId' => $this->userProjectRepository->getAuthorId($projectId)]);
+    }
+
     private function convertToSqlSorting($sorting)
     {
         switch ($sorting) {

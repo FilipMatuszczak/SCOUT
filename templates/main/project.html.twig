@@ -138,12 +138,12 @@
             <div id="modal-message" class="modal">
                 <div class="modal-content">
                     <span class="close"></span>
-                    <p>Napisz wiadomość do <a href="">Autor</a></p>
+                    <p>Napisz wiadomość do <a href="">{{ author.username }}</a></p>
                     <div class="photo-textarea">
-                        <form>
-                            <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"></textarea>
+                        <form action="{{ path('create_message') }}" method=post>
+                            <textarea id="mssgtxt" name="messageText" class="form-control" rows="5" cols="25"></textarea>
 
-                            <input type="hidden" name="username" value="">
+                            <input type="hidden" name="receiverId" value={{ author.userId }}>
                     </div>
                     <div class="buttons">
                         <button class="cancel-btn button">Anuluj</button>

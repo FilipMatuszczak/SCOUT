@@ -92,8 +92,14 @@ class ProjectsController extends AbstractController
         }
 
         $posts = $this->projectDataProvider->getProjectPosts($project);
-
-        return $this->render("main/project.html.twig", ['project' => $project, 'isMember' => $isMember, 'isAuthor' => $isAuthor, 'posts' => $posts]);
+        $author = $this->projectDataProvider->getAuthor($projectId);
+        return $this->render("main/project.html.twig", [
+            'project' => $project,
+            'isMember' => $isMember,
+            'isAuthor' => $isAuthor,
+            'posts' => $posts,
+            'author' => $author,
+        ]);
     }
 
     public function createProjectIndexAction()

@@ -51,4 +51,21 @@ class UserProjectRepository
             ->execute()
             ->fetchColumn();
     }
+
+    public function getAuthorId($projectId)
+    {
+        $qb = new QueryBuilder($this->connection);
+
+        return $qb->select('user_id')
+            ->from(self::TABLE, '')
+            ->where('options = 1')
+            ->andWhere('project_id = :projectId')
+            ->setParameters(
+                [
+                    'projectId' => $projectId,
+                ]
+            )
+            ->execute()
+            ->fetchColumn();
+    }
 }

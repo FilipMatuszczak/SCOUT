@@ -148,3 +148,8 @@ admin_reports:
     path: /admin/reports
     controller: App\Controller\AdminController:adminReportsIndexAction
     methods: GET
+
+send_add_user_to_project_request:
+    path: /add_to_project_request
+    controller: App\Controller\ProjectsController:sendRequestToAddToProjectAction
+    methods: POST

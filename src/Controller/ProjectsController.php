@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Security\UserProvider;
+use App\Services\MessageCreator;
 use App\Services\PostCreator;
 use App\Services\ProjectCreator;
 use App\Services\ProjectsDataProvider;
@@ -29,12 +30,16 @@ class ProjectsController extends AbstractController
     /** @var PostCreator */
     private $postCreator;
 
+    /** @var MessageCreator */
+    private $messageCreator;
+
     public function __construct(
         ProjectsDataProvider $projectDataProvider,
         ProjectCreator $projectCreator,
         Security $security,
         UserProvider $userProvider,
-        PostCreator $postCreator
+        PostCreator $postCreator,
+        MessageCreator $messageCreator
     )
     {
         $this->projectDataProvider = $projectDataProvider;
@@ -42,6 +47,7 @@ class ProjectsController extends AbstractController
         $this->security = $security;
         $this->userProvider = $userProvider;
         $this->postCreator = $postCreator;
+        $this->messageCreator = $messageCreator;
     }
 
     public function indexAction(Request $request)
@@ -158,14 +164,15 @@ class ProjectsController extends AbstractController
         return $this->redirectToRoute('project_profile', ['projectId' => $projectId]);
     }
 
-    private function canEdit($username)
+    public function sendRequestToAddToProjectAction(Request $request)
     {
-        $currentUsername = $user = $this->security->getUser()->getUsername();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        if ($currentUsername !== $username) {
-            return null;
-        }
+        $messageText = $request->get('messageText');
+        $projectId = $request->get('projectId');
 
-        return $this->userProvider->loadUserByUsername($username);
+        $this->messageCreator->createAddUserToProjectRequest($projectId, $messageText);
+
+        return $this->redirectToRoute('main');
     }
 }

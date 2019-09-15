@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AddUserToProjectRequest
 {
+    const OPTIONS_NEW = 1;
+    const OPTIONS_ACCEPTED = 2;
+    const OPTIONS_DECLINED = 4;
+
     /**
      * @var int
      *

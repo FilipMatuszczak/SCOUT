@@ -124,6 +124,11 @@ project_profile:
     controller: App\Controller\ProjectsController:projectProfileAction
     methods: GET
 
+edit_project:
+    path: /edit_project
+    controller: App\Controller\ProjectsController:editProjectAction
+    methods: POST
+
 create_project_post:
     path: /create_project_post
     controller:  App\Controller\ProjectsController:createPostForProject

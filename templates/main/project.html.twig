@@ -10,9 +10,6 @@
 
 
 {% block body %}
-
-
-
     <div id="profile">
         <div class="profile-left">
             <img id="profile-picture"
@@ -26,80 +23,83 @@
                     <button id="edit-mode" class="navico message-ico"><i class="fa fa-pencil"></i></button> {# edycja #}
                 {% endif %}
             </p>
-
-
             {% if isAuthor %}
-                <div id="modal-edit" class="modal" style="display: hidden;">
-                    <div class="modal-content">
-                        <span class="close"></span>
-                        {#       form         #}
+                <form action="{{ path('edit_project') }}" enctype="multipart/form-data" method="post">
+                    <div id="modal-edit" class="modal" style="display: hidden;">
+                        <div class="modal-content">
+                            <span class="close"></span>
+                            {#       form         #}
 
-                        <div class="edit-profile">
+                            <div class="edit-profile">
 
-                            <div class="edit-container">
-                                <div id="up">
-                                    <div id="photo">
+                                <div class="edit-container">
+                                    <div id="up">
+                                        <div id="photo">
 
+
+                                            <br>
+
+                                            <label for="image">
+                                                <input type="file" name="photo" id="image"
+                                                       accept="image/jpeg, image/png"
+                                                       class="fileToUpload" style="display:none;"/>
+                                                <img id="photo-edit"
+                                                     src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}"
+                                                     width="120"
+                                                     height="120">
+                                            </label>
+
+                                            <br><br><br>
+
+
+                                        </div>
+
+                                        <div class="name_div">
+                                            <input type="text" class="name" placeholder="Tytuł" name="title"
+                                                   maxlength="50"
+                                                   value="{{ project.title }}"/>
+                                        </div>
+                                    </div>
+                                    <div class="info"
+                                         style="text-align: left; margin-left:1%; margin-top: 1%; margin-bottom:1%;">
+                                        <p class="opis">Opis:</p><br>
+                                        <textarea name="text" class="bio" rows="10"
+                                                  cols="25">{{ project.description }}</textarea>
+                                        <input type="hidden" class="bio" placeholder="Opis" name="description"
+                                               maxlength="250"/><br>
 
                                         <br>
-
-                                        <label for="image">
-                                            <input type="file" name="image" id="image" accept="image/jpeg, image/png"
-                                                   class="fileToUpload" style="display:none;"/>
-                                            <img id="photo-edit"
-                                                 src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByProjectTitle(project.title) }}"
-                                                 width="120"
-                                                 height="120">
-                                        </label>
-
-                                        <br><br><br>
-
-
                                     </div>
 
-                                    <div class="name_div">
-                                        <input type="text" class="name" placeholder="Tytuł" name="title" maxlength="50"
-                                               value="{{ project.title }}"/>
+                                    {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
+                                    <div id="tech-forms" class="forms">
+                                        <input type="text" class="bio tech" id="tech" placeholder="Technologie"
+                                               maxlength="50"
+                                               name="technologies[]" list="TechList">
+                                        <datalist id="TechList">
+
+                                        </datalist>
+                                        <button type="button" id="button-moret" class="button-moret btad">+</button>
+                                        <br>
                                     </div>
-                                </div>
-                                <div class="info"
-                                     style="text-align: left; margin-left:1%; margin-top: 1%; margin-bottom:1%;">
-                                    <p class="opis">Opis:</p><br>
-                                    <textarea name="text" class="bio" rows="10"
-                                              cols="25">{{ project.description }}</textarea>
-                                    <input type="hidden" class="bio" placeholder="Opis" name="info"
-                                           maxlength="250"/><br>
 
-                                    <br>
-                                </div>
 
-                                {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
-                                <div id="tech-forms" class="forms">
-                                    <input type="text" class="bio tech" id="tech" placeholder="Technologie"
-                                           maxlength="50"
-                                           name="technologies[]" list="TechList">
-                                    <datalist id="TechList">
+                                    <div id="Technologies"></div>
 
-                                    </datalist>
-                                    <button type="button" id="button-moret" class="button-moret btad">+</button>
-                                    <br>
+
                                 </div>
 
 
-                                <div id="Technologies"></div>
-
-
-                            </div>
-
-
-                            <br>
-                            <div class="buttons">
-                                <button id="cancel-edit" class="button">Anuluj</button>
-                                <input type="submit" id="send-btn" class="button" value="Zapisz">
+                                <br>
+                                <div class="buttons">
+                                    <button id="cancel-edit" class="button">Anuluj</button>
+                                    <input type="hidden" name="projectId" value={{ project.projectId }}>
+                                    <input type="submit" id="send-btn" class="button" value="Zapisz">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             {% endif %}
 
 
@@ -237,7 +237,8 @@
 
                 <input type="hidden" name="" value=""> {#idpostu#}
                 {% if post.user.username != app.user.username %}
-                    <button class="reportico" onclick="reportPost({{ post.postId }})" ><i class="fa fa-exclamation-circle"></i></button>
+                    <button class="reportico" onclick="reportPost({{ post.postId }})"><i
+                                class="fa fa-exclamation-circle"></i></button>
                 {% endif %}
                 <p class="comment-content">{{ post.text }}</p>
                 {% if post.photo %}

@@ -134,6 +134,24 @@ class ProjectsController extends AbstractController
         return $this->redirectToRoute('project_profile', ['projectId' => $project->getProjectId()]);
     }
 
+    public function editProjectAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $username = $this->security->getUser()->getUsername();
+        $user = $this->userProvider->loadUserByUsername($username);
+
+        $projectId = $request->get('projectId');
+        $title = $request->get('title');
+        $description = $request->get('text');
+        $photo = $request->files->get('photo');
+        $technologies = $request->get('technologies');
+
+        $this->projectCreator->updateProject($projectId, $title, $description, $photo, $technologies, $user);
+
+        return $this->redirectToRoute('project_profile', ['projectId' => $projectId]);
+    }
+
     private function canEdit($username)
     {
         $currentUsername = $user = $this->security->getUser()->getUsername();

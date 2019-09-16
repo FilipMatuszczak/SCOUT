@@ -8,6 +8,10 @@
 
 
 {% block body %}
+    
+    {% if projects is empty%}
+        <h3 style="text-align: center; color: darkgrey;">Nie jesteś członkiem żadnego projektu.</h3>
+        {%endif%}
     {% for project in projects %}
         <div class="post">
             <a href="{{ path('project_profile', {'projectId': project.projectId}) }}"><img id="project-avatar"

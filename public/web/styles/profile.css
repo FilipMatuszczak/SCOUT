@@ -116,6 +116,10 @@
     overflow: hidden;
     margin-top: 10px;
     margin-bottom: 5px;
+    
+    
+    
+    
 }
 
 .comment:hover{
@@ -268,3 +272,4 @@ hr{
 .reportico:hover{
  color: #AF0000;   
 }
+

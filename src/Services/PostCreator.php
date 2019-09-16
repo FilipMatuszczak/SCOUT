@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Entity\Post;
 use App\Entity\Project;
 use App\Entity\User;
+use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -15,9 +16,13 @@ class PostCreator
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    /** @var PostRepository */
+    private $postRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, PostRepository $postRepository)
     {
         $this->entityManager = $entityManager;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -48,6 +53,14 @@ class PostCreator
         }
 
         $this->entityManager->persist($newPost);
+        $this->entityManager->flush();
+    }
+
+    public function deletePost($postId)
+    {
+        $post = $this->postRepository->findOneBy(['postId' => $postId]);
+
+        $this->entityManager->remove($post);
         $this->entityManager->flush();
     }
 }

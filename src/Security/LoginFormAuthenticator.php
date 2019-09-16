@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -25,12 +26,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
+    private $userProvider;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UrlGeneratorInterface $urlGenerator,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserProvider $userProvider
+    )
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->userProvider = $userProvider;
     }
 
     public function supports(Request $request)
@@ -75,6 +83,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $password = $credentials['password'];
         $salt = $user->getSalt();
         $passwordWithSalt = $password . $salt;
+
+        if ($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_BANNED)
+        {
+            throw new UnauthorizedHttpException('', 'You were banned due to your behaviour');
+        }
 
         if ($user->getPassword() ===  hash('sha512', $passwordWithSalt))
         {

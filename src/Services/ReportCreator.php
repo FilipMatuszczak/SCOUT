@@ -67,4 +67,22 @@ class ReportCreator
         $this->entityManager->persist($report);
         $this->entityManager->flush();
     }
+
+    public function changeReason($reportId, $reason)
+    {
+        $report = $this->reportRepository->findOneBy(['reportId' => $reportId]);
+
+        $report->setReason($reason);
+
+        $this->entityManager->persist($report);
+        $this->entityManager->flush();
+    }
+
+    public function deleteReport($reportId)
+    {
+        $report = $this->reportRepository->findOneBy(['reportId' => $reportId]);
+
+        $this->entityManager->remove($report);
+        $this->entityManager->flush();
+    }
 }

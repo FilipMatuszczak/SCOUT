@@ -3,33 +3,16 @@
 {% block body %}
 
     {# potwierdzenie usuniecia #}
-    <div id="modal-delete" class="modal">
-        <div class="modal-content">
-            <span class="close"></span>
 
-            <form>
-                <input type="hidden" name="" id=""/>
 
-                <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"
-                          placeholder="Powód usunięcia postu..."></textarea>
 
-                <label style="display: block; margin-left: 250px; "><input type="checkbox" name="checkbox"
-                                                                           value="value">Zbanuj dodatkowo
-                    użytkownika</label>
-
-                <div class="modal-buttons">
-                    <button class="cancel-btn">Anuluj</button>
-                    <input type="submit" id="send-btn" class="button sb delete" value="Usuń"></div>
-            </form>
-        </div>
-    </div>
     {# potwierdzenie zbanowania #}
 
     <div id="modal-ban" class="modal">
         <div class="modal-content">
             <span class="close"></span>
 
-            <form>
+            <form action="{{ path('ban_user') }}" method="post">
                 <input type="hidden" name="" id=""/>
 
                 <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"
@@ -37,6 +20,9 @@
 
                 <div class="modal-buttons">
                     <button class="cancel-btn">Anuluj</button>
+                    <input id="reportId" type="hidden" name="reportId" value="default">
+                    <input id="userId" type="hidden" name="userId" value="default">
+
                     <input type="submit" id="ban-btn" class="button sb block" value="Zbanuj"></div>
             </form>
         </div>
@@ -46,6 +32,26 @@
          Zastanawialam sie czy dać przycisk zbanuj zgłaszajacego jeśli np namolnie zgłasza posty ktore nie łamia regulaminu ale jestes na wakacjach wiec nie chce ci zawracać dupy. #}
 
 
+    <div id="modal-delete" class="modal">
+        <div class="modal-content">
+            <span class="close"></span>
+            <form action="{{ path('delete_post') }}" method="post">
+
+                <textarea id="mssgtxt" name="text" class="form-control" rows="5" cols="25"
+                          placeholder="Powód usunięcia postu..."></textarea>
+
+                <label style="display: block; margin-left: 250px; "><input type="checkbox" name="checkbox">Zbanuj dodatkowo
+                    użytkownika</label>
+
+                <div class="modal-buttons">
+                    <button class="cancel-btn">Anuluj</button>
+                    <input id="report" type="hidden" name="reportId" value="default">
+                    <input id="user" type="hidden" name="userId" value="default">
+                    <input type="submit" id="ban-btn" class="button sb block" value="Usuń"></div>
+            </form>
+
+        </div>
+    </div>
 
 
     {#start post#}
@@ -77,8 +83,8 @@
 
                 }
                 cancelReport({{ report.reportId }})">Anuluj zgłoszenie</button>
-                <button class="delete">Usuń post</button>
-                <button class="block">Zablokuj użytkownika</button>
+                <button class="delete" onclick="deletePost({{ report.reportId }}, {{ report.post.user.userId }})">Usuń post</button>
+                <button class="block" onclick="blockUser({{ report.reportId }}, {{ report.post.user.userId }})">Zablokuj użytkownika</button>
             </div>
 
 
@@ -88,7 +94,20 @@
         {#end post #}
 
     {% endfor %}
-
+    <script>
+        function blockUser(reportId, userId) {
+            event.preventDefault();
+            document.getElementById("reportId").value = reportId;
+            document.getElementById("userId").value = userId;
+            $('#modal-ban').show();
+        }
+        function deletePost(reportId, userId) {
+            event.preventDefault();
+            document.getElementById("report").value = reportId;
+            document.getElementById("user").value = userId;
+            $('#modal-delete').show();
+        }
+    </script>
 
 
 {% endblock %}

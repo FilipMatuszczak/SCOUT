@@ -8,12 +8,7 @@ $(document).ready(function(){
                 event.preventDefault();
                 $('#modal-delete').show();
             });
-            ////popup ban
-            $(".block").on("click", function () {
-                event.preventDefault();
-                $('#modal-ban').show();
-                ////przekazywanie zmiennej z postu do popupa
-            });
+
 
             //close modals
             $(".cancel-btn").on("click", function () {

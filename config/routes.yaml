@@ -163,3 +163,13 @@ cancel_report:
     path: /admin/reports/cancel_report/{reportId}
     controller: App\Controller\AdminController:cancelReportAction
     methods: PATCH
+
+ban_user:
+    path: /admin/ban_user
+    controller: App\Controller\AdminController:banUserAction
+    methods: POST
+
+delete_post:
+    path: /admin/delete_post
+    controller: App\Controller\AdminController:deletePostAction
+    methods: POST

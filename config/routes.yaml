@@ -173,3 +173,13 @@ delete_post:
     path: /admin/delete_post
     controller: App\Controller\AdminController:deletePostAction
     methods: POST
+
+decide_technology_request:
+    path: /admin/technology_decide
+    controller: App\Controller\AdminController:decideTechnologyRequestAction
+    methods: POST
+
+send_newsletter:
+    path: /admin/newsletter
+    controller: App\Controller\AdminController:sendNewsletterAction
+    methods: POST

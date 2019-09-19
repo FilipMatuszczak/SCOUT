@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TechnologyRequest
 {
+    const OPTION_NOT_RESOLVED = 1;
+    const OPTION_RESOLVED = 2;
+
     /**
      * @var int
      *
@@ -41,11 +44,11 @@ class TechnologyRequest
     private $timestamp;
 
     /**
-     * @var bool|null
+     * @var int|null
      *
-     * @ORM\Column(name="options", type="boolean", nullable=true)
+     * @ORM\Column(name="options", type="integer", nullable=true)
      */
-    private $options = '0';
+    private $options = 0;
 
     /**
      * @var User
@@ -98,12 +101,12 @@ class TechnologyRequest
         return $this;
     }
 
-    public function getOptions(): ?bool
+    public function getOptions(): ?int
     {
         return $this->options;
     }
 
-    public function setOptions(?bool $options): self
+    public function setOptions(?int $options): self
     {
         $this->options = $options;
 

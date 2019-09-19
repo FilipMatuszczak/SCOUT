@@ -1,26 +1,37 @@
-
 {% extends 'main/parent-admin.html.twig' %}
    
 {% block body %}
-    
-    {#start #}
-      <div class="post">
-          <h6 style="margin: 0px;">Status?</h6>
-                <h5 style="margin-top: 5px; margin-bottom: 5px;">AUTOR ↔ DATA</h5>
-          <h4 style="margin: 0px; color:">NAZWA</h4>
-                    <p> treść powodu
-          </p>
-                    <div class="buttons">
-                     
-                    <button class="NOPE">Odrzuć</button>
-                    <button class="YEP">Akceptuj</button>
-                </div>
-  
-    
-                </div>
-                
-                <br>
-                
-                {# stop #}
-    
-     {% endblock %}
+
+    {% for request in technologyRequests %}
+        <div class="post">
+            <h6 style="margin: 0px;">Status: Not Resolved</h6>
+            <h5 style="margin-top: 5px; margin-bottom: 5px;">{{ request.user.username }}
+                ↔ {{ request.timestamp.format('Y-m-d H:i:s') }}</h5>
+            <h4 style="margin: 0px; color:">{{ request.name }}</h4>
+            <p> {{ request.descriptionProposition }}
+            </p>
+            <div class="buttons">
+                <form action="{{ path('decide_technology_request') }}" method="post">
+                    <input type="hidden" value={{ request.name }} name="name" >
+                    <input type="hidden" value={{ request.descriptionProposition }} name="description" >
+                    <input type="hidden" value={{ request.requestId }} name="id">
+                    <input type="hidden" value="NOPE" name="decision">
+                    <button type="submit" class="NOPE">Odrzuć</button>
+                </form>
+                <form action="{{ path('decide_technology_request') }}" method="post">
+                    <input type="hidden" value={{ request.name }} name="name" >
+                    <input type="hidden" value={{ request.descriptionProposition }} name="description" >
+                    <input type="hidden" value={{ request.requestId }} name="id">
+                    <input type="hidden" value="YES" name="decision">
+                    <button type="submit" class="YEP">Akceptuj</button>
+                </form>
+            </div>
+
+
+        </div>
+    {% endfor %}
+    <br>
+
+    {# stop #}
+
+{% endblock %}

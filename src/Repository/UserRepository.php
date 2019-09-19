@@ -93,4 +93,11 @@ class UserRepository extends ServiceEntityRepository
 
             return $queryBuilder->getQuery()->getResult();
     }
+
+    public function fetchUserIdsForNewsletter()
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        return $queryBuilder->select('u.userId')->where('BIT_AND(u.options, 32) = 0')->getQuery()->getResult();
+    }
 }

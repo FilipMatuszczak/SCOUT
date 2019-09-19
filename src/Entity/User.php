@@ -33,6 +33,7 @@ class User implements UserInterface
     const USER_BANNED = 4;
     const USER_ADMIN = 8;
     const USER_CHANGING_PASSWORD = 16;
+    const USER_NEWSLETTER_ON = 32;
 
     /**
      * @var int
@@ -504,6 +505,11 @@ class User implements UserInterface
             $roles[] = 'ROLE_ADMIN';
         }
         return array_unique($roles);
+    }
+
+    public function isUserBanned()
+    {
+        return $this->options & self::USER_BANNED;
     }
 
     /**

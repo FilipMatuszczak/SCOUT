@@ -57,6 +57,29 @@ class MessageCreator
         $this->entityManager->flush();
     }
 
+    public function createMessages($receiverIds, $messageText)
+    {
+        $batchSize = 20;
+        for ($i = 0; $i < count($receiverIds); ++$i) {
+            $message = new Message();
+
+            $message
+                ->setTimestamp(new \DateTime('now'))
+                ->setText($messageText)
+                ->setReceiver($this->userProvider->loadUserById($receiverIds[$i]['userId']))
+                ->setSender($this->userProvider->loadUserByUsername($this->security->getUser()->getUsername()));
+
+            $this->entityManager->persist($message);
+            if (($i % $batchSize) === 0) {
+                $this->entityManager->flush();
+                $this->entityManager->clear();
+            }
+        }
+
+        $this->entityManager->flush();
+        $this->entityManager->clear();
+    }
+
     public function createAddUserToProjectRequest($projectId, $messageText)
     {
         $addUserToProject = new AddUserToProjectRequest();

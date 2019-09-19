@@ -1,5 +1,7 @@
 services:
-  register_handler:
-    class: App\Services\RegisterHandler
+  user_agent_subscriber:
+    class: App\Security\BanSubscriber
+    tags:
+      - { name: kernel.event_subscriber }
     arguments:
-      - App\Repository\UserRepository
+      ['@security.helper', '@App\Security\UserProvider', '@security.token_storage', '@session']

@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Report;
+use App\Entity\TechnologyRequest;
 use App\Repository\ReportRepository;
+use App\Repository\TechnologyRequestRepository;
+use App\Repository\UserRepository;
 use App\Services\MessageCreator;
 use App\Services\PostCreator;
 use App\Services\ReportCreator;
 use App\Services\ReportDataProvider;
+use App\Services\TechnologyCreator;
 use App\Services\UserHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,13 +37,25 @@ class AdminController extends AbstractController
     /** @var ReportRepository */
     private $reportRepository;
 
+    /** @var TechnologyRequestRepository */
+    private $technologyRequestRepository;
+
+    /** @var TechnologyCreator */
+    private $technologyCreator;
+
+    /** @var UserRepository */
+    private $userRepository;
+
     public function __construct(
         ReportDataProvider $reportDataProvider,
         ReportCreator $reportCreator,
         UserHandler $userHandler,
         MessageCreator $messageCreator,
         PostCreator $postCreator,
-        ReportRepository $reportRepository
+        ReportRepository $reportRepository,
+        TechnologyRequestRepository $technologyRequestRepository,
+        TechnologyCreator $technologyCreator,
+        UserRepository $userRepository
     )
     {
         $this->reportDataProvider = $reportDataProvider;
@@ -48,6 +64,9 @@ class AdminController extends AbstractController
         $this->messageCreator = $messageCreator;
         $this->postCreator = $postCreator;
         $this->reportRepository = $reportRepository;
+        $this->technologyRequestRepository = $technologyRequestRepository;
+        $this->technologyCreator = $technologyCreator;
+        $this->userRepository = $userRepository;
     }
 
     public function adminReportsIndexAction()
@@ -63,7 +82,20 @@ class AdminController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        return $this->render('main/admin-technologies.html.twig');
+        $newTechnologyRequests = $this->technologyRequestRepository->findBy(["options" => TechnologyRequest::OPTION_NOT_RESOLVED]);
+
+        return $this->render('main/admin-technologies.html.twig', ['technologyRequests' => $newTechnologyRequests]);
+    }
+
+    public function decideTechnologyRequestAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        if ($request->get('decision') == 'YES') {
+            $this->technologyCreator->createTechnology($request->get('name'), $request->get('description'), $request->get('id'));
+        } else {
+            $this->technologyCreator->deleteRequest($request->get('id'));
+        }
+        return $this->redirectToRoute('admin_technologies');
     }
 
     public function cancelReportAction(Request $request, $reportId)
@@ -84,8 +116,7 @@ class AdminController extends AbstractController
         $userId = $request->get('userId');
         $reportId = $request->get('reportId');
 
-        if ($request->get('checkbox'))
-        {
+        if ($request->get('checkbox')) {
             $this->userHandler->banUser($userId);
         }
 
@@ -107,6 +138,13 @@ class AdminController extends AbstractController
         $this->userHandler->banUser($userId);
         $this->reportCreator->updateReport($reportId, Report::REPORT_ACCEPTED);
         $this->reportCreator->changeReason($reportId, $request->get('text'));
+
+        return $this->redirectToRoute('admin_reports');
+    }
+
+    public function sendNewsletterAction(Request $request)
+    {
+        $this->messageCreator->createMessages($this->userRepository->fetchUserIdsForNewsletter(), $request->get('message'));
 
         return $this->redirectToRoute('admin_reports');
     }

@@ -67,7 +67,7 @@
         <div class="form-post">
          
             <img id="post-avatar" src=" " width="70" height="70">
-            <form action=" " enctype="multipart/form-data" method="post">
+            <form name="postForm" onsubmit="return validateformPost()" action=" " enctype="multipart/form-data" method="post">
 
                 <div class="photo-textarea">
                     <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
@@ -88,6 +88,17 @@
         
 </div>
     <script>
+
+        function validateformPost(){
+            var content=document.postForm.text.value;
+
+            if (content==null || content==""){
+                //console.log(reason);
+                document.postForm.text.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
         $(document).ready(function () {
             
             

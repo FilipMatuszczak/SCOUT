@@ -7,10 +7,35 @@
 
     {% endblock %}
 {% block body %}
+
+
+    {# modal request technologii #}
+    <form  name="ReqForm" onsubmit="return validateformReq()" action="" method="post">
+        <div id="modal-req" class="modal">
+            <div class="modal-content">
+
+                <p style="margin-left: 2%;">Czy chcesz wysłać prośbę o dodanie nowej technologii?</p>
+                <br>
+                <input id="reqTitle" name="reqTitle" value="" placeholder="Nazwa" class="name" style="border-radius: 5px; margin-bottom: 2%; margin-top: 2%;">
+
+                <textarea id="reqtxt" name="ReqText" class="form-control"
+                          placeholder="Napisz co to za technologia i dołącz linki do źródła." rows="5" cols="25"></textarea>
+                <div class="buttons" style="height: 40px;">
+                    <button class="cancel-btn button">Anuluj</button>
+
+                    <input type="submit" id="send-btn" class="button" value="Wyślij zgłoszenie">
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
     <div class="edit-profile">
     <h1>Edytuj swój profil:</h1>
     <div class="edit-container">
-        <form action="{{ path('edit_basic_profile_info',  {'username' : user.username} ) }}" method="post">
+        <form name="Form1" onsubmit="return validateform1()" action="{{ path('edit_basic_profile_info',  {'username' : user.username} ) }}" method="post">
             <input type="text" class="name" placeholder="Imię" name="firstname" maxlength="50"
                    value={{ user.firstname }}/>
 
@@ -57,6 +82,11 @@
 
 
         <hr>
+
+        <div class="TechReq">
+            <h4>Nie widzisz swojej technologii? </h4> <button id="ReqButton" class="button">Zgłoś ją!</button>
+        </div>
+
         <div id="tech-forms" class="forms">
             <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
             <datalist id="TechList">
@@ -76,7 +106,7 @@
 
             <img id="photo-edit" src="data:image/jpeg;base64,{{ img }}" width="120" height="120">
 
-            <form action="{{ path('edit_user_photo',  {'username' : user.username} ) }}" enctype="multipart/form-data"
+            <form name="Form2" onsubmit="return validateform2()" action="{{ path('edit_user_photo',  {'username' : user.username} ) }}" enctype="multipart/form-data"
                   method="post">
                 <br>
                 Wybierz zdjęcie: <br> <br>
@@ -128,6 +158,74 @@
            });
 
             */
+
+        ////validateform
+
+        function validateform1(){
+            var firstname=document.Form1.firstname.value;
+            var lastname=document.Form1.lastname.value;
+
+
+
+            if (firstname==null || firstname==""){
+                //console.log(reason);
+                document.Form1.firstname.style.border = "0.5px solid red";
+                return false;
+            } else if (lastname==null || lastname==""){
+                document.Form1.lastname.style.border = "0.5px solid red";
+                return false;
+            }
+
+            else{  return true; }
+        }
+
+        ////validateform
+
+        function validateform2(){
+            var fileToUpload=document.Form2.fileToUpload.value;
+
+             if (fileToUpload==null || fileToUpload==""){
+                document.getElementById("photo-edit").style.border = "0.5px solid red";
+                return false;
+            }
+            else{  return true; }
+        }
+
+
+        ////popup request
+        $("#ReqButton").on("click", function () {
+
+            event.preventDefault();
+            //$('#modal-edit').hide();
+            $('#modal-req').show();
+        });
+
+
+        $(".cancel-btn").on("click", function () {
+            event.preventDefault();
+
+            $('#reqtxt').val("");
+            $('#reqTitle').val("");
+
+            $('#modal-req').hide();
+
+        });
+
+        function validateformReq(){
+            var Rtitle=document.ReqForm.reqTitle.value;
+            var Rtxt=document.ReqForm.reqtxt.value;
+
+            if (Rtitle==null || Rtitle==""){
+                //console.log(reason);
+                document.ReqForm.reqTitle.style.border = "0.5px solid red";
+                return false;
+            } else if (Rtxt==null || Rtxt==""){
+                //console.log(reason);
+                document.ReqForm.reqtxt.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
     </script>
 
 

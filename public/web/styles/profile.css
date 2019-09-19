@@ -272,4 +272,10 @@ hr{
 .reportico:hover{
  color: #AF0000;   
 }
-
+.TechReq{width: 95%; margin-right:5%;}
+#ReqButton{float: right; background-color: #7c8ea3;
+width: 40%;}
+h4{float:left; size: 12px;
+    width:50%;
+    margin-left:5%;
+margin-top: 15px;}

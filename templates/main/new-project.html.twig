@@ -7,7 +7,30 @@
 
     {% endblock %}
 {% block body %}
-    <form action="{{ path('create_project') }}" enctype="multipart/form-data" method="post">
+
+    {# modal request technologii #}
+    <form  name="ReqForm" onsubmit="return validateformReq()" action="" method="post">
+        <div id="modal-req" class="modal">
+            <div class="modal-content">
+
+                <p style="margin-left: 2%;">Czy chcesz wysłać prośbę o dodanie nowej technologii?</p>
+                <br>
+                <input id="reqTitle" name="reqTitle" value="" placeholder="Nazwa" class="name" style="border-radius: 5px; margin-bottom: 2%; margin-top: 2%;">
+
+                <textarea id="reqtxt" name="ReqText" class="form-control"
+                          placeholder="Napisz co to za technologia i dołącz linki do źródła." rows="5" cols="25"></textarea>
+                <div class="buttons" style="height: 40px;">
+                    <button class="cancel-btn button">Anuluj</button>
+
+                    <input type="submit" id="send-btn" class="button" value="Wyślij zgłoszenie">
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <form name="postCreate" onsubmit="return validateformCreate()" action="{{ path('create_project') }}" enctype="multipart/form-data" method="post">
         <div class="edit-profile">
             <h1>Utwórz nowy projekt:</h1>
             <div class="edit-container">
@@ -39,6 +62,11 @@
                     <br>
                 </div>
                 <hr>
+
+                <div class="TechReq">
+                    <h4>Nie widzisz swojej technologii? </h4> <button id="ReqButton" class="button">Zgłoś ją!</button>
+                </div>
+
                 <div id="tech-forms" class="forms">
                     <input type="text" class="bio tech" id="tech" placeholder="Technologie" maxlength="50"
                            name="technologies[]" list="TechList">
@@ -59,7 +87,71 @@
     </form>
     <script>
 
+        ////validateform
+
+        function validateformCreate(){
+            var title=document.postCreate.title.value;
+            var image=document.postCreate.image.value;
+
+                var isValid;
+            $(".tech").each(function() {
+                var element = $(this);
+                if (element.val() == "") {
+                    element.css("border","0.5px solid red");
+                    isValid = false;
+                }
+            });
+
+
+            if (title==null || title==""){
+                //console.log(reason);
+                document.postCreate.title.style.border = "0.5px solid red";
+                return false;
+            } else if (image==null || image==""){
+                document.getElementById("photo-edit").style.border = "0.5px solid red";
+                return false;
+            }
+            else if(isValid==false){console.log("tech!!!1");return false;}
+            else{  return true; }
+        }
+
+        function validateformReq(){
+            var Rtitle=document.ReqForm.reqTitle.value;
+            var Rtxt=document.ReqForm.reqtxt.value;
+
+            if (Rtitle==null || Rtitle==""){
+                //console.log(reason);
+                document.ReqForm.reqTitle.style.border = "0.5px solid red";
+                return false;
+            } else if (Rtxt==null || Rtxt==""){
+                //console.log(reason);
+                document.ReqForm.reqtxt.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+
+
         $(document).ready(function () {
+
+            ////popup request
+            $("#ReqButton").on("click", function () {
+
+                event.preventDefault();
+                //$('#modal-edit').hide();
+                $('#modal-req').show();
+            });
+
+
+            $(".cancel-btn").on("click", function () {
+                event.preventDefault();
+
+                $('#reqtxt').val("");
+                $('#reqTitle').val("");
+
+                $('#modal-req').hide();
+
+            });
 
 
             /////////////////
@@ -141,6 +233,10 @@
                 readURL(this);
             });
             ////
+
+
+
+
 
 
         });

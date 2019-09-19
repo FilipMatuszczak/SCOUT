@@ -24,7 +24,7 @@
                 {% endif %}
             </p>
             {% if isAuthor %}
-                <form action="{{ path('edit_project') }}" enctype="multipart/form-data" method="post">
+                <form name="postCreate" onsubmit="return validateformCreate()" action="{{ path('edit_project') }}" enctype="multipart/form-data" method="post">
                     <div id="modal-edit" class="modal" style="display: hidden;">
                         <div class="modal-content">
                             <span class="close"></span>
@@ -70,7 +70,9 @@
 
                                         <br>
                                     </div>
-
+                                    <div class="TechReq">
+                                    <h4 style="color:grey;">Nie widzisz swojej technologii? </h4> <button id="ReqButton" class="button">Zgłoś ją!</button>
+                                    </div>
                                     {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
                                     <div id="tech-forms" class="forms">
                                         <input type="text" class="bio tech" id="tech" placeholder="Technologie"
@@ -140,7 +142,7 @@
                     <span class="close"></span>
                     <p>Napisz wiadomość do <a href="">{{ author.username }}</a></p>
                     <div class="photo-textarea">
-                        <form action="{{ path('create_message') }}" method=post>
+                        <form name="messageForm" onsubmit="return validateformMessage()" action="{{ path('create_message') }}" method=post>
                             <textarea id="mssgtxt" name="messageText" class="form-control" rows="5" cols="25"></textarea>
 
                             <input type="hidden" name="receiverId" value={{ author.userId }}>
@@ -155,7 +157,7 @@
 
             <button id="add-me" class="navico message-ico"><i class="fa fa-user-plus"></i>
             </button> {# popros o dodanie #}
-            <form action="{{ path('send_add_user_to_project_request') }}" method="post">
+                <form  name="AskForm" onsubmit="return validateformAsk()" action="{{ path('send_add_user_to_project_request') }}" method="post">
             <div id="modal-add" class="modal">
                 <div class="modal-content">
 
@@ -174,8 +176,33 @@
             </div>
             </form>
 
+
+
+
         </div>
     {% endif %}
+
+    {# modal request technologii #}
+    <form  name="ReqForm" onsubmit="return validateformReq()" action="" method="post">
+        <div id="modal-req" class="modal">
+            <div class="modal-content">
+
+                <p>Czy chcesz wysłać prośbę o dodanie nowej technologii?</p>
+                <br>
+                <input id="reqTitle" name="reqTitle" value="" placeholder="Nazwa" class="name" style="border-radius: 5px;">
+                <textarea id="reqtxt" name="ReqText" class="form-control"
+                          placeholder="Napisz co to za technologia i dołącz linki do źródła." rows="5" cols="25"></textarea>
+                <div class="buttons" style="height: 40px;">
+                    <button class="cancel-btn button">Anuluj</button>
+
+                    <input type="submit" id="send-btn" class="button" value="Wyślij zgłoszenie">
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+
 
     {# reporty #}
     <div id="modal-report" class="modal">
@@ -183,7 +210,7 @@
             <span class="close"></span>
             <p>Dlaczego chcesz zgłosić post użytkownika <a>AUTOR</a>?</p>
             <div class="photo-textarea">
-                <form action="{{ path('report_post') }}" method="post">
+                <form name="reportForm" onsubmit="return validateformReport()" action="{{ path('report_post') }}" method="post">
                     <textarea id="reptxt" name="reason" class="form-control" rows="5" cols="25"></textarea>
 
                     <input id="postId" type="hidden" name="postId" value='default'> {#idpostu?#}
@@ -202,7 +229,7 @@
         <div class="form-post">
             <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}"
                  width="70" height="70">
-            <form action="{{ path('create_project_post') }}" enctype="multipart/form-data" method="post">
+            <form  name="postForm" onsubmit="return validateformPost()" action="{{ path('create_project_post') }}" enctype="multipart/form-data" method="post">
 
                 <div class="photo-textarea">
                     <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
@@ -270,15 +297,27 @@
                 $('#modal-message').show();
             });
 
+            ////popup request
+            $("#ReqButton").on("click", function () {
+
+                event.preventDefault();
+                //$('#modal-edit').hide();
+                $('#modal-req').show();
+            });
+
             //close modals
             $(".cancel-btn").on("click", function () {
                 event.preventDefault();
                 $('#mssgtxt').val("");
                 $('#addtxt').val("");
                 $('#reptxt').val("");
+                $('#reqtxt').val("");
+                $('#reqTitle').val("");
                 $('#modal-add').hide();
                 $('#modal-message').hide();
                 $('#modal-report').hide();
+                $('#modal-req').hide();
+
             });
 
 
@@ -338,6 +377,93 @@
             });
 
         });
+
+
+        ////////////////////////////validate forms
+
+        function validateformReport(){
+            var reason=document.reportForm.reason.value;
+
+            if (reason==null || reason==""){
+                //console.log(reason);
+                document.reportForm.reason.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+        function validateformMessage(){
+            var message=document.messageForm.messageText.value;
+
+            if (message==null || message==""){
+                //console.log(reason);
+                document.messageForm.messageText.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+        function validateformReq(){
+            var Rtitle=document.ReqForm.reqTitle.value;
+            var Rtxt=document.ReqForm.reqtxt.value;
+
+            if (Rtitle==null || Rtitle==""){
+                //console.log(reason);
+                document.ReqForm.reqTitle.style.border = "0.5px solid red";
+                return false;
+            } else if (Rtxt==null || Rtxt==""){
+                //console.log(reason);
+                document.ReqForm.reqtxt.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+        function validateformPost(){
+            var content=document.postForm.text.value;
+            var photo=document.postForm.photo.value;
+
+            if ((content==null || content=="")&&(photo==null || photo=="")){
+                //console.log(reason);
+                document.postForm.text.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+        function validateformAsk(){
+            var contents=document.AskForm.messageText.value;
+
+            if (contents==null || contents==""){
+                //console.log(reason);
+                document.AskForm.messageText.style.border = "0.5px solid red";
+                return false;
+            } else {  return true; }
+        }
+
+
+        function validateformCreate(){
+            var title=document.postCreate.title.value;
+            var image=document.postCreate.image.value;
+
+            var isValid;
+            $(".tech").each(function() {
+                var element = $(this);
+                if (element.val() == "") {
+                    element.css("border","0.5px solid red");
+                    isValid = false;
+                }
+            });
+
+
+            if (title==null || title==""){
+                //console.log(reason);
+                document.postCreate.title.style.border = "0.5px solid red";
+                return false;
+            } else if (image==null || image==""){
+                document.getElementById("photo-edit").style.border = "0.5px solid red";
+                return false;
+            }
+            else if(isValid==false){console.log("tech!!!1");return false;}
+            else{  return true; }
+        }
+
     </script>
 
     <script src="{{ asset('web/scripts/edit-project.js') }}"></script>

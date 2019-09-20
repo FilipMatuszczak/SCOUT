@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 class UserProjectRepository

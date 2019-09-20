@@ -12,70 +12,73 @@
 
 
     <div id="Chat-Content">
-    
+
         <div id="chat-container">
- 
-        
-        {#Od kogoś #}
-        
-        <div class="I-message">
-            <a href=" "> <img id="comment-avatar-left"
-                    src=" "
-                      width="70" height="70"></a>
 
-            
-            <p class="project-title"
-               href="  ">KTOŚ</p>
-            ✽ Data
+            {% for message in messages %}
+                {#Od kogoś #}
+                {% if message.sender.username != app.user.username %}
+                    <div class="I-message">
+                        <a href="  {{ path('user_profile', {'username': message.sender.username}) }}"> <img
+                                    id="comment-avatar-left"
+                                    src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(message.sender.username) }}"
 
-            
 
-            <p class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tortor mauris, finibus et mollis vel, tincidunt quis est. Vivamus sed metus sit amet tellus egestas semper vitae tempus nunc. Curabitur erat magna, volutpat eget dapibus at, viverra non orci. Mauris malesuada et velit a aliquet. Aliquam in posuere magna. Mauris pellentesque turpis non quam tempus eleifend. Ut magna lorem, posuere quis dui eu, semper volutpat felis. Vivamus auctor justo nulla, vel iaculis orci lacinia sit amet.</p>
-           
-           
-            
+                                    width="70" height="70"></a>
+
+
+                        <a class="project-title"
+                           href="{{ path('user_profile', {'username': message.sender.username}) }}">{{ message.sender.username }}</a>
+                        ✽ {{ message.timestamp.format('Y-m-d H:i:s') }}
+
+
+                        <p class="message-content">{{ message.text }}</p>
+
+
+                    </div>
+                    {# #}
+                {% endif %}
+                {#Ode mnie #}
+                {% if message.sender.username == app.user.username %}
+
+                    <div class="YOU-message">
+                        <a href="  {{ path('user_profile', {'username': message.sender.username}) }}"> <img
+                                    id="comment-avatar-right"
+                                    src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(message.sender.username) }}"
+
+                                    width="70" height="70"></a>
+                        <div id="cos">
+                            <div class="title-right">
+                                <a class="project-title"
+                                   href="  {{ path('user_profile', {'username': message.sender.username}) }}">{{ message.sender.username }}</a>
+                                ✽ {{ message.timestamp.format('Y-m-d H:i:s') }}
+                            </div>
+                        </div>
+
+                        <p class="message-content">{{ message.text }}</p>
+
+
+                    </div>
+                {% endif %}
+
+                {# #}
+            {% endfor %}
+
+
         </div>
-    {# #}
 
-        {#Ode mnie #}
-            
-         <div class="YOU-message">
-            <a href=" "> <img id="comment-avatar-right"
-                    src=" "
-                      width="70" height="70"></a>
-             <div id="cos">
-            <div class="title-right">
-            <p class="project-title"
-               href="  ">JA</p>
-            ✽ Data
-            </div>
-            </div>
-
-            <p class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tortor mauris, finibus et mollis vel, tincidunt quis est. Vivamus sed metus sit amet tellus egestas semper vitae tempus nunc. Curabitur erat magna, volutpat eget dapibus at, viverra non orci. Mauris malesuada et velit a aliquet. Aliquam in posuere magna. Mauris pellentesque turpis non quam tempus eleifend. Ut magna lorem, posuere quis dui eu, semper volutpat felis. Vivamus auctor justo nulla, vel iaculis orci lacinia sit amet. Curabitur erat magna, volutpat eget dapibus at, viverra non orci. Mauris malesuada et velit a aliquet. Aliquam in posuere magna. Mauris pellentesque turpis non quam tempus eleifend. Ut magna lorem, posuere quis dui eu, semper volutpat felis. Vivamus auctor justo nulla, vel iaculis orci lacinia sit amet. it amet. Curabitur erat magna, volutpat eget dapibus at, viverra non orci. Mauris malesuada et velit a aliquet. Aliquam in posuere magna. Mauris pellentesque turpis non quam tempus eleifend. Ut magna lorem, posuere quis dui eu, semper volutpat felis. Vivamus auctor justo nulla, vel iaculis orci lacinia sit amet. it amet. Curabitur erat magna, volutpat eget dapibus at, viverra non orci. Mauris malesuada et velit a aliquet. Aliquam in posuere magna. Mauris pellentesque turpis non quam tempus eleifend. Ut magna lorem, posuere quis dui eu, semper volutpat felis. Vivamus auctor justo nulla, vel iaculis orci lacinia sit amet.</p>
-           
-           
-            
-        </div>
-             {# #}
-  
-            
-            
-            
-            
-        </div>
-        
         <div class="form-post">
-         
-            <img id="post-avatar" src=" " width="70" height="70">
-            <form name="postForm" onsubmit="return validateformPost()" action=" " enctype="multipart/form-data" method="post">
+
+            <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(app.user.username) }}" width="70" height="70">
+            <form name="postForm" onsubmit="return validateformPost()" action="{{ path('create_message') }}" enctype="multipart/form-data"
+                  method="post">
 
                 <div class="photo-textarea">
-                    <textarea name="text" class="form-control" rows="5" cols="25"></textarea>
+                    <textarea name="messageText" class="form-control" rows="5" cols="25"></textarea>
 
-                    <input type="hidden" name="username" value="">
+                    <input type="hidden" name="receiverId" value={{ receiverId }}>
 
                     <button style="display:none;" id="file-cancel"></button>
-                   
 
 
                     <input type="submit" id="button-rem" class="button-post" value="Wyślij"></div>
@@ -83,29 +86,30 @@
 
             </form>
         </div>
-   
-    
-        
-</div>
+
+
+    </div>
     <script>
 
-        function validateformPost(){
-            var content=document.postForm.text.value;
+        function validateformPost() {
+            var content = document.postForm.text.value;
 
-            if (content==null || content==""){
+            if (content == null || content == "") {
                 //console.log(reason);
                 document.postForm.text.style.border = "0.5px solid red";
                 return false;
-            } else {  return true; }
+            } else {
+                return true;
+            }
         }
 
         $(document).ready(function () {
-            
-            
-   var element = document.getElementById("chat-container");
-   element.scrollTop = element.scrollHeight - element.clientHeight;
 
-            
+
+            var element = document.getElementById("chat-container");
+            element.scrollTop = element.scrollHeight - element.clientHeight;
+
+
         });
 
 

@@ -188,3 +188,8 @@ all_messages:
     path: /messages
     controller: App\Controller\MessageController:allMessagesIndex
     methods: GET
+
+message_with_user:
+    path: /messages/{username}
+    controller: App\Controller\MessageController:MessagesWithUserIndex
+    methods: GET

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Dto\MessageDisplay;
+use App\Entity\Message;
 use App\Security\UserProvider;
 use App\Services\MessageCreator;
 use App\Services\MessagesDataProvider;
@@ -40,16 +42,31 @@ class MessageController extends AbstractController
         $requests = $this->messagesDataProvider->getAllRequestsAddToProject($userId);
         $usernames = $this->messagesDataProvider->getAllConversationUsernames($userId);
 
-        return $this->render('main/AllMessages.html.twig', ['requests' => $requests, 'usernames' => $usernames]);
+        /** @var MessageDisplay[] $messageDisplays */
+        $messageDisplays = $this->messagesDataProvider->getMessageDisplay($this->security->getUser()->getUsername(), $usernames);
+
+        usort($messageDisplays, function (MessageDisplay $a, MessageDisplay $b) {
+            return $a->getTimestamp()->getTimestamp() < $b->getTimestamp()->getTimestamp();
+        });
+
+        return $this->render('main/AllMessages.html.twig', ['requests' => $requests, 'messageDisplays' => $messageDisplays]);
     }
 
     public function writeMessageToUserAction(Request $request)
     {
-       $messageText = $request->get('messageText');
-       $receiverId = $request->get('receiverId');
+        $messageText = $request->get('messageText');
+        $receiverId = $request->get('receiverId');
 
-       $this->messageCreator->createMessage($receiverId, $messageText);
+        $this->messageCreator->createMessage($receiverId, $messageText);
 
-       return $this->redirectToRoute('main');
+        return $this->redirectToRoute('message_with_user', ['username' => $this->userProvider->loadUserById($receiverId)->getUsername()]);
+    }
+
+    public function MessagesWithUserIndex($username)
+    {
+        /** @var Message[] $messages */
+        $messages = $this->messagesDataProvider->getAllMessagesBetweenUsers($this->security->getUser()->getUsername(), $username);
+
+        return $this->render('main/Message.html.twig', ['messages' => $messages, 'receiverId' => $this->userProvider->loadUserByUsername($username)->getUserId()]);
     }
 }

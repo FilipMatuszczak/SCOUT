@@ -13,15 +13,15 @@
 
 
     
-    {# for #}
+    {% for username in usernames %}
         <div class="comment">
-            <a href=" "> <img id="comment-avatar-left"
-                    src=" "
+            <a href=" {{ path('user_profile', {'username': username}) }}"> <img id="comment-avatar-left"
+                    src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(username) }} "
                       width="70" height="70"></a>
 
             
             <p class="project-title"
-               href=" ">Autor</p>
+               href=" ">{{ username }}</p>
             ✽ Data
 
             
@@ -31,20 +31,20 @@
             <button class="button"> Przejdź do konwersacji </button>
             
         </div>
-    {#  enfor #}
+    {% endfor %}
 
     
-    {# request#}
+    {% for request in requests %}
     <div class="comment">
-            <a href=" "> <img id="comment-avatar-left"
-                    src=" "
-                      width="70" height="70"></a>
+        <a href=" {{ path('user_profile', {'username': request.user.username}) }}"> <img id="comment-avatar-left"
+                                                                            src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(request.user.username) }} "
+                                                                            width="70" height="70"></a>
 
             
-            <p class="project-title"
-               href=" ">Autor</p> prosi o dodanie do <p class="project-title"
-               href=" ">Projekt</p>
-            ✽ Data
+            <a class="project-title"
+               href="  {{ path('user_profile', {'username': request.user.username}) }}">{{ request.user.username }}</a> prosi o dodanie do <a class="project-title"
+               href="  {{ path('project_profile', {'projectId': request.project.projectId}) }}">{{ request.project.title }}</a>
+            ✽ {{ request.timestamp.format('Y-m-d H:i:s') }}
 
             
 
@@ -54,7 +54,7 @@
            <button class="button" style="background-color: darkgreen;"> Zaakceptuj </button>
             
         </div>
-    
+    {% endfor %}
 
     <script>
         $(document).ready(function () { });

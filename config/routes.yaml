@@ -183,3 +183,8 @@ send_newsletter:
     path: /admin/newsletter
     controller: App\Controller\AdminController:sendNewsletterAction
     methods: POST
+
+all_messages:
+    path: /messages
+    controller: App\Controller\MessageController:allMessagesIndex
+    methods: GET

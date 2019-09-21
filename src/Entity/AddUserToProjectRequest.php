@@ -38,9 +38,9 @@ class AddUserToProjectRequest
     private $timestamp;
 
     /**
-     * @var bool|null
+     * @var int|null
      *
-     * @ORM\Column(name="options", type="boolean", nullable=true)
+     * @ORM\Column(name="options", type="integer", nullable=true)
      */
     private $options = '0';
 
@@ -93,12 +93,12 @@ class AddUserToProjectRequest
         return $this;
     }
 
-    public function getOptions(): ?bool
+    public function getOptions(): ?int
     {
         return $this->options;
     }
 
-    public function setOptions(?bool $options): self
+    public function setOptions(?int $options): self
     {
         $this->options = $options;
 

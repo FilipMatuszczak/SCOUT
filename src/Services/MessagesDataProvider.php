@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Dto\MessageDisplay;
+use App\Entity\AddUserToProjectRequest;
 use App\Entity\Message;
 use App\Repository\AddUserToProjectRequestRepository;
 use App\Repository\MessageRepository;
@@ -53,7 +54,7 @@ class MessagesDataProvider
 
         }
 
-        $requests = $this->addUserToProjectRequestRepository->findBy(['project' => $this->projectRepository->findBy(['projectId' => ($projectIds)])]);
+        $requests = $this->addUserToProjectRequestRepository->findBy(['project' => $this->projectRepository->findBy(['projectId' => $projectIds]), 'options' => AddUserToProjectRequest::OPTIONS_NEW]);
 
         return $requests;
     }

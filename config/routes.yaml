@@ -228,3 +228,8 @@ project_technologies:
     path: /project/technologies/{projectId}
     controller: App\Controller\ProjectsController:getProjectTechnologiesAction
     methods: GET
+
+decide_add_user_to_project:
+    path: /messages/decideAddToProject
+    controller: App\Controller\MessageController:decideAddToProjectAction
+    methods: POST

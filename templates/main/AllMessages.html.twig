@@ -58,10 +58,21 @@
 
 
             <p class="request-content">{{ request.text }}</p>
+            <form action="{{ path('decide_add_user_to_project') }}" method="post">
+                <input type="hidden" name="decision" value="decline">
+                <input type="hidden" name="userId" value={{ request.user.userId }}>
+                <input type="hidden" name="projectId" value={{ request.project.projectId }}>
+                <input type="hidden" name="addUserToProjectRequestId" value={{ request.requestId }}>
 
-            <button class="button" style="Background-color: darkred;"> Odrzuć</button>
-            <button class="button" style="background-color: darkgreen;"> Zaakceptuj</button>
-
+                <button class="button" type="submit" style="Background-color: darkred;"> Odrzuć</button>
+            </form>
+            <form action="{{ path('decide_add_user_to_project') }}" method="post">
+                <input type="hidden" name="decision" value="accept">
+                <input type="hidden" name="userId" value={{ request.user.userId }}>
+                <input type="hidden" name="projectId" value={{ request.project.projectId }}>
+                <input type="hidden" name="addUserToProjectRequestId" value={{ request.requestId }}>
+                <button class="button" style="background-color: darkgreen;"> Zaakceptuj</button>
+            </form>
         </div>
     {% endfor %}
 

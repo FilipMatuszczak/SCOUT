@@ -89,6 +89,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new UnauthorizedHttpException('', 'You were banned due to your behaviour');
         }
 
+        if ($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_CHANGING_PASSWORD)
+        {
+            return false;
+        }
+
+        if (!($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_VERIFIED))
+        {
+            return false;
+        }
+
         if ($user->getPassword() ===  hash('sha512', $passwordWithSalt))
         {
             return true;

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -217,10 +218,12 @@ class LoginController extends AbstractController
     {
         $user = $this->userProvider->loadUserByUsername($request->get('username'));
 
-        if (empty($user)) {
-            throw $this->createNotFoundException(
-                'Cannot verify user ' . $request->get('username')
+        if ($user === null) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Nie istnieje taki użytkownik w bazie danych'
             );
+            return $this->redirectToRoute("index", ['message' => "No such user"]);
         }
 
         $this->passwordHandler->generatePasswordLinkForUser($user);

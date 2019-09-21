@@ -32,7 +32,7 @@
 
                 {% for flashMessage in app.session.flashbag.get('notice') %}
 
-                    {{ flashMessage }}
+                <p>  {{ flashMessage }}</p>
 
                 {% endfor %}
 
@@ -64,7 +64,7 @@
 
             <div id="id02" style="display:none;">Wygeneruj nowe hasło:
                 <input type="text"
-                       placeholder="Podaj email lub login" name="username" required>
+                       placeholder="Podaj login" name="username" required>
 
                 <input type="submit" id="button-rem" value="Przypomnij"><br>
 

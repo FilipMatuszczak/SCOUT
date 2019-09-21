@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Entity\Technology;
 use App\Entity\TechnologyRequest;
+use App\Entity\User;
 use App\Repository\TechnologyRequestRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,6 +48,21 @@ class TechnologyCreator
         $request = $this->technologyRequestRepository->findOneBy(['requestId' => (int)$requestId]);
 
         $this->entityManager->remove($request);
+        $this->entityManager->flush();
+    }
+
+    public function createTechnologyRequest($name, $reason, User $user)
+    {
+        $newRequest = new TechnologyRequest();
+
+        $newRequest
+            ->setUser($user)
+            ->setOptions(TechnologyRequest::OPTION_NOT_RESOLVED)
+            ->setTimestamp(new \DateTime('now'))
+            ->setName($name)
+            ->setDescriptionProposition($reason);
+
+        $this->entityManager->persist($newRequest);
         $this->entityManager->flush();
     }
 }

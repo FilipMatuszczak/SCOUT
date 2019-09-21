@@ -183,19 +183,21 @@
     {% endif %}
 
     {# modal request technologii #}
-    <form  name="ReqForm" onsubmit="return validateformReq()" action="" method="post">
+    <form  name="ReqForm" onsubmit="return validateformReq()" action="{{ path('create_request_for_technology') }}" method="post">
         <div id="modal-req" class="modal">
             <div class="modal-content">
 
                 <p>Czy chcesz wysłać prośbę o dodanie nowej technologii?</p>
                 <br>
-                <input id="reqTitle" name="reqTitle" value="" placeholder="Nazwa" class="name" style="border-radius: 5px;">
-                <textarea id="reqtxt" name="ReqText" class="form-control"
+                <input id="reqTitle" name="name" value="" placeholder="Nazwa" class="name" style="border-radius: 5px; margin-bottom: 2%; margin-top: 2%;">
+                <input type="hidden" name="destination" value="project_profile">
+                <input type="hidden" name="projectId" value={{ project.projectId }}>
+                <textarea id="reqtxt" name="reason" class="form-control"
                           placeholder="Napisz co to za technologia i dołącz linki do źródła." rows="5" cols="25"></textarea>
                 <div class="buttons" style="height: 40px;">
                     <button class="cancel-btn button">Anuluj</button>
 
-                    <input type="submit" id="send-btn" class="button" value="Wyślij zgłoszenie">
+                    <input type="submit" id="send-btn" class="button" value="Wyślij zgłoszenie" >
 
                 </div>
 

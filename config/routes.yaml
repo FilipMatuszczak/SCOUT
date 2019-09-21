@@ -233,3 +233,8 @@ decide_add_user_to_project:
     path: /messages/decideAddToProject
     controller: App\Controller\MessageController:decideAddToProjectAction
     methods: POST
+
+create_request_for_technology:
+    path: /technology/create_request
+    controller: App\Controller\ReportController:createTechnologyRequestAction
+    methods: POST

@@ -113,9 +113,14 @@ class MessageController extends AbstractController
 
     public function MessagesWithUserIndex($username)
     {
+        if ($username === 'SCOUT NEWSLETTER')
+        {
+            $username = 'admin';
+        }
+
         /** @var Message[] $messages */
         $messages = $this->messagesDataProvider->getAllMessagesBetweenUsers($this->security->getUser()->getUsername(), $username);
 
-        return $this->render('main/Message.html.twig', ['messages' => $messages, 'receiverId' => $this->userProvider->loadUserByUsername($username)->getUserId()]);
+        return $this->render('main/Message.html.twig', ['messages' => $messages, 'receiverId' => $this->userProvider->loadUserByUsername($username)->getUserId(), 'username' => $username]);
     }
 }

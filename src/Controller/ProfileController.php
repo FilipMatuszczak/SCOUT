@@ -111,12 +111,13 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
+        $newsletter = $request->get('newsletter');
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
         $birthDate = new \DateTime($request->get('bdaytime'));
         $info = $request->get('info');
 
-        $this->profileEditHandler->saveBasicInfo($user, $firstname, $lastname, $birthDate, $info);
+        $this->profileEditHandler->saveBasicInfo($user, $firstname, $lastname, $birthDate, $info, $newsletter);
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }

@@ -92,6 +92,10 @@ class MessagesDataProvider
         $messageDisplays = [];
 
         foreach ($users as $user) {
+            if ($user->getUsername() === 'admin')
+            {
+                $user->setUsername('SCOUT NEWSLETTER');
+            }
             $latestReceiverMessage = $this->messageRepository->findOneBy(['sender' => $user, 'receiver' => $currentUser], ['timestamp' => 'DESC']);
             $latestSenderMessage = $this->messageRepository->findOneBy(['receiver' => $user, 'sender' => $currentUser], ['timestamp' => 'DESC']);
 

@@ -50,6 +50,10 @@ class PhotoDataProvider
 
     public function getPhotoByUsername($username)
     {
+        if ($username === 'SCOUT NEWSLETTER')
+        {
+            $username = 'admin';
+        }
         $photo = $this->userRepository->findOneBy([User::COLUMN_USERNAME => $username])->getPhoto();
 
         if ($userPhoto = $this->getEncodedPhoto($photo)) {

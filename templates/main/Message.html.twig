@@ -19,7 +19,7 @@
                 {#Od kogoś #}
                 {% if message.sender.username != app.user.username %}
                     <div class="I-message">
-                        <a href="  {{ path('user_profile', {'username': message.sender.username}) }}"> <img
+                        <a {% if username != 'admin' %}href="  {{ path('user_profile', {'username': message.sender.username}) }}"{% endif %}> <img
                                     id="comment-avatar-left"
                                     src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(message.sender.username) }}"
 
@@ -28,7 +28,9 @@
 
 
                         <a class="project-title"
-                           href="{{ path('user_profile', {'username': message.sender.username}) }}">{{ message.sender.username }}</a>
+                {% if username != 'admin' %} href="{{ path('user_profile', {'username': message.sender.username}) }}"{% endif %}>
+                {% if username != 'admin' %}{{ message.sender.username }}{% endif %}
+                            {% if username == 'admin' %}SCOUT NEWSLETTER{% endif %}</a>
                         ✽ {{ message.timestamp.format('Y-m-d H:i:s') }}
 
 
@@ -66,7 +68,7 @@
 
 
         </div>
-
+        {% if username != 'admin' %}
         <div class="form-post">
 
             <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(app.user.username) }}" width="70" height="70">
@@ -86,7 +88,7 @@
 
             </form>
         </div>
-
+        {% endif %}
 
     </div>
     <script>

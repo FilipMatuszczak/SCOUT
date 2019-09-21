@@ -49,17 +49,23 @@ class ProfileEditHandler
 
     /**
      * @param User $user
-     * @param string $firstname
-     * @param string $lastname
-     * @param Datetime $birthDate
-     * @param string $info
+     * @param $firstname
+     * @param $lastname
+     * @param $birthDate
+     * @param $info
+     * @param $newsletter
      */
-    public function saveBasicInfo(User $user, $firstname, $lastname, $birthDate, $info)
+    public function saveBasicInfo(User $user, $firstname, $lastname, $birthDate, $info, $newsletter)
     {
         $user->setFirstname($firstname);
         $user->setLastname($lastname);
         $user->setInfo($info);
         $user->setDateOfBirth($birthDate);
+        if ($newsletter) {
+            $user->setOptions($user->getOptions() | User::USER_NEWSLETTER_ON);
+        } else {
+            $user->setOptions($user->getOptions() &~ User::USER_NEWSLETTER_ON);
+        }
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

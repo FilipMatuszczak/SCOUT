@@ -37,10 +37,10 @@
     <div class="edit-container">
         <form name="Form1" onsubmit="return validateform1()" action="{{ path('edit_basic_profile_info',  {'username' : user.username} ) }}" method="post">
             <input type="text" class="name" placeholder="Imię" name="firstname" maxlength="50"
-                   value={{ user.firstname }}/>
+                   value={{ user.firstname }}>
 
             <input type="text" class="name" placeholder="Nazwisko" name="lastname" maxlength="50"
-                   value={{ user.lastname }}/><br>
+                   value={{ user.lastname }}><br>
 
             <div style="text-align: left; margin-left:9%; margin-top: 1%; margin-bottom:1%;">
                 <label>Data urodzenia:</label> <br>
@@ -52,7 +52,7 @@
 
             <input type="text" class="bio" placeholder="Info" name="info" maxlength="250" value="{{ user.info }}"/><br>
             <label>
-                <input type="checkbox" name="vehicle" value="Car" checked>Chcę otrzymywać newslettera.
+                <input type="checkbox" name="newsletter" {% if user.newsletterOn %}checked {% endif %}>Chcę otrzymywać newslettera.
             </label><br>
 
             <br>

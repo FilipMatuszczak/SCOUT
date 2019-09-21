@@ -482,6 +482,11 @@ class User implements UserInterface
         return $this;
     }
 
+    public function newsletterOn(): bool
+    {
+        return $this->options & self::USER_NEWSLETTER_ON;
+    }
+
     /**
      * Returns the roles granted to the user.
      *

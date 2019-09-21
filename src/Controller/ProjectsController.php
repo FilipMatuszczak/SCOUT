@@ -10,6 +10,7 @@ use App\Services\PostCreator;
 use App\Services\ProjectCreator;
 use App\Services\ProjectsDataProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
@@ -162,6 +163,20 @@ class ProjectsController extends AbstractController
         $this->projectCreator->updateProject($projectId, $title, $description, $photo, $technologies, $user);
 
         return $this->redirectToRoute('project_profile', ['projectId' => $projectId]);
+    }
+
+    public function getProjectTechnologiesAction($projectId)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $project = $this->projectDataProvider->getProjectById($projectId);
+        $technologyNames = [];
+
+        foreach ($project->getTechnology() as $technology) {
+            $technologyNames[] = $technology->getName();
+        }
+
+        return new JsonResponse($technologyNames);
     }
 
     public function sendRequestToAddToProjectAction(Request $request)

@@ -193,3 +193,38 @@ message_with_user:
     path: /messages/{username}
     controller: App\Controller\MessageController:MessagesWithUserIndex
     methods: GET
+
+get_user_languages:
+    path: /languages/{userId}
+    controller: App\Controller\ProfileController:getUserLanguagesAction
+    methods: GET
+
+get_user_technologies:
+    path: /technologies/{userId}
+    controller: App\Controller\ProfileController:getUserTechnologiesAction
+    methods: GET
+
+get_user_cities:
+    path: /cities/{userId}
+    controller: App\Controller\ProfileController:getUserCitiesAction
+    methods: GET
+
+technology_exists:
+    path: /technologyExists/{technologyName}
+    controller:  App\Controller\ProfileController:technologyExistsAction
+    methods: GET
+
+language_exists:
+    path: /languageExists/{languageName}
+    controller:  App\Controller\ProfileController:languageExistsAction
+    methods: GET
+
+city_exists:
+    path: /cityExists/{cityName}
+    controller:  App\Controller\ProfileController:cityExistsAction
+    methods: GET
+
+project_technologies:
+    path: /project/technologies/{projectId}
+    controller: App\Controller\ProjectsController:getProjectTechnologiesAction
+    methods: GET

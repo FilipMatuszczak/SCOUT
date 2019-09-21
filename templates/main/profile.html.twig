@@ -146,7 +146,7 @@
     {% for post in posts %}
         <div class="comment">
             <a href="{{ path('user_profile', {'username': user.username}) }}"><img id="comment-avatar"
-                                                                                   src="data:image/jpeg;base64,{{ img }}"
+                                                                                   src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(post.user.username)}}"
                                                                                    width="70" height="70"></a>
 
             <p class="project-title"

@@ -60,33 +60,33 @@
             <input type="submit" value="Zapisz zmiany" name="submit" class="upload smaller"/>
         </form>
         <hr>
-
+    <form action="{{ path('save_cities_for_user') }}" method="post">
     <div id="cities-forms" class="forms">
-        <input type="CityList" class="bio" placeholder="Miasto" maxlength="50" id="city" list="CityList" value="Poznań">
+        <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" name="cities[]" id="city" list="CityList">
         <datalist id="CityList">
 
         </datalist>
         <button type="button" id="button-moreC" class="button-more btad">+</button>
         <br>
     </div>
-        <input type="submit" value="Dodaj miasto" name="submit" id="add-city" class="upload smaller"/>
-
+        <input type="submit" value="Zapisz miasta" name="submit" id="add-city" class="upload smaller"/>
+    </form>
 
         <div id="cities"></div>
 
 
 
         <hr>
-
+    <form action="{{ path('save_languages_for_user') }}" method="post">
         <div id="languages-forms" class="forms">
-            <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" list="LangList">
+            <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" name="languages[]" list="LangList">
             <datalist id="LangList">
             </datalist>
             <button type="button" id="button-more" class="button-more btad">+</button>
             <br>
         </div>
-        <input type="submit" value="Dodaj język" name="submit" id="add-lang" class="upload smaller"/>
-
+        <input type="submit" value="Zapisz języki" name="submit" id="add-lang" class="upload smaller"/>
+    </form>
 
         <div id="languages"></div>
 
@@ -96,25 +96,25 @@
         <div class="TechReq">
             <h4>Nie widzisz swojej technologii? </h4> <button id="ReqButton" class="button">Zgłoś ją!</button>
         </div>
-
+        <form action="{{ path('save_technologies_for_user') }}" method="post">
         <div id="tech-forms" class="forms">
-            <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList">
+            <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" name="technologies[]" list="TechList">
             <datalist id="TechList">
 
             </datalist>
             <button type="button" id="button-moret" class="button-moret btad">+</button>
             <br>
         </div>
-
-        <input type="submit" value="Dodaj technologie" name="submit" id="add-tech" class="upload smaller"/>
+        <input type="submit" value="Zapisz technologie" name="submit" id="add-tech" class="upload smaller"/>
         <div id="Technologies"></div>
+        </form>
 
 
         <hr>
 
         <div id="photo">
 
-            <img id="photo-edit" src="data:image/jpeg;base64,{{ img }}" width="120" height="120">
+            <img id="photo-edit" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(user.username) }}" width="120" height="120">
 
             <form name="Form2" onsubmit="return validateform2()" action="{{ path('edit_user_photo',  {'username' : user.username} ) }}" enctype="multipart/form-data"
                   method="post">

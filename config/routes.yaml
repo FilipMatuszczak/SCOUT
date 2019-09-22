@@ -238,3 +238,18 @@ create_request_for_technology:
     path: /technology/create_request
     controller: App\Controller\ReportController:createTechnologyRequestAction
     methods: POST
+
+save_technologies_for_user:
+    path: /save_technologies_for_user
+    controller: App\Controller\ProfileController:saveTechnologiesForUserAction
+    methods: POST
+
+save_languages_for_user:
+    path: /save_languages_for_user
+    controller: App\Controller\ProfileController:saveLanguagesForUserAction
+    methods: POST
+
+save_cities_for_user:
+    path: /save_cities_for_user
+    controller: App\Controller\ProfileController:saveCitiesForUserAction
+    methods: POST

@@ -89,6 +89,45 @@ class ProfileController extends AbstractController
         );
     }
 
+    public function saveCitiesForUserAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $username = $this->security->getUser()->getUsername();
+
+        $user = $this->userProvider->loadUserByUsername($username);
+        $cities = $request->get('cities');
+
+        $this->profileEditHandler->updateCitiesForUser($user, $cities);
+
+        return $this->redirectToRoute('edit_profile', ['username' => $username]);
+    }
+
+    public function saveLanguagesForUserAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $username = $this->security->getUser()->getUsername();
+
+        $user = $this->userProvider->loadUserByUsername($username);
+        $languages = $request->get('languages');
+
+        $this->profileEditHandler->updateLanguagesForUser($user, $languages);
+
+        return $this->redirectToRoute('edit_profile', ['username' => $username]);
+    }
+
+    public function saveTechnologiesForUserAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $username = $this->security->getUser()->getUsername();
+
+        $user = $this->userProvider->loadUserByUsername($username);
+        $technologies = $request->get('technologies');
+
+        $this->profileEditHandler->updateTechnologiesForUser($user, $technologies);
+
+        return $this->redirectToRoute('edit_profile', ['username' => $username]);
+    }
+
     public function createPostOnWall(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

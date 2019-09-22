@@ -108,7 +108,7 @@ $(document).ready(function(){
                 $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="city" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
-            if (dataC.length>1) {
+            if (dataC.length>0) {
 
             var i = 0;
             $(".city").each(function () {
@@ -139,7 +139,7 @@ $(document).ready(function(){
         ///todo dodaje nowe okno formularza
         i++;
 
-        $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="lang" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+        $('#cities-forms').append('<div> <input type="text" class="bio city down" placeholder="Miasto" maxlength="50" id="lang" name="cities[]" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
 
         ///////////
@@ -152,7 +152,7 @@ $(document).ready(function(){
         ///todo dodaje nowe okno formularza
         i++;    
         
-       $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+       $('#languages-forms').append('<div> <input type="text" class="bio lang down" placeholder="Język" maxlength="50" id="lang" name="languages[]" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
       
         
       ///////////
@@ -171,7 +171,7 @@ $(document).ready(function(){
         ///todo dodaje nowe okno formularza
         i++;    
         
-       $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+       $('#tech-forms').append('<div> <input type="text" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" name="technologies[]" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
       
         
       ///////////

@@ -68,7 +68,7 @@ class ProjectCreator
         $this->userProjectRepository->setUserAsAuthor($author->getUserId(), $project->getProjectId());
     }
 
-    public function updateProject($projectId, $title, $description, ?File $photo, array $technologyNames, User $editor)
+    public function updateProject($projectId, $title, $description, ?File $photo, ?array $technologyNames, User $editor)
     {
         $project = $this->projectRepository->findOneBy(['projectId' => $projectId]);
         if ($this->projectsDataProvider->getUserProjectStatus($editor->getUserId(), $projectId) != ProjectsDataProvider::USER_AUTHOR) {

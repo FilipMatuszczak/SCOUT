@@ -61,7 +61,7 @@
         </form>
         <hr>
         <button type="button" id="button-moreC" class="button-more btad">+</button><br>
-    <form action="{{ path('save_cities_for_user') }}" method="post">
+    <form name="cityCreate" onsubmit="return validateformCreateCity()" action="{{ path('save_cities_for_user') }}" method="post">
     <div id="cities-forms" class="forms">
         <div>
         <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" name="cities[]" id="city" list="CityList">
@@ -80,7 +80,7 @@
 
 
         <hr><button type="button" id="button-more" class="button-more btad">+</button> <br>
-    <form action="{{ path('save_languages_for_user') }}" method="post">
+    <form name="langCreate" onsubmit="return validateformCreateLang()"  action="{{ path('save_languages_for_user') }}" method="post">
         <div id="languages-forms" class="forms">
             <div>
             <input type="LangList" class="bio lang" placeholder="Język" maxlength="50" id="lang" name="languages[]" list="LangList">
@@ -102,7 +102,7 @@
         </div>
         <br> <br>
         <button type="button" id="button-moret" class="button-moret btad" style="margin-left: -6%;">+</button> <br>
-        <form action="{{ path('save_technologies_for_user') }}" method="post">
+        <form name="postCreate" onsubmit="return validateformCreate()" action="{{ path('save_technologies_for_user') }}" method="post">
         <div id="tech-forms" class="forms">
             <div>
             <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" name="technologies[]" list="TechList">
@@ -181,15 +181,15 @@
         function validateform1(){
             var firstname=document.Form1.firstname.value;
             var lastname=document.Form1.lastname.value;
-
-
+            document.Form1.firstname.style.border = "1px solid #7DA2AA";
+            document.Form1.lastname.style.border = "1px solid #7DA2AA";
 
             if (firstname==null || firstname==""){
                 //console.log(reason);
-                document.Form1.firstname.style.border = "0.5px solid red";
+                document.Form1.firstname.style.border = "1px solid red";
                 return false;
             } else if (lastname==null || lastname==""){
-                document.Form1.lastname.style.border = "0.5px solid red";
+                document.Form1.lastname.style.border = "1px solid red";
                 return false;
             }
 
@@ -200,9 +200,9 @@
 
         function validateform2(){
             var fileToUpload=document.Form2.fileToUpload.value;
-
+            document.getElementById("photo-edit").style.border = "1px solid #7DA2AA";
              if (fileToUpload==null || fileToUpload==""){
-                document.getElementById("photo-edit").style.border = "0.5px solid red";
+                document.getElementById("photo-edit").style.border = "1px solid red";
                 return false;
             }
             else{  return true; }
@@ -232,15 +232,193 @@
             var Rtitle=document.ReqForm.reqTitle.value;
             var Rtxt=document.ReqForm.reqtxt.value;
 
+            document.ReqForm.reqTitle.style.border = "1px solid #7DA2AA";
+            document.ReqForm.reqtxt.style.border = "1px solid #7DA2AA";
+
+
             if (Rtitle==null || Rtitle==""){
                 //console.log(reason);
-                document.ReqForm.reqTitle.style.border = "0.5px solid red";
+                document.ReqForm.reqTitle.style.border = "1px solid red";
                 return false;
             } else if (Rtxt==null || Rtxt==""){
                 //console.log(reason);
-                document.ReqForm.reqtxt.style.border = "0.5px solid red";
+                document.ReqForm.reqtxt.style.border = "1px solid red";
                 return false;
             } else {  return true; }
+        }
+
+        ////validateform
+        function validateformCreate(){
+
+
+            var isValid;
+            $(".tech").each(function() {
+
+                var element = $(this);
+//////
+                element.css("border","1px solid #7DA2AA");
+                var requestExistsTech = new XMLHttpRequest()
+
+                if((element.val() == "")  || (element.val() == null) ){
+                    isValid=false;
+                    element.css("border","1px solid red");
+
+                }else{
+
+                    requestExistsTech.open('GET', 'http://127.0.0.1:8000/technologyExists/' + element.val(), false)
+                    requestExistsTech.onload = function () {
+
+                        var dataE = JSON.parse(this.response)
+
+
+                        if (requestExistsTech.status >= 200 && requestExistsTech.status < 400) {
+                            //console.log(dataE);
+
+
+                            if ((element.val() == "") || dataE=="false" || (element.val() == null) ){
+                                ///console.log("NOPEEEE" + element.val());
+                                isValid=false;
+                                element.css("border","1px solid red");
+                            }
+
+
+                        } else {
+                            isValid=false;
+                            console.log('error')
+                        }
+
+
+                    }
+
+                    requestExistsTech.send()
+                }
+            });
+
+
+//////
+
+
+            if(isValid==false){return false;}
+            else{  return true; }
+
+
+        }
+////////////////////////////////////////lang/////////////
+
+
+        function validateformCreateLang(){
+
+
+            var isValid;
+            $(".lang").each(function() {
+
+                var element = $(this);
+//////
+                element.css("border","1px solid #7DA2AA");
+                var requestExistsTech = new XMLHttpRequest()
+
+                if((element.val() == "")  || (element.val() == null) ){
+                    isValid=false;
+                    element.css("border","1px solid red");
+
+                }else{
+
+                    requestExistsTech.open('GET', 'http://127.0.0.1:8000/languageExists/' + element.val(), false)
+                    requestExistsTech.onload = function () {
+
+                        var dataE = JSON.parse(this.response)
+
+
+                        if (requestExistsTech.status >= 200 && requestExistsTech.status < 400) {
+                            //console.log(dataE);
+
+
+                            if ((element.val() == "") || dataE=="false" || (element.val() == null) ){
+                                ///console.log("NOPEEEE" + element.val());
+                                isValid=false;
+                                element.css("border","1px solid red");
+                            }
+
+
+                        } else {
+                            isValid=false;
+                            console.log('error')
+                        }
+
+
+                    }
+
+                    requestExistsTech.send()
+                }
+            });
+
+
+//////
+
+
+            if(isValid==false){return false;}
+            else{  return true; }
+
+
+        }
+
+        ////////////////////////////////////////city/////////////
+
+
+        function validateformCreateCity(){
+
+
+            var isValid;
+            $(".city").each(function() {
+
+                var element = $(this);
+//////
+                element.css("border","1px solid #7DA2AA");
+                var requestExistsTech = new XMLHttpRequest()
+
+                if((element.val() == "")  || (element.val() == null) ){
+                    isValid=false;
+                    element.css("border","1px solid red");
+
+                }else{
+
+                    requestExistsTech.open('GET', 'http://127.0.0.1:8000/cityExists/' + element.val(), false)
+                    requestExistsTech.onload = function () {
+
+                        var dataE = JSON.parse(this.response)
+
+
+                        if (requestExistsTech.status >= 200 && requestExistsTech.status < 400) {
+                            //console.log(dataE);
+
+
+                            if ((element.val() == "") || dataE=="false" || (element.val() == null) ){
+                                ///console.log("NOPEEEE" + element.val());
+                                isValid=false;
+                                element.css("border","1px solid red");
+                            }
+
+
+                        } else {
+                            isValid=false;
+                            console.log('error')
+                        }
+
+
+                    }
+
+                    requestExistsTech.send()
+                }
+            });
+
+
+//////
+
+
+            if(isValid==false){return false;}
+            else{  return true; }
+
+
         }
 
     </script>

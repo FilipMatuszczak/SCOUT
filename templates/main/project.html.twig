@@ -445,27 +445,67 @@
         }
 
 
+
+        ////validateform
         function validateformCreate(){
             var title=document.postCreate.title.value;
-
+            document.postCreate.title.style.border = "1px solid #7DA2AA";
 
             var isValid;
             $(".tech").each(function() {
+
                 var element = $(this);
-                if (element.val() == "") {
-                    element.css("border","0.5px solid red");
-                    isValid = false;
+//////
+                element.css("border","1px solid #7DA2AA");
+                var requestExistsTech = new XMLHttpRequest()
+
+                if((element.val() == "")  || (element.val() == null) ){
+                    isValid=false;
+                    element.css("border","1px solid red");
+
+                }else{
+
+                    requestExistsTech.open('GET', 'http://127.0.0.1:8000/technologyExists/' + element.val(), false)
+                    requestExistsTech.onload = function () {
+
+                        var dataE = JSON.parse(this.response)
+
+
+                        if (requestExistsTech.status >= 200 && requestExistsTech.status < 400) {
+                            //console.log(dataE);
+
+
+                            if ((element.val() == "") || dataE=="false" || (element.val() == null) ){
+                                ///console.log("NOPEEEE" + element.val());
+                                isValid=false;
+                                element.css("border","1px solid red");
+                            }
+
+
+                        } else {
+                            isValid=false;
+                            console.log('error')
+                        }
+
+
+                    }
+
+                    requestExistsTech.send()
                 }
             });
 
 
+//////
             if (title==null || title==""){
                 //console.log(reason);
-                document.postCreate.title.style.border = "0.5px solid red";
+                document.postCreate.title.style.border = "1px solid red";
                 return false;
             }
-            else if(isValid==false){console.log("tech!!!1");return false;}
+
+            if(isValid==false){return false;}
             else{  return true; }
+
+
         }
 
     </script>

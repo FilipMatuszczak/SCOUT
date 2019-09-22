@@ -22,7 +22,7 @@ $(document).ready(function(){
             for (i = 1; i < data.length; i++) {
                 //console.log(data[i]);
 
-                $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+                $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" name = "technologies[]"  maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
             if (data.length>0) {
@@ -63,7 +63,7 @@ $(document).ready(function(){
             for (i = 1; i < data.length; i++) {
                 //console.log(data[i]);
 
-                $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+                $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" name="languages[]" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
             if (data.length>0) {
@@ -105,7 +105,7 @@ $(document).ready(function(){
             for (i = 1; i < dataC.length; i++) {
                 //console.log(data[i]);
 
-                $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="city" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+                $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="city" name="cities[]" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
             if (dataC.length>0) {

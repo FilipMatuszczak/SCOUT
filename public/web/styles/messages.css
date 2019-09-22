@@ -216,7 +216,7 @@ hr{
     overflow: hidden;
     margin-top: 10px;
     margin-bottom: 5px;
-    
+
     border: 2px solid #f1f1f1;
   background-color: #dedede;
   border-radius: 5px;
@@ -224,6 +224,7 @@ hr{
   margin: 10px 0;
     
 }
+
 #chat-container{
     padding: 2%;
     background-color: white;
@@ -237,3 +238,8 @@ hr{
     text-align: justify;
 }
 
+.youmessc{
+    text-align: justify;
+    text-align-last: right;
+
+}

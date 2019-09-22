@@ -91,7 +91,7 @@
 
         function validateformCreate(){
             var title=document.postCreate.title.value;
-            var image=document.postCreate.image.value;
+           ///var image=document.postCreate.image.value;
 
                 var isValid;
             $(".tech").each(function() {
@@ -107,10 +107,10 @@
                 //console.log(reason);
                 document.postCreate.title.style.border = "0.5px solid red";
                 return false;
-            } else if (image==null || image==""){
+            } /*else if (image==null || image==""){
                 document.getElementById("photo-edit").style.border = "0.5px solid red";
                 return false;
-            }
+            }*/
             else if(isValid==false){console.log("tech!!!1");return false;}
             else{  return true; }
         }

@@ -1,7 +1,153 @@
 $(document).ready(function(){
-    
-    
-      /////////more forms
+
+
+
+
+
+/////////////wczytywanie technologii uzytkownika
+
+    var userID=document.getElementById('UserID').value;
+
+    var requestTechUser = new XMLHttpRequest()
+
+
+    requestTechUser.open('GET', 'http://127.0.0.1:8000/technologies/' + userID, true)
+    requestTechUser.onload = function () {
+
+        var data = JSON.parse(this.response)
+
+
+        if (requestTechUser.status >= 200 && requestTechUser.status < 400) {
+            //console.log(userID);
+            for (i = 1; i < data.length; i++) {
+                //console.log(data[i]);
+
+                $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+
+            }
+            if (data.length>1) {
+            var i=0;
+            $(".tech").each(function() {
+                var element = $(this);
+                if (element.val() == "") {
+                    element.val(data[i]);
+                    i++;
+                }
+            });}
+
+        } else {
+            console.log('error')
+        }
+
+
+    }
+
+    requestTechUser.send()
+
+/////end technologii
+
+
+/////////////wczytywanie języków uzytkownika
+
+    var requestLangUser = new XMLHttpRequest()
+
+
+    requestLangUser.open('GET', 'http://127.0.0.1:8000/languages/' + userID, true)
+    requestLangUser.onload = function () {
+
+        var data = JSON.parse(this.response)
+
+
+        if (requestLangUser.status >= 200 && requestLangUser.status < 400) {
+            //console.log(userID);
+            for (i = 1; i < data.length; i++) {
+                //console.log(data[i]);
+
+                $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+
+            }
+            if (data.length>1) {
+                var i = 0;
+                $(".lang").each(function () {
+                    var element = $(this);
+                    if (element.val() == "") {
+                        element.val(data[i]);
+                        i++;
+                    }
+                });
+            }
+        } else {
+            console.log('error')
+        }
+
+
+    }
+
+    requestLangUser.send()
+
+/////end technologii
+
+
+
+/////////////wczytywanie miast uzytkownika
+
+    var requestCityUser = new XMLHttpRequest()
+
+
+    requestCityUser.open('GET', 'http://127.0.0.1:8000/cities/' + userID, true)
+    requestCityUser.onload = function () {
+
+        var dataC = JSON.parse(this.response)
+
+
+        if (requestCityUser.status >= 200 && requestCityUser.status < 400) {
+            //console.log(userID);
+            for (i = 1; i < dataC.length; i++) {
+                //console.log(data[i]);
+
+                $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="city" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+
+            }
+            if (dataC.length>1) {
+
+            var i = 0;
+            $(".city").each(function () {
+                var element = $(this);
+                if (element.val() == "") {
+                    element.val(dataC[i]);
+                    i++;
+                }
+            });
+        }
+        } else {
+            console.log('error')
+        }
+
+
+    }
+
+    requestCityUser.send()
+
+/////end miast
+
+
+
+
+
+/////////more forms
+    $('#button-moreC').click(function() {
+        ///todo dodaje nowe okno formularza
+        i++;
+
+        $('#cities-forms').append('<div> <input type="CityList" class="bio city down" placeholder="Miasto" maxlength="50" id="lang" list="CityList"><datalist id="CityList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+
+
+        ///////////
+    });
+
+
+
+    /////////more forms
     $('#button-more').click(function() {
         ///todo dodaje nowe okno formularza
         i++;    
@@ -37,7 +183,13 @@ $(document).ready(function(){
         $(this).parent('div').remove();
         i--;
     })
-    
+
+
+    $('#cities-forms').on("click", ".less", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        i--;
+    })
     
     //////Function for getting technologies
   $('#tech-forms').on("keyup",".tech",function(callback)           
@@ -132,16 +284,14 @@ requestLang.send()
     
     });
   /////////////////////////////
-    
-    
-    
-    
+
+
+
      ////getting cities
-    $('#city').keyup(function(callback)           
+    $('#cities-forms').on("keyup",".city",function(callback)
                        {
   
-  var city = $('#city').val()
-       
+  var city =  $(this).val()
     ///console.log(lang);
     if(city!=''){
         

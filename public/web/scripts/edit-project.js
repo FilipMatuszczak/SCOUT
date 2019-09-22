@@ -1,5 +1,51 @@
 $(document).ready(function () {
 
+/////////////wczytywanie technologii projektu
+    var ProjectID=document.getElementById('ProjectID').value;
+
+    var requestTechProject = new XMLHttpRequest()
+
+
+    requestTechProject.open('GET', 'http://127.0.0.1:8000/project/technologies/' + ProjectID, true)
+    requestTechProject.onload = function () {
+
+        var data = JSON.parse(this.response)
+
+
+        if (requestTechProject.status >= 200 && requestTechProject.status < 400) {
+            //console.log(userID);
+            for (i = 1; i < data.length; i++) {
+                //console.log(data[i]);
+
+                $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
+
+            }
+            if (data.length>1) {
+                var i=0;
+                $(".tech").each(function() {
+                    var element = $(this);
+                    if (element.val() == "") {
+                        element.val(data[i]);
+                        i++;
+                    }
+                });}
+
+        } else {
+            console.log('error')
+        }
+
+
+    }
+
+    requestTechProject.send()
+
+/////end technologii
+
+
+
+
+
+
 
             /////////////////
 

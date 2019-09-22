@@ -8,7 +8,7 @@
     {% endblock %}
 {% block body %}
 
-
+<input id="UserID" value="{{ user.userId }}" type="hidden">
     {# modal request technologii #}
     <form  name="ReqForm" onsubmit="return validateformReq()" action="{{ path('create_request_for_technology') }}" method="post">
         <div id="modal-req" class="modal">
@@ -59,12 +59,22 @@
 
             <input type="submit" value="Zapisz zmiany" name="submit" class="upload smaller"/>
         </form>
+        <hr>
 
-
+    <div id="cities-forms" class="forms">
         <input type="CityList" class="bio" placeholder="Miasto" maxlength="50" id="city" list="CityList" value="Poznań">
         <datalist id="CityList">
 
         </datalist>
+        <button type="button" id="button-moreC" class="button-more btad">+</button>
+        <br>
+    </div>
+        <input type="submit" value="Dodaj miasto" name="submit" id="add-city" class="upload smaller"/>
+
+
+        <div id="cities"></div>
+
+
 
         <hr>
 

@@ -82,6 +82,18 @@ class ProjectCreator
             $project->setPhoto(stream_get_contents($strm));
         }
 
+        foreach ($project->getTechnology() as $technology) {
+            $project->removeTechnology($technology);
+        }
+        $this->entityManager->persist($project);
+        $this->entityManager->flush();
+
+        $technologies = $this->technologyRepository->findBy(['name' => $technologyNames]);
+
+        foreach ($technologies as $technology) {
+            $project->addTechnology($technology);
+        }
+
         $this->entityManager->persist($project);
         $this->entityManager->flush();
     }

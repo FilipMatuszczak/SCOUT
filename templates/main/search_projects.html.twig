@@ -44,14 +44,11 @@
             <hr>
             <div class="sort">
                 Sortuj według:
-
                 <select name="sorting">
-
-                    <option value="Najnowsze">Najnowsze</option>
-                    <option value="Najstarsze">Najstarsze</option>
-                    <option value="A-Z">A-Z</option>
-                    <option value="Z-A">Z-A</option>
-                    <option selected="selected">{{ sorting }}</option>
+                    <option value="Najnowsze" {% if sorting == "Najnowsze" %} selected{% endif %}>Najnowsze</option>
+                    <option value="Najstarsze" {% if sorting == "Najstarsze" %} selected{% endif %}>Najstarsze</option>
+                    <option value="A-Z" {% if sorting == "A-Z" %} selected{% endif %}>A-Z</option>
+                    <option value="Z-A" {% if sorting == "Z-A" %} selected{% endif %}>Z-A</option>
                 </select>
                 <br>
                 <div class="btn-search">

@@ -95,9 +95,6 @@ class ProfileEditHandler
 
     public function updateTechnologiesForUser(User $user, $technologyNames)
     {
-        var_dump($technologyNames);
-        exit;
-
         foreach ($user->getTechnology() as $technology)
         {
             $user->removeTechnology($technology);

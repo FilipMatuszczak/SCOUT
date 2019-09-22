@@ -24,7 +24,7 @@
                 <input class="bio" type="text" size="30" name="lastName" id="inputTitle" placeholder="..."
                        value={{ lastName }}></div>
             <br>
-            <input type="hidden" name="page" value={{ page }}/>
+            <input type="hidden" name="page" value={{ page }}>
             <div class="bio-title">
                 Język
                 <input type="LangList" class="bio" placeholder="..." maxlength="50" id="lang" name="language"
@@ -59,11 +59,10 @@
                 Sortuj według:
 
                 <select name="sorting">
-                    <option value="A-Z">A-Z</option>
-                    <option value="Z-A">Z-A</option>
-                    <option value="Najstarsi">Najstarsi</option>
-                    <option value="Najmlodsi">Najmłodsi</option>
-                    <option selected="selected">{{ sorting }}</option>
+                    <option value="A-Z" {% if sorting == "A-Z" %} selected{% endif %}>A-Z</option>
+                    <option value="Z-A" {% if sorting == "Z-A" %} selected{% endif %}>Z-A</option>
+                    <option value="Najstarsi" {% if sorting == "Najstarsi" %} selected{% endif %}>Najstarsi</option>
+                    <option value="Najmlodsi" {% if sorting == "Najmlodsi" %} selected{% endif %}>Najmłodsi</option>
                 </select>
                 <br>
                 <div class="btn-search">

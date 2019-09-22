@@ -25,7 +25,7 @@ $(document).ready(function(){
                 $('#tech-forms').append('<div> <input type="TechList" class="bio tech" id="tech" placeholder="Technologie" maxlength="50" list="TechList"><datalist id="TechList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
-            if (data.length>1) {
+            if (data.length>0) {
             var i=0;
             $(".tech").each(function() {
                 var element = $(this);
@@ -66,7 +66,7 @@ $(document).ready(function(){
                 $('#languages-forms').append('<div> <input type="LangList" class="bio lang down" placeholder="Język" maxlength="50" id="lang" list="LangList"><datalist id="LangList"></datalist> <button type="button" id="button-less" class="less btad">-</button></div>');
 
             }
-            if (data.length>1) {
+            if (data.length>0) {
                 var i = 0;
                 $(".lang").each(function () {
                     var element = $(this);

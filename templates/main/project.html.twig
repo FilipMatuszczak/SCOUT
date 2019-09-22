@@ -75,15 +75,19 @@
                                     <h4 style="color:grey;">Nie widzisz swojej technologii? </h4> <button id="ReqButton" class="button">Zgłoś ją!</button>
                                     </div>
                                     {# powinny sie chyba wczytywac jakie już zostały dodane cnie? :[ #}
-                                    <div id="tech-forms" class="forms">
-                                        <input type="text" class="bio tech" id="tech" placeholder="Technologie"
-                                               maxlength="50"
-                                               name="technologies[]" list="TechList">
-                                        <datalist id="TechList">
 
-                                        </datalist>
-                                        <button type="button" id="button-moret" class="button-moret btad">+</button>
-                                        <br>
+                                    <br><br> <br>
+                                    <button type="button" id="button-moret" class="button-moret btad" style="margin-left: -8%;">+</button> <br>
+
+                                    <div id="tech-forms" class="forms">
+                                        <div>
+                                            <input type="text" class="bio tech" id="tech" placeholder="Technologie" maxlength="50"
+                                                   name="technologies[]" list="TechList">
+                                            <datalist id="TechList">
+
+                                            </datalist>
+                                            <button type="button" id="button-less" class="less btad">-</button>
+                                            <br> </div>
                                     </div>
 
 

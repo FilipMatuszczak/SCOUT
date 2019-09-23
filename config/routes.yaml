@@ -109,6 +109,11 @@ users_main:
     controller: App\Controller\UsersController:indexAction
     methods: GET
 
+filter_users:
+    path: /users/filter
+    controller: App\Controller\UsersController:filterUsers
+    methods: GET
+
 new_project_index:
     path: /project/create
     controller: App\Controller\ProjectsController:createProjectIndexAction

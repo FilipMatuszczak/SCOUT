@@ -62,7 +62,7 @@ class ReportController extends AbstractController
         $reason = $request->get('reason');
         $postId = $request->get('postId');
 
-        $this->reportCreator->createReportForPost($postId, $reason);
+        $this->reportCreator->createReportForPost($postId, strip_tags($reason));
         $destination = $request->get('destination');
         switch ($destination)
         {

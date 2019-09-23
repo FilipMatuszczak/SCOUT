@@ -14,6 +14,7 @@ use App\Services\ProfileEditHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Security;
 
 class ProfileController extends AbstractController
@@ -68,6 +69,10 @@ class ProfileController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $user = $this->userProvider->loadUserByUsername($username);
+        if (!$user)
+        {
+            throw new NotFoundHttpException();
+        }
         if ($user->getDateOfBirth()) {
             $userAge = date_diff(date_create($user->getDateOfBirth()->format('Y-m-d H:i:s')), date_create('today'))->y;
         } else {
@@ -137,7 +142,7 @@ class ProfileController extends AbstractController
         $user = $this->userProvider->loadUserByUsername($username);
         $photoFile = $request->files->get('photo');
         $text = $request->get('text');
-        $this->postCreator->createPostForUser($user, $text, $photoFile);
+        $this->postCreator->createPostForUser($user, strip_tags($text), $photoFile);
 
         return $this->redirectToRoute('user_profile', ['username' => $request->get('username')]);
     }

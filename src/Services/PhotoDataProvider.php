@@ -50,7 +50,7 @@ class PhotoDataProvider
 
     public function getPhotoByUsername($username)
     {
-        if ($username === 'SCOUT NEWSLETTER')
+        if ($username === 'SCOUT ADMINISTRATION')
         {
             $username = 'admin';
         }

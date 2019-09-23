@@ -43,6 +43,19 @@ class UsersController extends AbstractController
             $nextPage = $page + 1;
         }
 
+        if (empty($users) && $page != 1)
+        {
+            return $this->redirectToRoute('users_main', [
+                'page' => 1,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'sorting' => $sorting,
+                'technology' => $technology,
+                'language' => $language,
+                'city' => $city
+            ]);
+        }
+
         return $this->render('main/search_users.html.twig', [
             'users' => $users,
             'page' => $page,
@@ -53,6 +66,19 @@ class UsersController extends AbstractController
             'language' => $language,
             'city' => $city,
             'nextPage' => $nextPage,
+        ]);
+    }
+
+    public function filterUsers(Request $request)
+    {
+        return $this->redirectToRoute('users_main', [
+            'page' => 1,
+            'firstName' => $request->get('firstName'),
+            'lastName' => $request->get('lastName'),
+            'sorting' => $request->get('sorting'),
+            'technology' => $request->get('technology'),
+            'language' => $request->get('language'),
+            'city' => $request->get('city'),
         ]);
     }
 }

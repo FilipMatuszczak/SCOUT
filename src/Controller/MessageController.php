@@ -106,14 +106,14 @@ class MessageController extends AbstractController
         $messageText = $request->get('messageText');
         $receiverId = $request->get('receiverId');
 
-        $this->messageCreator->createMessage($receiverId, $messageText);
+        $this->messageCreator->createMessage($receiverId, strip_tags($messageText));
 
         return $this->redirectToRoute('message_with_user', ['username' => $this->userProvider->loadUserById($receiverId)->getUsername()]);
     }
 
     public function MessagesWithUserIndex($username)
     {
-        if ($username === 'SCOUT NEWSLETTER')
+        if ($username === 'SCOUT ADMINISTRATION')
         {
             $username = 'admin';
         }

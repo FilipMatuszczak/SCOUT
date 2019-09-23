@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MailerService
 {
@@ -54,7 +55,7 @@ class MailerService
         $user = $this->userRepository
             ->findCreatedUserByUsernameAndChangePasswordLink($username, $changePasswordLink);
 
-        if ($user) {
+        if ($user && $user->getOptions() & User::USER_CHANGING_PASSWORD) {
             $user->setOptions($user->getOptions() ^ User::USER_CHANGING_PASSWORD);
 
             $this->entityManager->persist($user);
@@ -63,6 +64,6 @@ class MailerService
             return $user;
         }
 
-        return null;
+        throw new NotFoundHttpException();
     }
 }

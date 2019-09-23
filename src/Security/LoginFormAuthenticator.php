@@ -83,15 +83,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $password = $credentials['password'];
         $salt = $user->getSalt();
         $passwordWithSalt = $password . $salt;
-
-        if ($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_BANNED)
+        $userEntity = $this->userProvider->loadUserByUsername($user->getUsername());
+        if ($userEntity->getOptions() & User::USER_BANNED)
         {
             throw new UnauthorizedHttpException('', 'You were banned due to your behaviour');
         }
 
-        if ($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_CHANGING_PASSWORD)
+        if ($userEntity->getOptions() & User::USER_CHANGING_PASSWORD)
         {
-            return false;
+            $userEntity->setOptions($userEntity->getOptions() ^ User::USER_CHANGING_PASSWORD);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
         }
 
         if (!($this->userProvider->loadUserByUsername($user->getUsername())->getOptions() & User::USER_VERIFIED))

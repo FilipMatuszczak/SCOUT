@@ -43,7 +43,7 @@ class ProjectRepository extends ServiceEntityRepository
 
         if (!empty($title)) {
             $queryBuilder->andWhere('p.title like :title')
-                ->setParameter('title', $title);
+                ->setParameter('title', $title . '%');
         }
 
         if (isset($technology)) {

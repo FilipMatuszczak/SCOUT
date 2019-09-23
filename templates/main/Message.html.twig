@@ -30,7 +30,7 @@
                         <a class="project-title"
                 {% if username != 'admin' %} href="{{ path('user_profile', {'username': message.sender.username}) }}"{% endif %}>
                 {% if username != 'admin' %}{{ message.sender.username }}{% endif %}
-                            {% if username == 'admin' %}SCOUT NEWSLETTER{% endif %}</a>
+                            {% if username == 'admin' %}SCOUT ADMINISTRATION{% endif %}</a>
                         ✽ {{ message.timestamp.format('Y-m-d H:i:s') }}
 
 

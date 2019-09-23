@@ -12,6 +12,7 @@ use App\Services\ProjectsDataProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Security;
 
 class ProjectsController extends AbstractController
@@ -68,6 +69,19 @@ class ProjectsController extends AbstractController
         if (sizeof($nextProjects) != 0) {
             $nextPage = $page + 1;
         }
+
+        if (empty($projects) && $page != 1)
+        {
+            return $this->redirectToRoute('projectcs_main', [
+                'projects' => $projects,
+                'page' => 1,
+                'sorting' => $sorting,
+                'technology' => $technology,
+                'title' => $title,
+                'member' => $member,
+            ]);
+        }
+
         return $this->render('main/search_projects.html.twig', [
             'projects' => $projects,
             'page' => $page,
@@ -79,12 +93,28 @@ class ProjectsController extends AbstractController
         ]);
     }
 
+    public function filterProjects(Request $request)
+    {
+        return $this->redirectToRoute('projectcs_main', [
+            'projects' =>  $request->get('projects'),
+            'page' => 1,
+            'sorting' =>  $request->get('sorting'),
+            'technology' =>  $request->get('technology'),
+            'title' =>  $request->get('title'),
+            'member' =>  $request->get('member'),
+        ]);
+    }
+
     public function projectProfileAction($projectId)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $userId = $this->userProvider->loadUserByUsername($this->security->getUser()->getUsername())->getUserId();
         $project = $this->projectDataProvider->getProjectById($projectId);
+        if (!$project)
+        {
+            throw new NotFoundHttpException();
+        }
         $isAuthor = false;
         $isMember = false;
         $status = $this->projectDataProvider->getUserProjectStatus($userId, $projectId);
@@ -142,7 +172,7 @@ class ProjectsController extends AbstractController
         $text = $request->get('text');
         $project = $this->projectDataProvider->getProjectById($request->get('projectId'));
 
-        $this->postCreator->createPostForProject($user, $text, $project, $photoFile);
+        $this->postCreator->createPostForProject($user, strip_tags($text), $project, $photoFile);
 
         return $this->redirectToRoute('project_profile', ['projectId' => $project->getProjectId()]);
     }
@@ -186,7 +216,7 @@ class ProjectsController extends AbstractController
         $messageText = $request->get('messageText');
         $projectId = $request->get('projectId');
 
-        $this->messageCreator->createAddUserToProjectRequest($projectId, $messageText);
+        $this->messageCreator->createAddUserToProjectRequest($projectId, strip_tags($messageText));
 
         return $this->redirectToRoute('main');
     }

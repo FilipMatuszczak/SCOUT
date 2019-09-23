@@ -67,11 +67,11 @@ class UserRepository extends ServiceEntityRepository
         $queryBuilder =  $this->createQueryBuilder('u');
             if (!empty($firstName)) {
                 $queryBuilder->andWhere('u.firstname like :firstname')
-                    ->setParameter('firstname', $firstName);
+                    ->setParameter('firstname', $firstName . '%');
             }
             if (!empty($lastName)) {
                 $queryBuilder->andWhere('u.lastname like :lastname')
-                ->setParameter('lastname', $lastName);
+                ->setParameter('lastname', $lastName . '%');
             }
 
             if (isset($technology)) {
@@ -98,6 +98,6 @@ class UserRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('u');
 
-        return $queryBuilder->select('u.userId')->where('BIT_AND(u.options, 32) = 0')->getQuery()->getResult();
+        return $queryBuilder->select('u.userId')->where('BIT_AND(u.options, 32) = 32')->getQuery()->getResult();
     }
 }

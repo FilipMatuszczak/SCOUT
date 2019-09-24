@@ -10,9 +10,10 @@
 
 {% block body %}
 
+{% if messageDisplays is empty %}
 
-
-
+    <h3 style="text-align: center; color: darkgrey;">Nie posiadasz żadnych wiadomości.</h3>
+{%endif%}
     {% for messageDisplay in messageDisplays %}
         <div class="comment">
             <a href=" {{ path('user_profile', {'username': messageDisplay.username}) }}"> <img id="comment-avatar-left"

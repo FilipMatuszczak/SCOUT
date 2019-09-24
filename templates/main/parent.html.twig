@@ -51,13 +51,13 @@
                                                                                        src="data:image/jpeg;base64,{{ photo_data_provider.getCurrentUserPhotoData() }}"
                                                                                        width="100"
                                                                                        height="100"></a>
-
+                <div class="navs">
             <button onclick="location.href='{{ path('projectcs_main') }}'" class="navico"><i class="fa fa-suitcase"></i></button>
             <button  onclick="location.href='{{ path('users_main') }}'" class="navico"><i class="fa fa-users"></i></button>
             <button  onclick="location.href='{{ path('all_messages') }}'" class="navico"><i class="fa fa-envelope"></i></button>
             <button onclick="location.href='{{ path('edit_profile', {'username': app.user.username}) }}'"
                     class="navico"><i class="fa fa-cog"></i></button>
-           
+                </div>
 
             <p class="anavig">Witaj, {{ app.user.username }} <br>
                 <a class="logout" href={{ path('app_logout') }}> Wyloguj się</a></p>

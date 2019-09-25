@@ -50,6 +50,8 @@ class ReportController extends AbstractController
                 return $this->redirectToRoute('edit_profile', ['username' => $user->getUsername()]);
             case 'project_profile':
                 return $this->redirectToRoute('project_profile', ['projectId' => $request->get('projectId')]);
+            case 'create_project':
+                return $this->redirectToRoute('new_project_index');
         }
 
         return $this->redirectToRoute('main');

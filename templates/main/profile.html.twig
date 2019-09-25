@@ -121,7 +121,7 @@
 
     {% if user.username == app.user.username %}
         <div class="form-post">
-            <img id="post-avatar" src="data:image/jpeg;base64,{{ img }}" width="70" height="70">
+            <img id="post-avatar" src="data:image/jpeg;base64,{{ photo_data_provider.getPhotoByUsername(user.username)}}" width="70" height="70">
             <form name="postForm" action="{{ path('create_wall_post') }}" enctype="multipart/form-data" method="post" onsubmit="return validateformPost()">
 
                 <div class="photo-textarea">

@@ -8,6 +8,7 @@ use App\Entity\Post;
 use App\Entity\Project;
 use App\Entity\User;
 use App\Repository\PostRepository;
+use App\Repository\ReportRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 

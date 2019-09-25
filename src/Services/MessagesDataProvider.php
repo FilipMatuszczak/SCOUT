@@ -10,6 +10,7 @@ use App\Repository\MessageRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserProjectRepository;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MessagesDataProvider
 {
@@ -140,7 +141,10 @@ class MessagesDataProvider
     {
         $owner = $this->userRepository->findOneBy(['username' => $ownerName]);
         $user = $this->userRepository->findOneBy(['username' => $username]);
-
+        if ($user === null && $username != 'SCOUT ADMINISTRATION')
+        {
+            throw new NotFoundHttpException();
+        }
         $halfMessages = $this->messageRepository->findBy(['receiver' => $owner, 'sender' => $user]);
         $otherHalfMessages = $this->messageRepository->findBy(['receiver' => $user, 'sender' => $owner]);
 

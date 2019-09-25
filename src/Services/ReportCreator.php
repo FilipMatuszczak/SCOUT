@@ -83,6 +83,12 @@ class ReportCreator
         $report = $this->reportRepository->findOneBy(['reportId' => $reportId]);
 
         $this->entityManager->remove($report);
+
+        $reports = $this->reportRepository->findBy(['post' => $report->getPost()]);
+        foreach ($reports as $report) {
+            $this->entityManager->remove($report);
+        }
+
         $this->entityManager->flush();
     }
 }

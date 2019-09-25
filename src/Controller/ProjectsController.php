@@ -218,6 +218,6 @@ class ProjectsController extends AbstractController
 
         $this->messageCreator->createAddUserToProjectRequest($projectId, strip_tags($messageText));
 
-        return $this->redirectToRoute('main');
+        return $this->redirectToRoute('project_profile', ['projectId' => $projectId]);
     }
 }
